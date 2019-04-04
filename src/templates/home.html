@@ -16,7 +16,29 @@
       </tr>
     </thead>
     <tbody>
-      {% for board in boards %}
+    <tr>
+      <td>
+        <a href="{% url 'fortnite_official' %}">Fortnite Official</a> </td>
+      <td>1</td>
+      <td>1</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>PUBG Official</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Apex Legends Official</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+
+    {% for board in boards %}
+
         <tr>
           <td>
             <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>

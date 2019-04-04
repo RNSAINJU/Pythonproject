@@ -5,8 +5,10 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
 from boards import views
+from django.urls import path,include
 
 urlpatterns = [
+    path('fortniteofficial',views.fortnitedatascrape, name='fortnite_official'),
     url(r'^$', views.BoardListView.as_view(), name='home'),
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
