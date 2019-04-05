@@ -9,7 +9,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path('fortniteofficial',views.fortnitedatascrape, name='fortnite_official'),
-    url(r'^$', views.BoardListView.as_view(), name='home'),
+    url(r'^$', views.BoardListView.as_view(), name='gaming'),
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
