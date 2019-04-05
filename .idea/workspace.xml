@@ -43,8 +43,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myproject/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+            <state relative-caret-position="345">
+              <caret line="92" column="26" selection-start-line="92" selection-start-column="26" selection-end-line="92" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -185,8 +185,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="942" />
-    <option name="y" value="124" />
+    <option name="x" value="804" />
+    <option name="y" value="35" />
     <option name="width" value="960" />
     <option name="height" value="1080" />
   </component>
@@ -300,11 +300,25 @@
       <option name="project" value="LOCAL" />
       <updated>1554450789746</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update ip">
+      <created>1554457935587</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1554457935587</updated>
+    </task>
+    <task id="LOCAL-00008" summary="database update for postgres">
+      <created>1554458159196</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1554458159196</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="942" y="124" width="960" height="1080" extended-state="0" />
+    <frame x="804" y="35" width="960" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23692636" />
@@ -351,7 +365,9 @@
     <MESSAGE value="debug false" />
     <MESSAGE value="Postgres debug true" />
     <MESSAGE value="sd" />
-    <option name="LAST_COMMIT_MESSAGE" value="sd" />
+    <MESSAGE value="update ip" />
+    <MESSAGE value="database update for postgres" />
+    <option name="LAST_COMMIT_MESSAGE" value="database update for postgres" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/boards/templatetags/__init__.py">
@@ -686,8 +702,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myproject/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+        <state relative-caret-position="345">
+          <caret line="92" column="26" selection-start-line="92" selection-start-column="26" selection-end-line="92" selection-end-column="26" />
         </state>
       </provider>
     </entry>

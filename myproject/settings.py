@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'khwoppaDB',
+        'NAME': 'khwoppadb',
         'USER': 'khwoppa_admin',
         'PASSWORD': 'probook450',
         'HOST': 'localhost',
