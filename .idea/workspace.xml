@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74d414f5-9576-4905-a478-5992df95c7e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/settings.py" afterDir="false" />
     </list>
@@ -45,7 +44,7 @@
         <entry file="file://$PROJECT_DIR$/myproject/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="465">
-              <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
+              <caret line="91" column="51" lean-forward="true" selection-start-line="91" selection-start-column="51" selection-end-line="91" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -182,7 +181,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="543" />
+    <option name="y" value="78" />
     <option name="width" value="960" />
     <option name="height" value="1080" />
   </component>
@@ -261,11 +262,25 @@
       <option name="project" value="LOCAL" />
       <updated>1554446971765</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Database configuration">
+      <created>1554447765984</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1554447765984</updated>
+    </task>
+    <task id="LOCAL-00003" summary="debug false">
+      <created>1554447846746</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554447846747</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="960" height="1080" extended-state="4" />
+    <frame x="543" y="78" width="960" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23692636" />
@@ -308,7 +323,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ip address updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="ip address updates" />
+    <MESSAGE value="Database configuration" />
+    <MESSAGE value="debug false" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/boards/templatetags/__init__.py">
@@ -644,7 +661,7 @@
     <entry file="file://$PROJECT_DIR$/myproject/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
-          <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
+          <caret line="91" column="51" lean-forward="true" selection-start-line="91" selection-start-column="51" selection-end-line="91" selection-end-column="51" />
         </state>
       </provider>
     </entry>
