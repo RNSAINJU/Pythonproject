@@ -43,8 +43,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myproject/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="142" selection-start-line="142" selection-end-line="142" />
+            <state relative-caret-position="405">
+              <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -185,7 +185,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="143" />
+    <option name="x" value="942" />
+    <option name="y" value="124" />
     <option name="width" value="960" />
     <option name="height" value="1080" />
   </component>
@@ -197,7 +198,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -205,10 +205,16 @@
               <item name="khwoppa" type="b2602c69:ProjectViewProjectNode" />
               <item name="khwoppa" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="khwoppa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="khwoppa" type="462c0819:PsiDirectoryNode" />
+              <item name="myproject" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,11 +293,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554448480802</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="sd">
+      <created>1554450789746</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1554450789746</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="143" y="0" width="960" height="1080" extended-state="0" />
+    <frame x="942" y="124" width="960" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23692636" />
@@ -337,7 +350,8 @@
     <MESSAGE value="Database configuration" />
     <MESSAGE value="debug false" />
     <MESSAGE value="Postgres debug true" />
-    <option name="LAST_COMMIT_MESSAGE" value="Postgres debug true" />
+    <MESSAGE value="sd" />
+    <option name="LAST_COMMIT_MESSAGE" value="sd" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/boards/templatetags/__init__.py">
@@ -672,8 +686,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myproject/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="142" selection-start-line="142" selection-end-line="142" />
+        <state relative-caret-position="405">
+          <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
         </state>
       </provider>
     </entry>
