@@ -14,3 +14,8 @@ body{
 .logo a:active{
     text-decoration:none;
     }
+
+ .bg_2{
+    background-image: url(../img/bg_2.jpg);
+    data-stellar-background-ratio="0.5";
+ }

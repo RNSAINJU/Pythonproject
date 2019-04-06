@@ -6,6 +6,7 @@ from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
 from boards import views
 from django.urls import path,include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^$', views.BoardListView.as_view(), name='home'),
@@ -44,3 +45,5 @@ urlpatterns = [
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
         views.PostUpdateView.as_view(), name='edit_post'),
 ]
+
+urlpatterns +=staticfiles_urlpatterns()

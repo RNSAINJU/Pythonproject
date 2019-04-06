@@ -25,7 +25,11 @@ SECRET_KEY = 'rqr_cjv4igscyu8&&(0%e(=sy=f2)p=f_wn&@0xsp7m$@!kp=d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['https://www.khwoppagiftcard.store','khwoppagiftcard.store','www.khwoppagiftcard.store','142.93.210.233']
+=======
+ALLOWED_HOSTS = ['142.93.210.233','khwoppagiftcard.store','www.khwoppagiftcard.store','localhost','127.0.0.1']
+>>>>>>> f65c64246c08f902cf666729e7eaca50b322ef6b
 
 
 # Application definition
@@ -135,11 +139,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
 
 
 LOGIN_URL = 'login'
