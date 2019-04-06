@@ -142,24 +142,3 @@ class PostUpdateView(UpdateView):
         post.updated_at=timezone.now()
         post.save()
         return redirect('topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)
-
-def fortnitedatascrape(request):
-
-    name = ('https://www.epicgames.com/fortnite/en-US/news')
-    uri = (str(input())).strip()
-
-    main_url = uri
-
-    html = uReq(main_url)
-    page_html = html.read()
-    html.close()
-
-    page_soup = soup(page_html, "html.parser")
-
-    containers = page_soup.findAll("div", {"class": "feature-headline"})
-
-    for container in containers:
-        post=container.a['h2']
-        print(post)
-        name=("Company name:" + post)
-    return render(request,'fortnite.html')
