@@ -16,10 +16,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+            <state relative-caret-position="315">
+              <caret line="51" column="81" selection-start-line="51" selection-start-column="81" selection-end-line="51" selection-end-column="81" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -35,6 +35,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>images</find>
+      <find>image</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -86,6 +87,11 @@
               <item name="khwoppa" type="b2602c69:ProjectViewProjectNode" />
               <item name="khwoppa" type="462c0819:PsiDirectoryNode" />
               <item name="myproject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="khwoppa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="khwoppa" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="khwoppa" type="b2602c69:ProjectViewProjectNode" />
@@ -144,7 +150,21 @@
       <option name="project" value="LOCAL" />
       <updated>1554563789165</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="images updated">
+      <created>1554564069129</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554564069129</updated>
+    </task>
+    <task id="LOCAL-00004" summary="images updated">
+      <created>1554564248832</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1554564248832</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -191,13 +211,6 @@
     <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
@@ -225,12 +238,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/pagination.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-129332" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+        <state relative-caret-position="315">
+          <caret line="51" column="81" selection-start-line="51" selection-start-column="81" selection-end-line="51" selection-end-column="81" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
