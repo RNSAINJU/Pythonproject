@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup as soup
 class BoardListView(ListView):
     model= Board
     context_object_name = 'boards'
-    template_name = 'home.html'
+    template_name = 'index.html'
 
 
 class TopicListView(ListView):
