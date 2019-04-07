@@ -14,13 +14,28 @@ from django.utils.decorators import method_decorator
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 
+def home(request):
+    return render(request, 'index.html')
 
+def about(request):
+    return render(request, 'about.html')
 
+def products(request):
+    return render(request, 'products.html')
+
+def partners(request):
+    return render(request, 'partners.html')
+
+def news(request):
+    return render(request, 'news.html')
+
+def contact(request):
+    return render(request, 'contact.html')
 
 class BoardListView(ListView):
     model= Board
     context_object_name = 'boards'
-    template_name = 'index.html'
+    template_name = 'home.html'
 
 
 class TopicListView(ListView):

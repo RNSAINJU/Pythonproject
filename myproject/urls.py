@@ -9,7 +9,14 @@ from django.urls import path,include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    url(r'^$', views.BoardListView.as_view(), name='home'),
+    url(r'^$', views.home, name='home'),
+    url(r'^about/$', views.about, name='about'),
+    url(r'^products/$', views.products, name='products'),
+    url(r'^partners/$', views.partners, name='partners'),
+    url(r'^news/$', views.news, name='news'),
+    url(r'^discussion$', views.BoardListView.as_view(), name='discussion'),
+    url(r'^contact/$', views.contact, name='contact'),
+
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),

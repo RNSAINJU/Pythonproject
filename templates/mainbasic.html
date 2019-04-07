@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Crossbody - Free Bootstrap 4 Template by Colorlib</title>
+      {% block title %}
+      {% endblock %}
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,13 +31,13 @@
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
 
+
 <!-- Your customer chat code -->
 <div class="fb-customerchat"
   attribution=setup_tool
   page_id="559524434453053"
-  theme_color="#fa3c4c">
+  theme_color="#ff0000">
 </div>
-
 {% block body %}
 
   	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -138,6 +140,9 @@ That EASY!</p>
         </div>
       </div>
     </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 {% endblock footer %}
 
