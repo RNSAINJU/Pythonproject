@@ -9135,12 +9135,8 @@ textarea.form-control {
 
 /********************************/
 /*          Media Queries       */
-/********************************/
+/*******************************
 @media screen and (min-width: 980px){
     .hide { display: none; }
 }
-
-
-
-.hide{
-}
+/*/
