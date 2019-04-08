@@ -1,8 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'basic2.html' %}
 
 {% load static %}
 
-{% block title %}Post a reply{% endblock %}
+{% block title %}
+<title>Post a reply</title>
+  {% endblock %}
 
 {% block stylesheet %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
@@ -15,15 +17,30 @@
   </script>
 {% endblock %}
 
+{% block content %}
+
+
+  <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">
+          		<i class="db-left"></i>
+          		Discussion/Forum For Gamers
+          		<i class="db-right"></i>
+          	</span>
+            <h2 class="mb-3">Games Topics For Discussion</h2>
+            <p> This page is for all gamers who wants to discuss about their respective games. </p>
+          </div>
+        </div>
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'topic_posts' topic.board.pk topic.pk %}">{{ topic.subject }}</a></li>
-  <li class="breadcrumb-item active">Post a reply</li>
+<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'discussion' %}">Games.</a></span>
+  <span><a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}.</a></span>
+  <span><a href="{% url 'topic_posts' topic.board.pk topic.pk %}">{{ topic.subject }}.</a></span>
+  <span>Post a reply</span>
 {% endblock %}
 
-{% block content %}
 
   <form method="post" class="mb-4" novalidate>
     {% csrf_token %}
@@ -46,5 +63,6 @@
       </div>
     </div>
   {% endfor %}
-
+</div>
+</section>
 {% endblock %}

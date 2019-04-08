@@ -3594,9 +3594,9 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #3e3a3a3d;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 1px solid rgba(49, 12, 12, 0.6);
   border-radius: 0.25rem; }
   .card > hr {
     margin-right: 0;

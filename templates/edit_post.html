@@ -1,6 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'basic2.html' %}
 
-{% block title %}Edit post{% endblock %}
+{% block title %}
+<title>Edit post</title>
+  {% endblock %}
 
 {% block stylesheet %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
@@ -13,18 +15,38 @@
   </script>
 {% endblock %}
 
-{% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'board_topics' post.topic.board.pk %}">{{ post.topic.board.name }}</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'topic_posts' post.topic.board.pk post.topic.pk %}">{{ post.topic.subject }}</a></li>
-  <li class="breadcrumb-item active">Edit post</li>
-{% endblock %}
 
 {% block content %}
+
+
+  <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">
+          		<i class="db-left"></i>
+          		Discussion/Forum For Gamers
+          		<i class="db-right"></i>
+          	</span>
+            <h2 class="mb-3">Games Topics For Discussion</h2>
+            <p> This page is for all gamers who wants to discuss about their respective games. </p>
+          </div>
+        </div>
+
+        {% block breadcrumb %}
+        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'discussion' %}">Games.</a></span>
+          <span><a href="{% url 'board_topics' post.topic.board.pk %}">{{ post.topic.board.name }}.</a></span>
+          <span><a href="{% url 'topic_posts' post.topic.board.pk post.topic.pk %}">{{ post.topic.subject }}.</a></span>
+          <span>Edit post</span>
+        {% endblock %}
+
+
 <form method="post" class="mb-4" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-success">Save changes</button>
     <a href="{% url 'topic_posts' post.topic.board.pk post.topic.pk %}" class="btn btn-outline-secondary" role="button">Cancel</a>
 </form>
+</div>
+</section>
 {% endblock %}

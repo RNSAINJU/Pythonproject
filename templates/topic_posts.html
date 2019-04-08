@@ -1,18 +1,38 @@
-{% extends 'base.html' %}
+{% extends 'basic2.html' %}
 
 {% load gravatar %}
 
 {% load static %}
 
-{% block title %}{{ topic.subject }}{% endblock %}
+{% block title %}
+    <title>{{ topic.subject }}|Khwoppa Gift Card</title>
+      {% endblock %}
 
-{% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}</a></li>
-  <li class="breadcrumb-item active">{{ topic.subject }}</li>
-{% endblock %}
 
 {% block content %}
+
+
+  <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">
+          		<i class="db-left"></i>
+          		Discussion/Forum For Gamers
+          		<i class="db-right"></i>
+          	</span>
+            <h2 class="mb-3">Games Topics For Discussion</h2>
+            <p> This page is for all gamers who wants to discuss about their respective games. </p>
+          </div>
+        </div>
+
+{% block breadcrumb %}
+<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'discussion' %}">Games.</a></span>
+  <span> <a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}.</a> </span>
+  <span>{{ topic.subject }}</span>
+{% endblock %}
+
+
 
   <div class="mb-4">
     <a href="{% url 'reply_topic' topic.board.pk topic.pk %}" class="btn btn-primary" role="button">Reply</a>
@@ -49,8 +69,10 @@
         </div>
       </div>
     </div>
+
   {% endfor %}
-
-{% include 'includes/pagination.html' %}
-
+</div>
+        </div>
+        </section>
 {% endblock %}
+{% include 'includes/pagination.html' %}
