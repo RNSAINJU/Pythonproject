@@ -5,11 +5,13 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
 from boards import views
-from django.urls import path,include
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
+# url(r'^kgc_admin/$', views.kgc_admin, name='kgc_admin'),
+    url(r'^fileupload/$', views.simple_upload, name='fileupload'),
+url(r'^$', views.home, name='home'),
     url(r'^about/$', views.about, name='about'),
     url(r'^products/$', views.products, name='products'),
     url(r'^partners/$', views.partners, name='partners'),
@@ -51,4 +53,5 @@ urlpatterns = [
         views.PostUpdateView.as_view(), name='edit_post'),
 ]
 
-urlpatterns +=staticfiles_urlpatterns()
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -11,8 +11,9 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 
 
-from urllib.request import urlopen as uReq
-from bs4 import BeautifulSoup as soup
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
 
 def home(request):
     return render(request, 'index.html')
@@ -28,6 +29,9 @@ def partners(request):
 
 def news(request):
     return render(request, 'news.html')
+
+# def kgc_admin(request):
+#     return render(request, 'admin/index.html')
 
 
 class BoardListView(ListView):
@@ -155,3 +159,15 @@ class PostUpdateView(UpdateView):
         post.updated_at=timezone.now()
         post.save()
         return redirect('topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile=request.FILES['myfile']
+        fs=FileSystemStorage()
+        filename=fs.save(myfile.name,myfile)
+        uploaded_file_url=fs.url(filename)
+        return render(request, 'simple_upload.html',{
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'simple_upload.html')
+
