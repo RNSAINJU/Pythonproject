@@ -2,16 +2,55 @@
 {% load static %}
 
 {% block stylesheet %}
-    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+    <!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'admin/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/vendor/animate/animate.css' %} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/vendor/css-hamburgers/hamburgers.min.css' %} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/main.css' %}">
+<!--===============================================================================================-->
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="text-center logo my-4">
-            <a href="{% url 'home' %}"> Khwoppa Gift Card Boards</a>
-        </h1>
+
 
         {% block content %}
         {% endblock %}
-    </div>
+
+{% endblock %}
+
+{% block javascript %}
+<!--===============================================================================================-->
+	<script src="{% static 'admin/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'admin/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'admin/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'admin/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'admin/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'admin/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'admin/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'admin/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'admin/js/main.js' %}"></script>
+
+
 {% endblock %}

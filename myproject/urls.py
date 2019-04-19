@@ -51,6 +51,9 @@ url(r'^$', views.home, name='home'),
     url(r'^new_post/$',views.NewPostView.as_view(), name='new_post'),
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
         views.PostUpdateView.as_view(), name='edit_post'),
+    url(r'^account_activation_sent/$', accounts_views.account_activation_sent, name='account_activation_sent'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        accounts_views.activate, name='activate'),
 ]
 
 if settings.DEBUG:

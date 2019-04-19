@@ -9,7 +9,7 @@ from django.db.models import Count
 from django.views.generic import CreateView, UpdateView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-
+from django.core.mail import send_mail
 
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -29,10 +29,6 @@ def partners(request):
 
 def news(request):
     return render(request, 'news.html')
-
-# def kgc_admin(request):
-#     return render(request, 'admin/index.html')
-
 
 class BoardListView(ListView):
     model= Board

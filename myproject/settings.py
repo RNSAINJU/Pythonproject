@@ -151,4 +151,10 @@ LOGIN_REDIRECT_URL= 'home'
 
 LOGOUT_REDIRECT_URL= 'home'
 
-EMAIL_BACKEND ='django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = config('EMAIL_BACKEND'default='django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST='smtp.sendgrid.net'
+EMAIL_PORT=587
+EMAIL_HOST_USER='rnsainju'
+EMAIL_HOST_PASSWORD='probook450'
+EMAIL_USE_TLS=True
