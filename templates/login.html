@@ -10,8 +10,14 @@
 		<div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
 			<form  method="post" class="login100-form validate-form" novalidate>
                  {% csrf_token %}
-               <input type="hidden" name="next" value="{{ next }}">
-              {% include 'includes/form.html' %}
+				<input type="hidden" name="next" value="{{ next }}">
+				{% if form.non_field_errors %}
+				<div class="alert alert-danger" role="alert">
+					{% for error in form.non_field_errors %}
+					<p {% if forloop.last %} class="mb-0" {% endif %}> {{ error }}</p>
+					{% endfor %}
+				</div>
+				{% endif %}
 
 				<span class="login100-form-title p-b-37">
 					Sign In
