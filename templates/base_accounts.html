@@ -1,7 +1,11 @@
-{% extends 'base.html' %}
-{% load static %}
+{% load static %}<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} Khwoppa Gift Card Boards {% endblock%}</title>
 
-{% block stylesheet %}
+
     <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="{% static 'admin/images/icons/favicon.ico' %}"/>
 <!--===============================================================================================-->
@@ -24,7 +28,9 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/main.css' %}">
 <!--===============================================================================================-->
-{% endblock %}
+
+</head>
+<body>
 
 {% block body %}
 
@@ -34,7 +40,7 @@
 
 {% endblock %}
 
-{% block javascript %}
+
 <!--===============================================================================================-->
 	<script src="{% static 'admin/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
@@ -52,5 +58,5 @@
 <!--===============================================================================================-->
 	<script src="{% static 'admin/js/main.js' %}"></script>
 
-
-{% endblock %}
+</body>
+</html>
