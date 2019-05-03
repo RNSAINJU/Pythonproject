@@ -14,39 +14,26 @@
         </div>
     		<div class="row no-gutters">
 
-				<div class="col-lg-6 d-flex">
-    				<div class="coach d-sm-flex align-items-stretch">
-	    				<div class="img" style="background-image: url(../static/img/trainer-1.jpg);"></div>
-	    				<div class="text py-4 px-5 ftco-animate">
-	    					<span class="subheading">Streamer</span>
-	    					<h3><a href="#">नेपाली बाबा जी</a></h3>
-	    					<p>Watch Fortnite LIVE STREAM Sunday-Wednesday : 8 am and Thursday-Friday : 8 pm</p>
-	    					<ul class="ftco-social-media d-flex mt-4">
-	                <li class="ftco-animate"><a href="https://www.youtube.com/channel/UC4a99ipd8ak7joa9OX-Zxcw" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-youtube"></span></a></li>
-	                <li class="ftco-animate"><a href="https://www.facebook.com/nepali.babag.5" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a></li>
-	                <li class="ftco-animate"><a href="https://www.instagram.com/nepalibabag/" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-instagram"></span></a></li>
-	              </ul>
-	    					<p></p>
-	    				</div>
-	    			</div>
-    			</div>
+          {% for obj in partners_list %}
+        <div class="col-lg-6 d-flex">
+            <div class="coach d-sm-flex align-items-stretch">
+              <div class="img" style="background-image: url({{ obj.image.url }});"></div>
+              <div class="text py-4 px-5 ftco-animate">
+                <span class="subheading">{{ obj.profession }}</span>
+                <h3><a href="#">{{ obj.title }}</a></h3>
+                <p>{{ obj.description }}</p>
+                <ul class="ftco-social-media d-flex mt-4">
+                  <li class="ftco-animate"><a href="{{ obj.ytlink }}" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-youtube"></span></a></li>
+                  <li class="ftco-animate"><a href="{{ obj.fblink }}" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a></li>
+                  <li class="ftco-animate"><a href="{{ obj.instalink }}" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-instagram"></span></a></li>
+                </ul>
+                <p></p>
+              </div>
+            </div>
+          </div>
 
-    			<div class="col-lg-6 d-flex">
-    				<div class="coach d-sm-flex align-items-stretch">
-	    				<div class="img" style="background-image: url(../static/img/trainer-2.jpg);"></div>
-	    				<div class="text py-4 px-5 ftco-animate">
-	    					<span class="subheading">Esports Team</span>
-	    					<h3><a href="#">OuterRaids</a></h3>
-	    					<p>OuterRaids®   eSports Pvt. Ltd. " - eSports & Gaming Organisation based in Nepal.</p>
-	    					<ul class="ftco-social-media d-flex mt-4">
-	                <li class="ftco-animate"><a href="https://www.youtube.com/channel/UC8b2WIEXgu_55olAhP0zzsg" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-youtube"></span></a></li>
-	                <li class="ftco-animate"><a href="https://www.facebook.com/outerraids/" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a></li>
-	                <li class="ftco-animate"><a href="https://www.instagram.com/outerraids/" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-instagram"></span></a></li>
-	              </ul>
-	    					<p></p>
-	    				</div>
-	    			</div>
-    			</div>
+          {% endfor %}
+
 
     		</div>
     	</div>

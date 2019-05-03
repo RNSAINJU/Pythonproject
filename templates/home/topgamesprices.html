@@ -14,8 +14,28 @@ That EASY!.</p>
           </div>
         </div>
     		<div class="row">
+          {% for obj in featured_list %}
     			<div class="col-md-4">
-    				<div class="pricing-wrap ftco-animate img" style="background-image: url(static/img/program-1.jpg);">
+    				<div class="pricing-wrap ftco-animate img" style="background-image: url({{ obj.image.url }});">
+    					<div class="title p-4">
+    						<h3>{{ obj.title }}</h3>
+    						<span>{{ obj.short_description }}</span>
+    					</div>
+    					<div class="text p-4 d-flex align-items-end">
+    						<a href="https://m.me/khwoppagiftcard" target="_blank" class="btn-custom px-4 py-2">Message Now</a>
+    						<div>
+    							<span class="price">Rs {{ obj.price }}</span>
+    							<h3><a href="#">{{ obj.title }}</a></h3>
+    							<p>{{ obj.description }}</p>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+          {% endfor %}
+
+
+    			<div class="col-md-4">
+    				<div class="pricing-wrap ftco-animate active img" style="background-image: url(static/img/program-1.jpg);">
     					<div class="title p-4">
     						<h3>Fortnite Vbucks</h3>
     						<span>Get Fortnite vbucks easily in nepal at cheap price.</span>
@@ -30,38 +50,7 @@ That EASY!.</p>
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-4">
-    				<div class="pricing-wrap ftco-animate active img" style="background-image: url(static/img/program-2.jpg);">
-    					<div class="title p-4">
-    						<h3>PUBG UC</h3>
-    						<span>Unknown cash topup for PUBG easily just id and name required.</span>
-    					</div>
-    					<div class="text p-4 d-flex align-items-end">
-    						<a href="https://m.me/khwoppagiftcard" target="_blank" class="btn-custom px-4 py-2">Message Now</a>
-    						<div>
-    							<span class="price">Rs 1450.00</span>
-    							<h3><a href="#">770 UC</a></h3>
-    							<p>Topup unknown cash easily for PUBG with just game id and name and payment through esewa or imepay.</p>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-4">
-    				<div class="pricing-wrap ftco-animate img" style="background-image: url(static/img/program-3.jpg);">
-    					<div class="title p-4">
-    						<h3>Free fire diamonds</h3>
-    						<span>Topup freefire diamonds</span>
-    					</div>
-    					<div class="text p-4 d-flex align-items-end">
-    						<a href="https://m.me/khwoppagiftcard" target="_blank" class="btn-custom px-4 py-2">Message Now</a>
-    						<div>
-    							<span class="price">Rs 340</span>
-    							<h3><a href="#">Weekly Membership</a></h3>
-    							<p>Easily topup freefire diamonds no need to provide login details free fire id and name only required.</p>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
+
     		</div>
     	</div>
     </section>

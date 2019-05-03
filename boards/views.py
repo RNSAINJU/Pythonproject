@@ -15,14 +15,11 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
 
-def home(request):
-    return render(request, 'index.html')
+
 
 def about(request):
     return render(request, 'about.html')
 
-def products(request):
-    return render(request, 'products.html')
 
 def partners(request):
     return render(request, 'partners.html')
@@ -133,7 +130,7 @@ class PostUpdateView(UpdateView):
     fields = ('message',)
     template_name = 'edit_post.html'
 
-    ''' pk_url_kwarg will be used to identify the name of the keyword argument used 
+    ''' pk_url_kwarg will be used to identify the name of the keyword argument used
     to retrieve the Post object. It’s the same as we define in the urls.py.
     '''
     pk_url_kwarg = 'post_pk'
@@ -166,4 +163,3 @@ def simple_upload(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'simple_upload.html')
-

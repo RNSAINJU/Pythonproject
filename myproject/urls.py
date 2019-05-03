@@ -7,15 +7,20 @@ from accounts import views as accounts_views
 from boards import views
 from django.conf import settings
 from django.conf.urls.static import static
+from products import views as product_views
+from home import views as home_views
 
 urlpatterns = [
 # url(r'^kgc_admin/$', views.kgc_admin, name='kgc_admin'),
+    url(r'^products/$',product_views.product_list_view,name='products'),
+    # url(r'^featured/$',product_views.featured_list_view,name='featured'),
+
     url(r'^fileupload/$', views.simple_upload, name='fileupload'),
-url(r'^$', views.home, name='home'),
-    url(r'^about/$', views.about, name='about'),
-    url(r'^products/$', views.products, name='products'),
-    url(r'^partners/$', views.partners, name='partners'),
-    url(r'^news/$', views.news, name='news'),
+    url(r'^$', home_views.home_list_view, name='home'),
+    url(r'^partners/$', home_views.partner_list_view, name='partners'),
+    url(r'^about/$', home_views.about_list_view, name='about'),
+
+    url(r'^news/$', home_views.news_list_view, name='news'),
     url(r'^discussion$', views.BoardListView.as_view(), name='discussion'),
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),

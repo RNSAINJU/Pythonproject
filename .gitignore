@@ -105,3 +105,5 @@ ENV/
 
 accounts/migrations
 boards/migrations
+products/migrations
+home/migrations

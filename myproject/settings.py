@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['142.93.210.233','khwoppagiftcard.store','www.khwoppagiftcard.s
 # Application definition
 
 INSTALLED_APPS = [
+    'myproject.apps.SuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'accounts',
     'boards',
+    'products',
+    'home',
 ]
 
 MIDDLEWARE = [

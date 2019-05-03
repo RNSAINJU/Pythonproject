@@ -18,93 +18,24 @@
           	<div class="row ftco-animate">
 		          <div class="col-md-12">
 		            <div class="carousel-testimony owl-carousel ftco-owl">
+
+                  {% for obj in reviewers_list %}
 		              <div class="item">
 		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(../static/img/person_1.jpg)">
+		                  <div class="user-img mb-4" style="background-image: url({{ obj.image.url }})">
 		                    <span class="quote d-flex align-items-center justify-content-center">
 		                      <i class="icon-quote-left"></i>
 		                    </span>
 		                  </div>
 		                  <div class="text text-center">
-		                    <p class="mb-4">Best online store to buy Freefire diamonds.
-i love this page👈👈</p>
-		                    <p class="name">Rajeev Rajsetehav Dangal</p>
-		                    <span class="position">Customer</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(../static/img/person_2.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">Very fast response liked :).</p>
-		                    <p class="name">
-Ronald Shah Thakuri </p>
-		                    <span class="position">Customer</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(../static/img/person_3.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">Fast and very cheap top up.</p>
-		                    <p class="name">Dipesh Sainju</p>
-		                    <span class="position">Customer</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(../static/img/person_4.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">Fast and cost effective pubg topup within 10-15 minutes .... Loving it 😍💝.</p>
-		                    <p class="name">Rojee Karmacharya</p>
-		                    <span class="position">Customer</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(../static/img/person_5.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">Best of the best sale ever found.</p>
-		                    <p class="name">Dipesh Prajapati</p>
+		                    <p class="mb-4">{{ obj.message }}</p>
+		                    <p class="name">{{ obj.customername }}</p>
 		                    <span class="position">Customer</span>
 		                  </div>
 		                </div>
 		              </div>
 
-						 <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(../static/img/person_6.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">Khwoppagiftcard is the best e-commerce platform on the gaming market in Nepal. Its designed to help nepalese gamer. Fast, cheap price and trustable!</p>
-		                    <p class="name">Shunzeel Awal</p>
-		                    <span class="position">Customer</span>
-		                  </div>
-		                </div>
-		              </div>
+                  {% endfor %}
 
 		            </div>
 		          </div>

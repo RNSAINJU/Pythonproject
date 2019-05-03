@@ -13,50 +13,27 @@
           </div>
         </div>
         <div class="row d-flex">
+
+          {% for obj in news_list %}
+
           <div class="col-lg-4 d-flex ftco-animate">
           	<div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('../static/img/image_1.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url({{ obj.image.url }});">
               </a>
               <div class="text py-4 d-flex">
               	<div class="meta text-center">
-              		<span class="day">07</span>
-              		<span class="mos">April</span>
-              		<span class="yr">2019</span>
+              		<span class="day">{{ obj.date.day }}</span>
+              		<span class="mos">{{ obj.date|date:'F' }}</span>
+              		<span class="yr">{{ obj.date.year }}</span>
               	</div>
               	<div class="desc">
-	                <h3 class="heading mt-2"><a href="#">Outer Raids DUOS Tournament</a></h3>
-	                <p>⛏Friday || 1:00 P.M. || Duos Tournament 🇳🇵
-💵 WIN 2800 V-BUCKS
-Sponsored by : Khwoppa Gift Card</p>
+	                <h3 class="heading mt-2"><a href="#">{{ obj.title }}</a></h3>
+	                <p>{{ obj.description }}</p>
 	              </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 d-flex ftco-animate">
-          	<div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('../static/img/image_2.jpg');">
-              </a>
-              <div class="text py-4 d-flex">
-              	<div class="meta text-center">
-              		<span class="day">25</span>
-              		<span class="mos">Febrauary</span>
-              		<span class="yr">2019</span>
-              	</div>
-              	<div class="desc">
-	                <h3 class="heading mt-2"><a href="#">PULL THE TRIGGER</a></h3>
-	                <p>PUBG KNOCKDOWN SQUAD
-PULL THE TRIGGER
-
-**Mobile players only **
-
-1. Winner team members gets 770UC each
-2. 20% discount for 2nd runner up
-3. 100 Rs off on 770 UC topup for remaing participating members</p>
-	              </div>
-              </div>
-            </div>
-          </div>
-
+          {% endfor %}
         </div>
       </div>
     </section>
