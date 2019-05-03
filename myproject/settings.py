@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['142.93.210.233','khwoppagiftcard.store','www.khwoppagiftcard.s
 INSTALLED_APPS = [
     'jet',
     'jet.dashboard',
-    'myproject.apps.SuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
