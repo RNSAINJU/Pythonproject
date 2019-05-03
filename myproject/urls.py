@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import include, path
 from django.contrib import admin
 
 ''' importing views module from accounts '''
@@ -9,6 +10,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from products import views as product_views
 from home import views as home_views
+# from django-jet import jet
 
 urlpatterns = [
 # url(r'^kgc_admin/$', views.kgc_admin, name='kgc_admin'),
@@ -52,6 +54,10 @@ urlpatterns = [
     url(r'^boards/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', views.PostListView.as_view(), name='topic_posts'),
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$', views.reply_topic, name='reply_topic'),
+    # url(r'^jet/', jet.urls, 'jet'),  # Django JET URLS
+        url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
+
     url(r'^admin/', admin.site.urls),
     url(r'^new_post/$',views.NewPostView.as_view(), name='new_post'),
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
