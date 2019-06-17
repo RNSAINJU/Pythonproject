@@ -141,14 +141,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL ='/media/'
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
+STATIC_ROOT = '/opt/myproject/static/'
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    '/khwoppagiftcardgaming/static',
-    '/usr/local/lib/python3.6/site-packages/django/contrib/admin/static',
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+#     '/khwoppagiftcardgaming/static',
+#     '/usr/local/lib/python3.6/site-packages/django/contrib/admin/static',
+# ]
 
 
 LOGIN_URL = 'login'
