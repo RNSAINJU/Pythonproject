@@ -148,7 +148,7 @@ MEDIA_ROOT= os.path.join(BASE_DIR,'media')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     # 'khwoppa/static'
-    'opt/myproject/myproject/static',
+    'opt/myproject/static',
     # '/usr/local/lib/python3.6/site-packages/django/contrib/admin/static',
 ]
 
