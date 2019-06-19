@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rqr_cjv4igscyu8&&(0%e(=sy=f2)p=f_wn&@0xsp7m$@!kp=d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['68.183.91.249','khwoppagiftcard.store','www.khwoppagiftcard.store']
+ALLOWED_HOSTS = ['68.183.91.249','khwoppagiftcard.store','www.khwoppagiftcard.store','localhost','127.0.0.1']
 
 
 # Application definition
@@ -143,14 +143,9 @@ MEDIA_URL ='/media/'
 #
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATIC_ROOT = '/opt/myproject/static/'
+
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
 
-
-#     'khwoppa/static'
-#     # 'opt/myproject/static',
-#     '/usr/local/lib/python3.6/site-packages/django/contrib/admin/static',
-# ]
 
 
 LOGIN_URL = 'login'
