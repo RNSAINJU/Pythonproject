@@ -14,7 +14,7 @@ class HomeView(TemplateView):
         featuredproducts=ChildProduct.objects.filter(featured=True)
         partners=Partner.objects.all()
         reviews=Reviews.objects.all()
-        news=News.objects.all()
+        news=News.objects.order_by('date')
 
         args={
         'form':form,'featured_list':featuredproducts,
