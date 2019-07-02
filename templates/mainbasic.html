@@ -27,7 +27,10 @@
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
   </head>
+
+
   <body>
+
 <!-- Load Facebook SDK for JavaScript -->
 <!-- <div id="fb-root"></div> -->
 
@@ -61,6 +64,18 @@
 	  </nav>
     <!-- END nav -->
 
+    <div class="mt-5 pt-4">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        </div>
 {% block content %}
 <!--Main content here -->
     {% endblock %}

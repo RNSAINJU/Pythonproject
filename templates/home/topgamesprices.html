@@ -16,7 +16,7 @@ That EASY!.</p>
     		<div class="row">
           {% for obj in featured_list %}
     			<div class="col-md-4">
-            {% if obj.parent_product.hover %}
+            {% if obj.enabledetail %}
     				<div class="pricing-wrap ftco-animate active img" style="background-image: url({{ obj.parent_product.image.url }});">
 
             {% else %}
@@ -42,8 +42,9 @@ That EASY!.</p>
                     Rs {{ obj.price }}
                     </span>
                     {% endif %}
-    							<h3><a href="#">{{ obj.parent_product.title }}</a></h3>
+    							<h3><a href="{{ obj.get_absolute_url }}">{{ obj.parent_product.title }}</a></h3>
     							<p>{{ obj.parent_product.description }}</p>
+                  <a href="{{ obj.get_add_to_cart_url }}" >More options</a>
     						</div>
     					</div>
     				</div>

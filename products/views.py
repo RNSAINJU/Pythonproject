@@ -3,18 +3,18 @@ from django.views.generic import ListView, DetailView
 from django.utils import timezone
 from .models import Product,ChildProduct, OrderProduct,Order
 from django.shortcuts import reverse, redirect
+from django.contrib import messages
 
 
 class ProductView(ListView):
-    model=Product
-    context_object_name = 'products'
+    model=ChildProduct
+    context_object_name = 'child'
     template_name="products.html"
     # paginate_by = 10
 
     def get_queryset(self):
-        queryset1=Product.objects.all()
-        queryset2=ChildProduct.objects.all()
-        queryset={'parent':queryset1,'child':queryset2}
+        product=ChildProduct.objects.filter(productsfeatured=True)
+        queryset={'products':product}
         return queryset
 
 def load_prices(request):
@@ -26,21 +26,60 @@ class ProductDetailView(DetailView):
     model= ChildProduct
     template_name= "product.html"
 
-# def add_to_cart(request,slug):
-#     product=get_object_or_404(Product,slug=slug)
-#     order_product=OrderProduct.objects.create(product=product)
-#     order=Order.objects.filter(user=request.user, ordered=False)
-#     if order_qs.exists():
-#         order= order_qs[0]
-#         #check if the order item is in order
-#         if order.products.filter(product__slug=product.slug).exists():
-#             order_product.quantity +=1
-#             order_product.save()
-#     else:
-#         ordered_date=timezone.now()
-#         order =Order.objects.create(user=request.user, ordered_date=ordered_date)
-#         order.items.add(order_product)
-#     return redirect("core:product", slug=slug)
+
+def add_to_cart(request,slug):
+    product=get_object_or_404(ChildProduct,slug=slug)
+    order_product, created=OrderProduct.objects.get_or_create(
+    product=product,
+    user=request.user,
+    ordered=False
+    )
+    order_qs=Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order= order_qs[0]
+        #check if the order item is in order
+        if order.products.filter(product__slug=product.slug).exists():
+            order_product.quantity +=1
+            order_product.save()
+            messages.info(request, "This item quantity was updated.")
+            return redirect("core:product", slug=slug)
+        else:
+            messages.info(request, "This item was added to your cart.")
+            order.products.add(order_product)
+            return redirect("core:product", slug=slug)
+    else:
+        ordered_date=timezone.now()
+        order =Order.objects.create(user=request.user, ordered_date=ordered_date)
+        order.products.add(order_product)
+        messages.info(request, "This item was added to your cart.")
+        return redirect("core:product", slug=slug)
+
+def remove_from_cart(request, slug):
+    product=get_object_or_404(ChildProduct,slug=slug)
+    order_qs=Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+    if order_qs.exists():
+        order= order_qs[0]
+        #check if the order item is in order
+        if order.products.filter(product__slug=product.slug).exists():
+            order_product=OrderProduct.objects.filter(
+            product=product,
+            user=request.user,
+            ordered=False
+            )[0]
+            order.products.remove(order_product)
+            messages.info(request, "This item was removed from your cart.")
+            return redirect("core:product", slug=slug)
+        else:
+            #add a message saying user doent have order
+            messages.info(request, "This item was not in your cart.")
+            return redirect("core:product", slug=slug)
+    else:
+        messages.info(request, "You do not have an active order.")
+        return redirect("core:product", slug=slug)
+
 # class ProductListView(ListView):
 #     model= ChildProduct
 #     context_object_name='childproduct'

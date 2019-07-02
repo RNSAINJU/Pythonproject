@@ -18,17 +18,7 @@
 
 {% block content %}
 
-    <section class="hero-wrap js-fullheight">
-      <div class="overlay" style="background-image: url(static/img/bg_2.jpg);" data-stellar-background-ratio="0.5"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end">
-          <div class="col-md-12 text-center ftco-animate">
-            <h1 class="mb-3 bread" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">Pricing</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home.</a></span> <span>Pricing</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <section class="ftco-section">
     	<div class="container">
@@ -45,42 +35,46 @@
         </div>
     		<div class="row">
 
-          {% for obj in object_list %}
-          <!-- {% url 'parent_child' parent_product.pk childproduct.pk as topic_url %} -->
 
-    			<div class="col-md-4">
-    				<div class="pricing-wrap ftco-animate img" style="background-image: url({{ parent_product.image.url }});">
+
+    			<div class="col-md-12">
+    				<div class="pricing-wrap ftco-animate img active" style="background-image: url({{ object.parent_product.image.url }});">
     					<div class="title p-4">
-    						<h3>{{ parent_product.title }}</h3>
-    						<span></span>
+    						<h3>{{ object.parent_product.title }}</h3>
+    						<span>{{ object.parent_product.short_description }}</span>
     					</div>
     					<div class="text p-4 d-flex align-items-end">
-    						<a href="{{ obj.get_add_to_cart_url }}" class="btn-custom px-4 py-2">Add to cart</a>
-    						<div>
-                  {% if obj.discount_price %}
+    						<a href="{{ object.get_add_to_cart_url }}" class="btn-custom px-4 py-2">Add to cart</a>
+
+                <div>
+
+                  {% if object.discount_price %}
     							<span  style="font-size:20px;">
-                    <strike>Rs {{ obj.price }}</strike>
+                    <strike>Rs {{ object.price }}</strike>
                     <br>
                     </span>
                     <span class="price" style="font-size:20px;">
-                    Rs {{ obj.discount_price }}
+                    Rs {{ object.discount_price }}
                     </span>
                     {% else %}
                     <span class="price" >
-                    Rs {{ obj.price }}
+                    Rs {{ object.price }}
                     </span>
                     {% endif %}
 
 
-{% include 'hr/prices_list.html' %}
 
-    							<h3><a href="{{ obj.get_absolute_url }}">sadsadsadsadasdd</a></h3>
-    							<p>{{ obj.get_absolute_url }}</p>
+
+
+                  <h3><a href="{{ object.get_absolute_url }}">{{ object.type }}</a></h3>
+  <p>{{ object.parent_product.description }}</p>
+                  <a href="{{ object.get_add_to_cart_url }}" style="float:right;">More options</a>
     						</div>
+
     					</div>
     				</div>
     			</div>
-{% endfor %}
+
     		</div>
     	</div>
     </section>

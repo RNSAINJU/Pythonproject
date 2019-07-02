@@ -11,7 +11,7 @@ class HomeView(TemplateView):
 
     def get(self, request):
         form=ContactForm()
-        featuredproducts=ChildProduct.objects.filter(featured=True)
+        featuredproducts=ChildProduct.objects.filter(homefeatured=True)
         partners=Partner.objects.all()
         reviews=Reviews.objects.all()
         news=News.objects.order_by('date')

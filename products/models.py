@@ -37,16 +37,17 @@ class Product(models.Model):
     # )
     # type=models.CharField(blank=True,max_length=50,choices=TYPE_CHOICES)
     title=models.CharField(max_length=50, unique=True,blank=True)
-    short_description=models.CharField(max_length=40, unique=True)
+    short_description=models.CharField(max_length=60, unique=True)
     description=models.TextField()
     image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
-    featured=models.BooleanField(default=False)
-    hover=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
+
 
     objects= ProductManager()
+
     def __str__(self):
         return self.title
+
 
 class ChildProduct(models.Model):
     STATUS_CHOICES=(
@@ -58,8 +59,10 @@ class ChildProduct(models.Model):
     price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
     discount_price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
-
-    featured=models.BooleanField(default=False)
+    homefeatured=models.BooleanField(default=False)
+    productsfeatured=models.BooleanField(default=False)
+    enabledetailview=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
+    enabledetail=models.BooleanField(default=False)
     slug=models.SlugField()
 
     objects= ProductManager()
@@ -72,14 +75,23 @@ class ChildProduct(models.Model):
                 'slug':self.slug
                 })
 
-    # def get_add_to_cart_url(self):
-    #     return reverse("core:add-to-cart", kwargs={
-    #         'slug':self.slug
-    #     })
+    def get_add_to_cart_url(self):
+        return reverse("core:add-to-cart", kwargs={
+            'slug':self.slug
+        })
+
+    def get_remove_from_cart_url(self):
+        return reverse("core:remove-from-cart", kwargs={
+            'slug':self.slug
+        })
 
 class OrderProduct(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    # , blank=True, null=True
+    ordered=models.BooleanField(default=False)
     product=models.ForeignKey(ChildProduct, on_delete=models.CASCADE)
     quantity=models.IntegerField(default=1)
+
     def __str__(self):
         return f"{self.quantity} of {self.product.type}"
 
@@ -91,4 +103,4 @@ class Order(models.Model):
     ordered=models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return self.user.username
