@@ -60,7 +60,7 @@ class ChildProduct(models.Model):
     discount_price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
     homefeatured=models.BooleanField(default=False)
-    # productsfeatured=models.BooleanField(default=False)
+    productsfeatured=models.BooleanField(default=False)
     enabledetailview=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
     enabledetail=models.BooleanField(default=False)
     slug=models.SlugField()
