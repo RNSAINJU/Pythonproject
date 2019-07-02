@@ -104,9 +104,3 @@ ENV/
 .idea/
 
 media
-
-#migration files
-.products/migrations
-.accounts/migrations
-.boards/migrations
-.home/migrations
