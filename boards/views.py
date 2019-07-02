@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render,reverse
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView
 
@@ -14,6 +14,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
+from django.core.mail import send_mail
+
 
 
 
@@ -25,6 +27,7 @@ def partners(request):
     return render(request, 'partners.html')
 
 def news(request):
+    # send_mail('subject', 'body of the message', 'help.khwoppagiftcard.store', ['aryan.sainju@gmail.com'],fail_silently=False)
     return render(request, 'news.html')
 
 class BoardListView(ListView):

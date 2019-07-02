@@ -16,17 +16,34 @@ That EASY!.</p>
     		<div class="row">
           {% for obj in featured_list %}
     			<div class="col-md-4">
-    				<div class="pricing-wrap ftco-animate img" style="background-image: url({{ obj.image.url }});">
-    					<div class="title p-4">
-    						<h3>{{ obj.title }}</h3>
-    						<span>{{ obj.short_description }}</span>
+            {% if obj.parent_product.hover %}
+    				<div class="pricing-wrap ftco-animate active img" style="background-image: url({{ obj.parent_product.image.url }});">
+
+            {% else %}
+            		<div class="pricing-wrap ftco-animate  img" style="background-image: url({{ obj.parent_product.image.url }});">
+            {% endif %}
+              <div class="title p-4">
+    						<h3>{{ obj.parent_product.title }}</h3>
+    						<span>{{ obj.parent_product.short_description }}</span>
     					</div>
     					<div class="text p-4 d-flex align-items-end">
     						<a href="https://m.me/khwoppagiftcard" target="_blank" class="btn-custom px-4 py-2">Message Now</a>
     						<div>
-    							<span class="price">Rs {{ obj.price }}</span>
-    							<h3><a href="#">{{ obj.title }}</a></h3>
-    							<p>{{ obj.description }}</p>
+                  {% if obj.discount_price %}
+    							<span  style="font-size:20px;">
+                    <strike>Rs {{ obj.price }}</strike>
+                    <br>
+                    </span>
+                    <span class="price" style="font-size:20px;">
+                    Rs {{ obj.discount_price }}
+                    </span>
+                    {% else %}
+                    <span class="price" >
+                    Rs {{ obj.price }}
+                    </span>
+                    {% endif %}
+    							<h3><a href="#">{{ obj.parent_product.title }}</a></h3>
+    							<p>{{ obj.parent_product.description }}</p>
     						</div>
     					</div>
     				</div>
@@ -34,8 +51,8 @@ That EASY!.</p>
           {% endfor %}
 
 
-    			<div class="col-md-4">
-    				<div class="pricing-wrap ftco-animate active img" style="background-image: url(static/img/program-1.jpg);">
+    			<!-- <div class="col-md-4">
+
     					<div class="title p-4">
     						<h3>Fortnite Vbucks</h3>
     						<span>Get Fortnite vbucks easily in nepal at cheap price.</span>
@@ -49,7 +66,7 @@ That EASY!.</p>
     						</div>
     					</div>
     				</div>
-    			</div>
+    			</div> -->
 
     		</div>
     	</div>

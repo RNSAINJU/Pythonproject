@@ -15,7 +15,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
+from django.core.mail import send_mail
 
 def signup(request):
     if request.method == 'POST':
@@ -33,7 +33,7 @@ def signup(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token': account_activation_token.make_token(user),
             })
-            user.email_user(subject, message)
+            send_mail(subject, message,'help.khwoppagiftcard.store',[user.email])
 
             return redirect('account_activation_sent')
     else:

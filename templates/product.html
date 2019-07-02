@@ -45,23 +45,21 @@
         </div>
     		<div class="row">
 
-          {% for obj in products.parent %}
+          {% for obj in object_list %}
           <!-- {% url 'parent_child' parent_product.pk childproduct.pk as topic_url %} -->
 
     			<div class="col-md-4">
-    				<div class="pricing-wrap ftco-animate img" style="background-image: url({{ obj.image.url }});">
+    				<div class="pricing-wrap ftco-animate img" style="background-image: url({{ parent_product.image.url }});">
     					<div class="title p-4">
-    						<h3>{{ obj.title }}</h3>
-    						<span>{{ obj.short_description }}</span>
+    						<h3>{{ parent_product.title }}</h3>
+    						<span></span>
     					</div>
     					<div class="text p-4 d-flex align-items-end">
     						<a href="{{ obj.get_add_to_cart_url }}" class="btn-custom px-4 py-2">Add to cart</a>
-
-                <div>
-
+    						<div>
                   {% if obj.discount_price %}
     							<span  style="font-size:20px;">
-                    <strike>Rs {{ products.child.price }}</strike>
+                    <strike>Rs {{ obj.price }}</strike>
                     <br>
                     </span>
                     <span class="price" style="font-size:20px;">
@@ -74,13 +72,11 @@
                     {% endif %}
 
 
+{% include 'hr/prices_list.html' %}
 
-
-
-                  <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
-  <p>{{ obj.description }}</p>
+    							<h3><a href="{{ obj.get_absolute_url }}">sadsadsadsadasdd</a></h3>
+    							<p>{{ obj.get_absolute_url }}</p>
     						</div>
-
     					</div>
     				</div>
     			</div>

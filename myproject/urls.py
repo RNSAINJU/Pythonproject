@@ -13,14 +13,16 @@ from home import views as home_views
 # from django-jet import jet
 
 urlpatterns = [
-# url(r'^kgc_admin/$', views.kgc_admin, name='kgc_admin'),
-    url(r'^products/$',product_views.product_list_view,name='products'),
-    # url(r'^featured/$',product_views.featured_list_view,name='featured'),
+    path('',include('products.urls',namespace='core')),
+
+    url(r'^products/$',product_views.ProductView.as_view(),name='products'),
 
     url(r'^fileupload/$', views.simple_upload, name='fileupload'),
-    url(r'^$', home_views.home_list_view, name='home'),
-    url(r'^partners/$', home_views.partner_list_view, name='partners'),
-    url(r'^about/$', home_views.about_list_view, name='about'),
+
+    url(r'^$', home_views.HomeView.as_view(), name='home'),
+    url(r'^partners/$', home_views.PartnerView.as_view(), name='partners'),
+    url(r'^about/$', home_views.AboutView.as_view(), name='about'),
+    # url(r'^about/(?P<pk>\d+)/new/$', home_views.new_enquiry, name='new_enquiry'),
 
     url(r'^news/$', home_views.news_list_view, name='news'),
     url(r'^discussion$', views.BoardListView.as_view(), name='discussion'),

@@ -1,54 +1,59 @@
 {% load widget_tweaks %}
-		<section class="ftco-appointment">
+		<section class="ftco-appointment" id="contact">
 			<div class="overlay"></div>
     	<div class="container-wrap">
     		<div class="row no-gutters d-md-flex align-items-center">
 <!--    			<div class="col-lg-5 d-flex align-self-stretch">-->
 <!--    				<div id="map"></div>-->
 <!--    			</div>-->
+
 	    		<div class="col-lg-7 appointment ftco-animate">
 	          <div class="heading-section ftco-animate">
 	            <h2 class="mb-3">Contact With Us</h2>
 	            <p> If you have any enquiry or have any problems feel free to enquiry us about it.</p>
 	          </div>
-	    			<form method="POST" class="appointment-form" novalidate>
+	    			<form method="post" class="appointment-form"  novalidate>
 							{% csrf_token %}
 
-							<input type="hidden" name="next" value="{{ next }}">
-							{% if form.non_field_errors %}
+
+							{% for field in form %}
+							{% for error in field.errors %}
 							<div class="alert alert-danger" role="alert">
-								{% for error in form.non_field_errors %}
-								<p {% if forloop.last %} class="mb-0" {% endif %}> {{ error }}</p>
-								{% endfor %}
+							<p style="color: red">{{ error }}</p>
 							</div>
-							{% endif %}
+							{% endfor %}
 
+							{% endfor %}
 
+<!-- {{ form }} -->
 
 							<div class="d-md-flex">
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="First Name" name="firstname">
+									{{ form.firstname }}
+
 		    				</div>
 		    				<div class="form-group ml-md-4">
-		    					<input type="text" class="form-control" placeholder="Last Name" name="lastname">
+									{{ form.lastname }}
+
 		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="Email Address" name="email">
+		    					{{ form.email }}
 		    				</div>
 		    				<div class="form-group ml-md-4">
-		    					<input type="text" class="form-control" placeholder="Phone" name="phoneno">
+		    					{{ form.phoneno }}
 		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
 	    					<div class="form-group">
-		              <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message" name="message"></textarea>
-		            </div>
+									{{ form.message }}
+
+</div>
 		            <div class="form-group ml-md-4">
 		              <input type="submit" value="Enquiry" class="btn btn-primary py-3 px-4">
 		            </div>
-	    				</div>
+
 
 	    			</form>
 	    		</div>

@@ -154,10 +154,14 @@ LOGIN_REDIRECT_URL= 'home'
 
 LOGOUT_REDIRECT_URL= 'home'
 
-# EMAIL_BACKEND = config('EMAIL_BACKEND'default='django.core.mail.backends.smtp.EmailBackend'
+
+SENDGRID_API_KEY='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'
 
 EMAIL_HOST='smtp.sendgrid.net'
-EMAIL_PORT=465
-EMAIL_HOST_USER='apikey'
-EMAIL_HOST_PASSWORD='	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'
+EMAIL_HOST_USER='kgcgiftcard'
+EMAIL_HOST_PASSWORD='gunsNroses450'
+EMAIL_PORT=587
 EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL='help.khwoppagiftcard.store'
+ACCOUNT_EMAIL_SUBJECT_PREFIX='help.khwoppagiftcard.store'
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'

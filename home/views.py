@@ -1,55 +1,71 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Partner, Reviews, News, Enquiries
-from products.models import Product
+from home.models import Partner, Reviews, News, Enquiries
+from products.models import Product, ChildProduct
+from django.views.generic import ListView, DetailView, TemplateView
 import datetime
-from .forms import ContactForm
+from home.forms import ContactForm
+from django.utils import timezone
 
-def home_list_view(request):
-    queryset=Product.objects.filter(featured=True)
-    queryset2=Partner.objects.all()
-    queryset3=Reviews.objects.all()
-    queryset4=News.objects.all()
-    context={
-            'featured_list':queryset,
-            'partners_list':queryset2,
-            'reviewers_list':queryset3,
-            'news_list':queryset4
-    }
-    return render(request,"index.html",context)
+class HomeView(TemplateView):
+    template_name='index.html'
 
-def partner_list_view(request):
-    queryset=Partner.objects.all()
-    context={
-        'partners_list':queryset
-    }
-    return render(request,"partners.html",context)
+    def get(self, request):
+        form=ContactForm()
+        featuredproducts=ChildProduct.objects.filter(featured=True)
+        partners=Partner.objects.all()
+        reviews=Reviews.objects.all()
+        news=News.objects.all()
 
-def about_list_view(request):
-    # queryset=Reviews.objects.all()
-    # context={
-    #         'reviewers_list':queryset
-    # }
-    # return render(request,"about.html",context)
-    contact = get_object_or_404(Enquiries)
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
+        args={
+        'form':form,'featured_list':featuredproducts,
+        'partners_list':partners,
+        'reviewers_list':reviews,
+        'news_list':news
+        }
+        return render(request,self.template_name,args)
+
+    def post(self,request):
+        form=ContactForm(request.POST)
         if form.is_valid():
-            # contact = form.save(commit=False)
-            contact.firstname=form.cleaned_data.get('firstname'),
-            contact.lastname=form.cleaned_data.get('lastname'),
-            contact.email=form.cleaned_data.get('email'),
-            contact.phoneno=form.cleaned_data.get('phoneno'),
-            contact.message=form.cleaned_data.get('message'),
-            contact.save()
+            post=form.save(commit=False)
+            post.date=timezone.now()
+            post.save()
+            return redirect('home')
+        else:
+            form=ContactForm()
+        return render(request, self.template_name, {'form':form})
 
-        return HttpResponseRedirect(reverse('about') )
-    else:
-        form = ContactForm()
-    context = {
-        'form': form,
-        'contact': contact,
-    }
-    return render(request, "about.html", context)
+
+class PartnerView(ListView):
+    model=Partner
+    context_object_name = 'partners_list'
+    template_name="partners.html"
+    # paginate_by = 10
+
+class AboutView(TemplateView):
+    template_name='about.html'
+
+    def get(self,request):
+        form=ContactForm()
+        reviews=Reviews.objects.all()
+
+        args={
+        'form':form,'reviewers_list':reviews
+        }
+        return render(request, self.template_name,args)
+
+    def post(self, request):
+        form= ContactForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.date=timezone.now()
+            post.save()
+            return redirect('about')
+        else:
+            form = ContactForm()
+        return render(request, self.template_name, {'form': form})
+
+
 
 def news_list_view(request):
     queryset=News.objects.all()
@@ -57,12 +73,3 @@ def news_list_view(request):
             'news_list':queryset
     }
     return render(request,"news.html",context)
-
-def contact_page(request):
-    if request.method == "POST":
-        form=ContactForm(request.POST)
-        if form.is_valid():
-            pass
-        else:
-            form=ContactForm()
-        return render(request, 'about.html',{'form':form})

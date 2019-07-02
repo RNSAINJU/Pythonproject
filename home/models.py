@@ -47,11 +47,12 @@ class News(models.Model):
         return self.title
 
 class Enquiries(models.Model):
-    firstname=models.CharField(max_length=10, unique=True)
-    lastname=models.CharField(max_length=10, unique=True)
-    email=models.CharField(max_length=10, unique=True)
-    phoneno=models.IntegerField()
+    firstname=models.CharField(max_length=100, unique=True)
+    lastname=models.CharField(max_length=100, unique=True)
+    email=models.CharField(max_length=100, unique=True)
+    phoneno=models.CharField(max_length=100, unique=True)
     message=models.TextField()
+    date=models.DateTimeField(auto_now_add=True)
 
     def __str(self):
         return self.firstname

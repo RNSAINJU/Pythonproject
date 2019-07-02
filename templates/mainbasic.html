@@ -87,7 +87,7 @@ That EASY!</p>
           <div class="col-lg-4 col-md-6 mb-5 mb-md-5">
 
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Recent Blog</h2>
+              <h2 class="ftco-heading-2">Recent News</h2>
 
               {% for obj in news_list %}
               <div class="block-21 mb-4 d-flex">
@@ -109,10 +109,10 @@ That EASY!</p>
              <div class="ftco-footer-widget mb-4 ml-md-4">
               <h2 class="ftco-heading-2">Services</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Game topups</a></li>
-                <li><a href="#" class="py-2 d-block">Gift cards</a></li>
-                <li><a href="#" class="py-2 d-block">Games on demand</a></li>
-<!--                <li><a href="#" class="py-2 d-block">Yoga</a></li>-->
+                <li style="color:white;">Game topups</li>
+                <li style="color:white;">Gift cards</li>
+                <li style="color:white;">Games on demand</li>
+
               </ul>
             </div>
           </div>
@@ -178,7 +178,24 @@ That EASY!</p>
   js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script> -->
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ <script>
+    $("#id_country").change(function () {
+      var url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+      var countryId = $(this).val();  // get the selected country ID from the HTML input
 
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'country': countryId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_city").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
 
 
    {% block javascript %}
