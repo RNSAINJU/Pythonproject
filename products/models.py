@@ -36,7 +36,7 @@ class Product(models.Model):
     # ('child','Child'),
     # )
     # type=models.CharField(blank=True,max_length=50,choices=TYPE_CHOICES)
-    title=models.CharField(max_length=50, unique=True)
+    title=models.CharField(max_length=50, unique=True,blank=True)
     short_description=models.CharField(max_length=40, unique=True)
     description=models.TextField()
     image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)

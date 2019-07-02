@@ -105,5 +105,8 @@ ENV/
 
 media
 
-
-
+#migration files
+.products/migrations
+.accounts/migrations
+.boards/migrations
+.home/migrations
