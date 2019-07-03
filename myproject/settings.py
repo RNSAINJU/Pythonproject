@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'boards',
     'products',
     'home',
+    'orders',
 ]
 
 MIDDLEWARE = [

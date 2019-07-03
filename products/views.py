@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404,render
 from django.views.generic import ListView, DetailView
 from django.utils import timezone
-from .models import Product,ChildProduct, OrderProduct,Order
+from .models import Product,ChildProduct
+from orders.models import OrderProduct,Order
 from django.shortcuts import reverse, redirect
 from django.contrib import messages
 
@@ -9,8 +10,9 @@ from django.contrib import messages
 class ProductView(ListView):
     model=ChildProduct
     context_object_name = 'child'
+    # paginate_by = 1
     template_name="products.html"
-    # paginate_by = 10
+
 
     def get_queryset(self):
         product=ChildProduct.objects.filter(productsfeatured=True)
@@ -65,10 +67,10 @@ def remove_from_cart(request, slug):
         #check if the order item is in order
         if order.products.filter(product__slug=product.slug).exists():
             order_product=OrderProduct.objects.filter(
-            product=product,
-            user=request.user,
-            ordered=False
-            )[0]
+                product=product,
+                user=request.user,
+                ordered=False
+                )[0]
             order.products.remove(order_product)
             messages.info(request, "This item was removed from your cart.")
             return redirect("core:product", slug=slug)

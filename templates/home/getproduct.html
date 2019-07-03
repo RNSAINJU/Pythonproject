@@ -1,0 +1,33 @@
+<div class="title p-4">
+  <h3>{{ object.parent_product.title }}</h3>
+  <span>{{ object.parent_product.short_description }}</span>
+</div>
+<div class="text p-4 d-flex align-items-end">
+  <a href="{{ object.get_add_to_cart_url }}" class="btn-custom px-4 py-2">Add to cart</a>
+<a href="{{ object.get_remove_from_cart_url }}" >Remove from cart</a>
+  <div>
+
+    {% if object.discount_price %}
+    <span  style="font-size:20px;">
+      <strike>Rs {{ object.price }}</strike>
+      <br>
+      </span>
+      <span class="price" style="font-size:20px;">
+      Rs {{ object.discount_price }}
+      </span>
+      {% else %}
+      <span class="price" >
+      Rs {{ object.price }}
+      </span>
+      {% endif %}
+
+
+
+
+
+    <h3><a href="{{ object.get_absolute_url }}">{{ object.type }}</a></h3>
+<p>{{ object.parent_product.description }}</p>
+    <a href="{{ object.get_add_to_cart_url }}" >More options</a>
+  </div>
+
+</div>

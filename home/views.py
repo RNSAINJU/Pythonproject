@@ -8,6 +8,7 @@ from django.utils import timezone
 
 class HomeView(TemplateView):
     template_name='index.html'
+    # paginate_by=2
 
     def get(self, request):
         form=ContactForm()
