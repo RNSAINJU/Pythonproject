@@ -54,19 +54,19 @@ That EASY!.</p>
               <td>{{ order_item.product.type }}</td>
               <td>{{ order_item.product.price }}</td>
               <td>
-                <a href="{% url 'products:remove-single-item-from-cart' order_item.product.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                <a href="{% url 'products:remove-single-item-from-cart' order_item.product.slug %}"><span class="oi oi-minus mr-2"></span></a>
                 {{ order_item.quantity }}
-                 <a href="{% url 'products:add-to-cart' order_item.product.slug %}"><i class="fas fa-plus ml-2"></i></a>
+                 <a href="{% url 'products:add-to-cart' order_item.product.slug %}"><span class="oi oi-plus ml-2"></span></a>
               </td>
               <td>
               {% if order_item.product.discount_price %}
                 Rs {{ order_item.get_total_discount_price }}
-                <span class="badge badge-primary">Saving Rs {{ order_item.get_total_discount_price }}</span>
+                <span class="badge badge-primary">Saving Rs {{ order_item.get_amount_saved }}</span>
               {% else %}
                 Rs {{ order_item.get_total_product_price }}
               {% endif %}
 
-               <a style="color:red;" href="{% url 'products:remove-from-cart' order_item.product.slug %}"><i class="fas fa-plus ml-2"></i></a>
+               <a href="{% url 'products:remove-from-cart' order_item.product.slug %}"><span style="color:red;"  class="oi oi-trash float-right"></span></a>
             </td>
           </tr>
 
