@@ -158,12 +158,12 @@ LOGOUT_REDIRECT_URL= 'home'
 
 
 SENDGRID_API_KEY='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'
-
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+MAILER_EMAIL_BACKEND=EMAIL_BACKEND
 EMAIL_HOST='smtp.sendgrid.net'
 EMAIL_HOST_USER='kgcgiftcard'
-EMAIL_HOST_PASSWORD='gunsNroses450'
+EMAIL_HOST_PASSWORD='probook450'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
-DEFAULT_FROM_EMAIL='help.khwoppagiftcard.store'
-ACCOUNT_EMAIL_SUBJECT_PREFIX='help.khwoppagiftcard.store'
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL='mail@khwoppagiftcard.store'
+ACCOUNT_EMAIL_SUBJECT_PREFIX='mail.khwoppagiftcard.store'

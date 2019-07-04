@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Order, OrderProduct
+from .models import Order, OrderProduct, BillingAddress
 from django.views.generic import ListView, DetailView, TemplateView, View
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -34,9 +34,26 @@ class CheckOutView(View):
 
     def post(self, *args, **kwargs):
         form=CheckoutForm(self.request.POST or None)
-        if form.is_valid():
-            # print("The form is valid")
-            # print(form.cleaned_data)
+        try:
+            order= Order.objects.get(user=self.request.user,ordered=False)
+            if form.is_valid():
+                street_address= form.cleaned_data.get('street_address')
+                secondary_address= form.cleaned_data.get('secondary_address')
+                # save_info= form.cleaned_data.get('save_info')
+                payment_option= form.cleaned_data.get('payment_option')
+                billing_address= BillingAddress(
+                    user=self.request.user,
+                    street_address=street_address,
+                    secondary_address=secondary_address
+                )
+                billing_address.save()
+                order.billing_address=billing_address
+                order.save()
+                # print("The form is valid")
+                # print(form.cleaned_data)
+                return redirect('orders:checkout')
+            messages.warning(self.request, "Failed checkout")
             return redirect('orders:checkout')
-        messages.warning(self.request, "Failed checkout")
-        return redirect('orders:checkout')
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order")
+            return redirect("orders:cart")
