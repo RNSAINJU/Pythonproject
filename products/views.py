@@ -5,7 +5,7 @@ from .models import Product,ChildProduct
 from orders.models import OrderProduct,Order
 from django.shortcuts import reverse, redirect
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 
 class ProductView(ListView):
     model=ChildProduct
@@ -28,7 +28,7 @@ class ProductDetailView(DetailView):
     model= ChildProduct
     template_name= "product.html"
 
-
+@login_required
 def add_to_cart(request,slug):
     product=get_object_or_404(ChildProduct,slug=slug)
     order_product, created=OrderProduct.objects.get_or_create(
@@ -44,7 +44,7 @@ def add_to_cart(request,slug):
             order_product.quantity +=1
             order_product.save()
             messages.info(request, "This item quantity was updated.")
-            return redirect("core:product", slug=slug)
+            return redirect("orders:cart")
         else:
             messages.info(request, "This item was added to your cart.")
             order.products.add(order_product)
@@ -73,7 +73,37 @@ def remove_from_cart(request, slug):
                 )[0]
             order.products.remove(order_product)
             messages.info(request, "This item was removed from your cart.")
+            return redirect("orders:cart")
+        else:
+            #add a message saying user doent have order
+            messages.info(request, "This item was not in your cart.")
             return redirect("core:product", slug=slug)
+    else:
+        messages.info(request, "You do not have an active order.")
+        return redirect("core:product", slug=slug)
+
+def remove_single_item_from_cart(request, slug):
+    product=get_object_or_404(ChildProduct,slug=slug)
+    order_qs=Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+    if order_qs.exists():
+        order= order_qs[0]
+        #check if the order item is in order
+        if order.products.filter(product__slug=product.slug).exists():
+            order_product=OrderProduct.objects.filter(
+                product=product,
+                user=request.user,
+                ordered=False
+                )[0]
+            if order_product.quantity >1:
+                order_product.quantity -= 1
+                order_product.save()
+            else:
+                order.products.remove(order_product)
+            messages.info(request, "This item quantity was updated.")
+            return redirect("orders:cart")
         else:
             #add a message saying user doent have order
             messages.info(request, "This item was not in your cart.")

@@ -1,0 +1,106 @@
+{% extends 'mainbasic.html' %}
+
+
+{% block title %}
+    <title>Home|Khwoppa Gift Card</title>
+      {% endblock %}
+
+ {% block nav %}
+<ul class="navbar-nav ml-auto">
+	<li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+	<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	<li class="nav-item"><a href="{% url 'products' %}" class="nav-link">Products</a></li>
+    <li class="nav-item"><a href="{% url 'partners' %}" class="nav-link">Partners</a></li>
+	<li class="nav-item"><a href="{% url 'news' %}" class="nav-link">News</a></li>
+	<li class="nav-item"><a href="{% url 'discussion' %}" class="nav-link">Discussion Forum</a></li>
+
+{% include 'navbar.html' %}
+</ul>
+{% endblock %}
+
+{% block content %}
+
+
+    <section class="ftco-section">
+    	<div " class="container">
+    		<div class="row justify-content-center mb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">
+          		<i class="db-left"></i>
+          		Order-Summary
+          		<i class="db-right"></i>
+          	</span>
+            <h2 class="mb-3">Order-Summary</h2>
+            <p>Kwoppa Gift Card is created to supply various game topups and gift cards to Nepali users with ease. No Hassle, Simply DM, Transfer, and Redeem.
+That EASY!.</p>
+          </div>
+        </div>
+
+
+        <table style="color:white;" class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order_item in object.products.all %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ order_item.product.type }}</td>
+              <td>{{ order_item.product.price }}</td>
+              <td>
+                <a href="{% url 'products:remove-single-item-from-cart' order_item.product.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                {{ order_item.quantity }}
+                 <a href="{% url 'products:add-to-cart' order_item.product.slug %}"><i class="fas fa-plus ml-2"></i></a>
+              </td>
+              <td>
+              {% if order_item.product.discount_price %}
+                Rs {{ order_item.get_total_discount_price }}
+                <span class="badge badge-primary">Saving Rs {{ order_item.get_total_discount_price }}</span>
+              {% else %}
+                Rs {{ order_item.get_total_product_price }}
+              {% endif %}
+
+               <a style="color:red;" href="{% url 'products:remove-from-cart' order_item.product.slug %}"><i class="fas fa-plus ml-2"></i></a>
+            </td>
+          </tr>
+
+            {% empty %}
+            <tr>
+              <td class="colspan="5""> Your cart is empty </td>
+              </tr>
+
+              <tr>
+                  <a class='btn btn-warning float-right' href="/">CONTINUE SHOPPING</a>
+                </tr>
+
+            {% endfor %}
+
+            {% if object.get_total %}
+            <tr>
+              <td colspan="4"><b>Order Total</b></td>
+              <td colspan="5"> Rs {{ object.get_total }} </td>
+            </tr>
+
+            <tr>
+                <td colspan="5">
+                  <a class='btn btn-warning float-right ml-2' href="/checkout.">PROCEED TO CHECKOUT </a>
+                  <a class='btn btn-primary float-right' href="/checkout.">CONTINUE SHOPPING</a></td>
+            </tr>
+            {% endif %}
+
+          </tbody>
+        </table>
+
+
+  </div>
+    </section>
+
+
+
+{% endblock %}

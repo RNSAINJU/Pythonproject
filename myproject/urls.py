@@ -13,6 +13,10 @@ from home import views as home_views
 # from django-jet import jet
 
 urlpatterns = [
+    path('',include('accounts.urls',namespace='accounts')),
+    path('',include('boards.urls',namespace='boards')),
+    path('',include('home.urls',namespace='home')),
+    path('',include('orders.urls',namespace='orders')),
     path('',include('products.urls',namespace='core')),
 
     url(r'^products/$',product_views.ProductView.as_view(),name='products'),
