@@ -31,6 +31,7 @@ class Order(models.Model):
     start_Date=models.DateTimeField(auto_now_add=True)
     ordered_date=models.DateTimeField()
     ordered=models.BooleanField(default=False)
+    # billing_
 
     def __str__(self):
         return self.user.username
@@ -40,3 +41,11 @@ class Order(models.Model):
         for order_item in self.products.all():
             total += order_item.get_final_price()
         return total
+
+class BillingAddress(models.Model):
+    user =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete =models.CASCADE)
+    street_address = models.CharField(max_length=100)
+    secondary_address = models.CharField(max_length=100)
+
+    def __str__(self):
+        self.user.username
