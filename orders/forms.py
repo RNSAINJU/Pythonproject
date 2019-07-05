@@ -1,5 +1,6 @@
 from django import forms
 
+
 PAYMENT_CHOICES =(
     ('E','Esewa'),
     ('I','Imepay'),
@@ -19,6 +20,14 @@ class CheckoutForm(forms.Form):
     })
     )
 
-    save_info=forms.BooleanField(required=False)
+    # save_info=forms.BooleanField(required=False)
     payment_option=forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+
+class PaymentForm(forms.Form):
+    transaction_id=forms.CharField(
+    widget=forms.TextInput(attrs={
+        'class':"form-control",
+        'placeholder':"Your transaction code here"
+    })
+    )
