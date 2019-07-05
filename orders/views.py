@@ -66,4 +66,5 @@ class PaymentView(View):
 
     # def post(self, *args, **kwargs):
     #     order=Order.objects.get(user=self,request.user, ordered=False)
+    #
     #     order.ordered=True
