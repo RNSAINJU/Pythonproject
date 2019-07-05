@@ -32,6 +32,7 @@ class Order(models.Model):
     ordered_date=models.DateTimeField()
     ordered=models.BooleanField(default=False)
     billing_address =models.ForeignKey('BillingAddress', on_delete=models.SET_NULL, blank=True, null=True)
+    payment =models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -49,3 +50,25 @@ class BillingAddress(models.Model):
 
     def __str__(self):
         self.user.username
+
+class Payment(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    amount =models.FloatField()
+    timestamp=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
+
+# class OrderDetails(models.Model):
+#     game_email
+#     game_password
+#     game_id
+#     game_name
+#     game_level
+#     remaining_vbucks
+#     fb_name
+#     transaction_code
+#     payment_screenshot
+#
+#     def __str__(self):
+#         return self.game_name
