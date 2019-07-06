@@ -26,9 +26,11 @@ class CheckOutView(View):
 
     def get(self, *args, **kwargs):
         form=CheckoutForm()
+        order= Order.objects.get(user=self.request.user,ordered=False)
 
         context={
             'form':form,
+            'order':order
         }
         return render(self.request,'checkout.html',context)
 
@@ -94,6 +96,12 @@ class PaymentView(View):
                     amount=amount
                 )
                 payment.save()
+
+                order_items= order.products.all()
+                order_items.update(ordered=True)
+                for item in order_items:
+                    item.save()
+
                 order.payment=payment
                 order.ordered=True
                 order.save()
