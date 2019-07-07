@@ -106,4 +106,4 @@ ENV/
 media
 
 migrations/
-products/migrations/
+products/migrations/0001_initial.py
