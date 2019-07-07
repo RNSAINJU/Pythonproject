@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Order, OrderProduct, BillingAddress, Payment
+from .models import Order, OrderProduct, BillingAddress, Payment, Coupon
 from django.views.generic import ListView, DetailView, TemplateView, View
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -31,11 +31,12 @@ class CheckOutView(View):
             context={
                 'form':form,
                 'couponform':CouponForm(),
-                'order':order
+                'order':order,
+                'DISPLAY_COUPON_FORM':True
             }
             return render(self.request,'checkout.html',context)
         except ObjectDoesNotExist:
-            messages.info(request, "You do not have an active order")
+            messages.info(self.request, "You do not have an active order")
             return redirect("orders:checkout")
 
 
@@ -80,17 +81,23 @@ class PaymentView(View):
     def get(self, *args, **kwargs):
         form=PaymentForm()
         order= Order.objects.get(user=self.request.user,ordered=False)
-        context={
-            'form':form,
-            'order':order
-        }
-        return render(self.request,'payment.html',context)
+        if order.billing_address:
+            context={
+                'form':form,
+                'order':order,
+                'DISPLAY_COUPON_FORM':False
+            }
+            return render(self.request,'payment.html',context)
+        else:
+            messages.error(self.request, "You have not  billing address")
+            return redirect("orders:checkout")
 
 
     def post(self, *args, **kwargs):
         form=PaymentForm(self.request.POST or None)
         order= Order.objects.get(user=self.request.user,ordered=False)
         # amount=int(order.get_total())
+
         try:
             if form.is_valid():
                 transaction_id=form.cleaned_data.get('transaction_id')
@@ -129,19 +136,18 @@ def get_coupon(request,code):
             return redirect("orders:checkout")
 
 
-def add_coupon(request):
-    if request.method == "POST":
-        form= CouponForm(request.POST or None)
+class AddCouponView(View):
+    def post(self, *args, **kwargs):
+        form= CouponForm(self.request.POST or None)
         if form.is_valid():
             try:
                 code=form.cleaned_data.get('code')
-                order=Order.objects.get(user=request.user,ordered=False)
-                order.coupon =get_coupon(request, code)
+                order=Order.objects.get(user=self.request.user,ordered=False)
+                order.coupon =get_coupon(self.request, code)
                 order.save()
-                messages.success(request,"Successfully added coupon")
+                messages.success(self.request,"Successfully added coupon")
                 return redirect("orders:checkout")
 
             except ObjectDoesNotExist:
-                messages.info(request, "You do not have an active order")
+                messages.info(self.request, "You do not have an active order")
                 return redirect("orders:checkout")
-    return None

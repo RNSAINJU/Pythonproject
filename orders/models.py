@@ -43,6 +43,7 @@ class Order(models.Model):
         total = 0
         for order_item in self.products.all():
             total += order_item.get_final_price()
+        if self.coupon:
             total -= self.coupon.amount
         return total
 
