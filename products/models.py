@@ -39,6 +39,7 @@ class Product(models.Model):
     title=models.CharField(max_length=50, unique=True,blank=True)
     short_description=models.CharField(max_length=60, unique=True)
     description=models.TextField()
+    category =models.ForeignKey('Main_Category', on_delete=models.SET_NULL, blank=True, null=True)
     image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
 
@@ -83,3 +84,9 @@ class ChildProduct(models.Model):
         return reverse("core:remove-from-cart", kwargs={
             'slug':self.slug
         })
+
+class Main_Category(models.Model):
+    name=models.CharField(max_length=50, unique=True,blank=True)
+
+    def __str__(self):
+        return self.name
