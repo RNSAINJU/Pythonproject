@@ -28,7 +28,7 @@ class PaymentForm(forms.Form):
     transaction_id=forms.CharField(
     widget=forms.TextInput(attrs={
         'class':"form-control",
-        'placeholder':"Your transaction code here"
+        'placeholder':"Your Esewa transaction code here"
     })
     )
 

@@ -7,9 +7,21 @@
 
 {% block content %}
 
-<main >
-    <div class="container wow fadeIn">
-      <h2 class="my-5 h2 text-center">Payment</h2>
+<section  class="ftco-section pt-0">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-10 heading-section text-center ftco-animate">
+        <span class="subheading">
+          <i class="db-left"></i>
+          Order
+          <i class="db-right"></i>
+        </span>
+        <h2 class="mb-3">Payment</h2>
+        <p>Deposit to esewa id:
+<span style="color:white;">khwoppagiftcard@gmail.com</span></p>
+      </div>
+    </div>
+
       <div class="row">
         <div class="col-md-8 mb-4">
           <div class="card">
@@ -20,8 +32,14 @@
 
               <h3>Payment</h3>
 
-							<p>Send total money from esewa then type transaction code below</p>
+              <div style="color:white">
+							<p>1. Go to Fund Transfer in Esewa</p>
+              <p>2. Type above given Esewa id </p>
+              <p>3. Type this Rs {{ order.get_total }} (total billed) in Amount</p>
+              <p>4. Select Personal Use int Purpose </p>
+              <p>5. Write your facebook name or Contact number in remarks</p>
 
+</div>
                 <div class="md-form mb-5">
 
                   {{ form.transaction_id }}
@@ -48,6 +66,6 @@
       </div>
 
     </div>
-  </main>
+  </section>
 
   {% endblock %}
