@@ -106,3 +106,4 @@ ENV/
 media
 
 migrations/
+products/migrations/
