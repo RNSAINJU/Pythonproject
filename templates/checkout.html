@@ -5,9 +5,23 @@
     <title>Home|Khwoppa Gift Card</title>
       {% endblock %}
 
+      {% block nav %}
+     <ul class="navbar-nav ml-auto">
+     	<li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+     	<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+     	<li class="nav-item"><a href="{% url 'products' %}" class="nav-link">Products</a></li>
+         <li class="nav-item"><a href="{% url 'partners' %}" class="nav-link">Partners</a></li>
+     	<li class="nav-item"><a href="{% url 'news' %}" class="nav-link">News</a></li>
+     	<li class="nav-item"><a href="{% url 'discussion' %}" class="nav-link">Discussion Forum</a></li>
+
+     {% include 'navbar.html' %}
+     </ul>
+     {% endblock %}
+     
 {% block content %}
 
-<section  class="ftco-section pt-0">
+
+<section  class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-md-10 heading-section text-center ftco-animate">
@@ -17,8 +31,7 @@
           <i class="db-right"></i>
         </span>
         <h2 class="mb-3">Checkout</h2>
-        <p>Kwoppa Gift Card is created to supply various game topups and gift cards to Nepali users with ease. No Hassle, Simply DM, Transfer, and Redeem.
-That EASY!.</p>
+        <p> Don't forget to add discount coupon if you have one. For any enquiry message us on <a href="https://m.me/khwoppagiftcard">facebook</a> </p>
       </div>
     </div>
 
