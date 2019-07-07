@@ -128,20 +128,20 @@ def get_coupon(request,code):
             messages.info(request, "This coupn does not exist")
             return redirect("orders:checkout")
 
-#
-# def add_coupon(request):
-#     if request.method == "POST":
-#         form= CouponForm(request.POST or None)
-#         if form.is_valid():
-#             try:
-#                 code=form.cleaned_data.get('code')
-#                 order=Order.objects.get(user=request.user,ordered=False)
-#                 order.coupon =get_coupon(request, code)
-#                 order.save()
-#                 messages.success(request,"Successfully added coupon")
-#                 return redirect("orders:checkout")
-#
-#             except ObjectDoesNotExist:
-#                 messages.info(request, "You do not have an active order")
-#                 return redirect("orders:checkout")
-#     return None
+
+def add_coupon(request):
+    if request.method == "POST":
+        form= CouponForm(request.POST or None)
+        if form.is_valid():
+            try:
+                code=form.cleaned_data.get('code')
+                order=Order.objects.get(user=request.user,ordered=False)
+                order.coupon =get_coupon(request, code)
+                order.save()
+                messages.success(request,"Successfully added coupon")
+                return redirect("orders:checkout")
+
+            except ObjectDoesNotExist:
+                messages.info(request, "You do not have an active order")
+                return redirect("orders:checkout")
+    return None
