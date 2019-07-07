@@ -31,3 +31,11 @@ class PaymentForm(forms.Form):
         'placeholder':"Your transaction code here"
     })
     )
+
+class CouponForm(forms.Form):
+    code=forms.CharField(widget=forms.TextInput(attrs={
+        'class':"form-control",
+        'placeholder':"Your coupon code",
+        'aria-label':"Recipent's username",
+        'aria_describedby':"basic-addon2"
+    }))

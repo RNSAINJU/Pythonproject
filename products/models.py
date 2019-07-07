@@ -58,6 +58,9 @@ class ChildProduct(models.Model):
     type=models.CharField(max_length=50,null=True)
     price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
     discount_price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
+
+    # price = models.FloatField()
+    # discount_price = models.FloatField(blank=True, null=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
     homefeatured=models.BooleanField(default=False)
     productsfeatured=models.BooleanField(default=False)
@@ -83,23 +86,3 @@ class ChildProduct(models.Model):
         return reverse("core:remove-from-cart", kwargs={
             'slug':self.slug
         })
-
-# class OrderProduct(models.Model):
-#     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-#     # , blank=True, null=True
-#     ordered=models.BooleanField(default=False)
-#     product=models.ForeignKey(ChildProduct, on_delete=models.CASCADE)
-#     quantity=models.IntegerField(default=1)
-#
-#     def __str__(self):
-#         return f"{self.quantity} of {self.product.type}"
-#
-# class Order(models.Model):
-#     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     products=models.ManyToManyField(OrderProduct)
-#     start_Date=models.DateTimeField(auto_now_add=True)
-#     ordered_date=models.DateTimeField()
-#     ordered=models.BooleanField(default=False)
-#
-#     def __str__(self):
-#         return self.user.username
