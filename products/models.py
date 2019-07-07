@@ -56,8 +56,8 @@ class ChildProduct(models.Model):
     )
     parent_product=models.ForeignKey(Product, related_name='childproduct', on_delete=models.CASCADE)
     type=models.CharField(max_length=50,null=True)
-    price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
-    discount_price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
+    # price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
+    # discount_price=models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
 
     # price = models.FloatField()
     # discount_price = models.FloatField(blank=True, null=True)
