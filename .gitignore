@@ -104,6 +104,3 @@ ENV/
 .idea/
 
 media
-
-migrations/
-products/migrations/0001_initial.py
