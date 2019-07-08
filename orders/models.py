@@ -72,7 +72,8 @@ class Coupon(models.Model):
     def __str__(self):
         return self.code
 
-class OrderDetails(models.Model):
+class OrderDetailsTopup(models.Model):
+    game_type=models.CharField(max_length=50)
     game_id=models.CharField(max_length=50)
     game_name=models.CharField(max_length=50)
     # image=

@@ -51,10 +51,12 @@
   {% if order_item.product.parent_product.category.name == 'Gametopups' %}
 
                 <div class="md-form mb-5">
-                  <label for="game_id" class="">{{ order_item.product.parent_product.category.name }}</label>|
-                  <label for="game_id" class="">{{ order_item.product.parent_product.title }}</label>|
-                  <label for="game_id" class="">{{ order_item.product.type }}</label>
 
+                   <!-- <input type="hidden" id="custId" name="custId" value="3487"> -->
+                  <label for="game_id" class="">{{ order_item.product.parent_product.category.name }}</label>|
+                  <label for="game_id" class="">{{ order_item.product.parent_product.title }}</label>
+
+                  <input type="text" name="game_type" id="game_type" class="form-control" value="{{ order_item.product.type }}" disabled/>
                   {{ form.game_id }}
                   {{ form.game_name }}
                 </div>
