@@ -39,3 +39,40 @@ class CouponForm(forms.Form):
         'aria-label':"Recipent's username",
         'aria_describedby':"basic-addon2"
     }))
+
+class TopupForm(forms.Form):
+    game_id=forms.CharField(widget=forms.TextInput(attrs={
+        'class':"form-control",
+        'placeholder':"In game id ",
+    }))
+    game_name=forms.CharField(widget=forms.TextInput(attrs={
+        'class':"form-control",
+        'placeholder':"In game name ",
+    }))
+
+class TopupLoginForm(forms.Form):
+    type=forms.CharField(widget=forms.TextInput(attrs={
+        'class':"form-control",
+        'placeholder':"Facebook, Google OR Epic games",
+    }))
+
+    email=forms.CharField(widget=forms.TextInput(attrs={
+        'class':"form-control",
+    }))
+    password=forms.CharField(widget=forms.TextInput(attrs={
+        'class':"form-control",
+    }))
+    character_name=forms.CharField(widget=forms.TextInput(attrs={
+        'class':"form-control",
+        'placeholder':"In game name |Epic id",
+    }))
+    remaining_vbucks=forms.CharField(widget=forms.TextInput(attrs={
+        'class':"form-control",
+        'placeholder':"Current remaining vbucks",
+    }))
+
+# class TopupLoginForm(forms.Form):
+#     email=forms.CharField(widget=forms.TextInput(attrs={
+#         'class':"form-control",
+#         'placeholder':"Facebook, Google OR Epic games",
+#     }))

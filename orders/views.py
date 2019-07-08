@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import CheckoutForm, PaymentForm, CouponForm
+from .forms import CheckoutForm, PaymentForm, CouponForm, TopupForm, TopupLoginForm
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -27,8 +27,15 @@ class CheckOutView(View):
     def get(self, *args, **kwargs):
         try:
             order=Order.objects.get(user=self.request.user,ordered=False)
-            form=CheckoutForm()
+            # for order_item in order.products.all:
+            #     if order_item.product.parent_product.category == 'Gametopups':
+            form=TopupForm()
+            #     elif order_item.product.parent_product.category  == 'Gamestopup(Loginrequired)':
+            loginrequiredform=TopupLoginForm()
+            checkoutform=CheckoutForm()
             context={
+                'loginrequiredform':loginrequiredform,
+                'checkoutform':checkoutform,
                 'form':form,
                 'couponform':CouponForm(),
                 'order':order,
@@ -45,8 +52,8 @@ class CheckOutView(View):
         try:
             order= Order.objects.get(user=self.request.user,ordered=False)
             if form.is_valid():
-                street_address= form.cleaned_data.get('street_address')
-                secondary_address= form.cleaned_data.get('secondary_address')
+                game_id= form.cleaned_data.get('game_id')
+                game_name= form.cleaned_data.get('game_name')
                 # save_info= form.cleaned_data.get('save_info')
                 payment_option= form.cleaned_data.get('payment_option')
                 billing_address= BillingAddress(

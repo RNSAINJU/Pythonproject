@@ -17,7 +17,7 @@
      {% include 'navbar.html' %}
      </ul>
      {% endblock %}
-     
+
 {% block content %}
 
 
@@ -43,22 +43,58 @@
             <form method="POST" class="card-body">
               {% csrf_token %}
 
-              <h3>Shipping address</h3>
+              <h3>Game details</h3>
 
               <!-- <div class='hideable_shipping_form'> -->
+{% for order_item in order.products.all %}
+  {{ forloop.counter }}
+  {% if order_item.product.parent_product.category.name == 'Gametopups' %}
 
                 <div class="md-form mb-5">
-                  <!-- <input type='text' placeholder='1234 Main St' id='shipping_address' name='shipping_address' class='form-control' /> -->
-                  {{ form.street_address }}
-                  <label for="shipping_address" class="">Address</label>
+                  <label for="game_id" class="">{{ order_item.product.parent_product.category.name }}</label>|
+                  <label for="game_id" class="">{{ order_item.product.parent_product.title }}</label>|
+                  <label for="game_id" class="">{{ order_item.product.type }}</label>
+
+                  {{ form.game_id }}
+                  {{ form.game_name }}
                 </div>
 
-                <div class="md-form mb-5">
-                  {{ form.secondary_address }}
-                  <label for="shipping_address2" class="">Address 2 (optional)</label>
-                </div>
+                {% endif %}
+
+    {% if order_item.product.parent_product.category.name == 'Gamestopup(Loginrequired)' %}
+    <div class="md-form mb-5">
+      <label for="game_id" class="">{{ order_item.product.parent_product.category.name }}</label>|
+      <label for="game_id" class="">{{ order_item.product.parent_product.title }}</label>|
+      <label for="game_id" class="">{{ order_item.product.type }}</label><br>
+
+      <label for="game_id" class="">Server</label>
+      <label for="game_id" class="">Login Type</label>
+            {{ loginrequiredform.type }}
+
+      <label for="game_id" class="">Login Email</label>
+            {{ loginrequiredform.email }}
+      <label for="game_id" class="">Login Password</label>
+            {{ loginrequiredform.password }}
+      <label for="game_id" class="">Character Name</label>
+            {{ loginrequiredform.character_name }}
+      <label for="game_id" class="">V-bucks balance</label>
+            {{ loginrequiredform.remaining_vbucks }}
 
 
+    </div>
+    {% endif %}
+
+    {% if order_item.product.parent_product.category.name == 'Subscriptions' %}
+      <p> Your subscription will be activated soon. Please keep checking.</p>
+    {% endif %}
+
+    {% if order_item.product.parent_product.category.name == 'Gift cards' %}
+      Your gift card will be mail to you.
+      {{ loginrequiredform.email }}
+    {% endif %}
+
+
+{% endfor %}
 
                 <!-- <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" name="same_billing_address" id="same_billing_address">
@@ -115,7 +151,7 @@
               <h3>Payment option</h3>
 
               <div class="d-block my-3">
-                {% for value,name  in form.fields.payment_option.choices %}
+                {% for value,name  in checkoutform.fields.payment_option.choices %}
                 <div class="custom-control custom-radio">
                   <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
                   <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
