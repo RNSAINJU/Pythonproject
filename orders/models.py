@@ -28,7 +28,6 @@ class OrderProduct(models.Model):
 class Order(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     products=models.ManyToManyField(OrderProduct)
-    # order_details=models.ManyToManyField(OrderDetails)
     start_Date=models.DateTimeField(auto_now_add=True)
     ordered_date=models.DateTimeField()
     ordered=models.BooleanField(default=False)
@@ -50,11 +49,10 @@ class Order(models.Model):
 
 class BillingAddress(models.Model):
     user =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete =models.CASCADE)
-    street_address = models.CharField(max_length=100)
-    secondary_address = models.CharField(max_length=100)
+    details = models.TextField()
 
     def __str__(self):
-        return self.user.username
+        return self.details
 
 class Payment(models.Model):
     transaction_id= models.CharField(max_length=50)
@@ -71,9 +69,7 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
-
-class OrderDetailsTopup(models.Model):
-    game_type=models.CharField(max_length=50)
-    game_id=models.CharField(max_length=50)
-    game_name=models.CharField(max_length=50)
-    # image=
+# class OrderDetails(models.Model):
+#     game_id
+#     game_name
+#     image=

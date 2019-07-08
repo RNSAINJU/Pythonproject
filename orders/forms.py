@@ -8,16 +8,12 @@ PAYMENT_CHOICES =(
 )
 
 class CheckoutForm(forms.Form):
-    street_address=forms.CharField(
-    widget=forms.TextInput(attrs={
-        'class':"form-control",'placeholder':"baneshwor, kathmandu"
-    })
-    )
-
-    secondary_address=forms.CharField(required=False,
-    widget=forms.TextInput(attrs={
-        'class':"form-control",'placeholder':"Apartment"
-    })
+    game_details = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 5, 'placeholder': 'Your game details here'}
+        ),
+        max_length=4000,
+        help_text='The max length of the text is 4000.'
     )
 
     # save_info=forms.BooleanField(required=False)
@@ -70,9 +66,3 @@ class TopupLoginForm(forms.Form):
         'class':"form-control",
         'placeholder':"Current remaining vbucks",
     }))
-
-# class TopupLoginForm(forms.Form):
-#     email=forms.CharField(widget=forms.TextInput(attrs={
-#         'class':"form-control",
-#         'placeholder':"Facebook, Google OR Epic games",
-#     }))

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Order, OrderProduct, BillingAddress, Payment, Coupon
+from .models import Order, OrderProduct, Payment, Coupon, BillingAddress
 from django.views.generic import ListView, DetailView, TemplateView, View
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -29,13 +29,11 @@ class CheckOutView(View):
             order=Order.objects.get(user=self.request.user,ordered=False)
             # for order_item in order.products.all:
             #     if order_item.product.parent_product.category == 'Gametopups':
-            form=TopupForm()
             #     elif order_item.product.parent_product.category  == 'Gamestopup(Loginrequired)':
             loginrequiredform=TopupLoginForm()
-            checkoutform=CheckoutForm()
+            form=CheckoutForm()
             context={
                 'loginrequiredform':loginrequiredform,
-                'checkoutform':checkoutform,
                 'form':form,
                 'couponform':CouponForm(),
                 'order':order,
@@ -52,14 +50,12 @@ class CheckOutView(View):
         try:
             order= Order.objects.get(user=self.request.user,ordered=False)
             if form.is_valid():
-                game_id= form.cleaned_data.get('game_id')
-                game_name= form.cleaned_data.get('game_name')
+                game_details= form.cleaned_data.get('game_details')
                 # save_info= form.cleaned_data.get('save_info')
                 payment_option= form.cleaned_data.get('payment_option')
                 billing_address= BillingAddress(
                     user=self.request.user,
-                    street_address=street_address,
-                    secondary_address=secondary_address
+                    details=game_details,
                 )
                 billing_address.save()
                 order.billing_address=billing_address

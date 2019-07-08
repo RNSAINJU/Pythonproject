@@ -46,28 +46,25 @@
               <h3>Game details</h3>
 
               <!-- <div class='hideable_shipping_form'> -->
-{% for order_item in order.products.all %}
-  {{ forloop.counter }}
+<!-- {% for order_item in order.products.all %} -->
+  <!-- {{ forloop.counter }} -->
   {% if order_item.product.parent_product.category.name == 'Gametopups' %}
 
                 <div class="md-form mb-5">
+                  <label for="game_id" class="">**Please type your in game
+                     id and name below**</label>
 
-                   <!-- <input type="hidden" id="custId" name="custId" value="3487"> -->
-                  <label for="game_id" class="">{{ order_item.product.parent_product.category.name }}</label>|
-                  <label for="game_id" class="">{{ order_item.product.parent_product.title }}</label>
+                  {{ form.game_details }}
 
-                  <input type="text" name="game_type" id="game_type" class="form-control" value="{{ order_item.product.type }}" disabled/>
-                  {{ form.game_id }}
-                  {{ form.game_name }}
                 </div>
 
                 {% endif %}
 
     {% if order_item.product.parent_product.category.name == 'Gamestopup(Loginrequired)' %}
     <div class="md-form mb-5">
-      <label for="game_id" class="">{{ order_item.product.parent_product.category.name }}</label>|
+      <!-- <label for="game_id" class="">{{ order_item.product.parent_product.category.name }}</label>|
       <label for="game_id" class="">{{ order_item.product.parent_product.title }}</label>|
-      <label for="game_id" class="">{{ order_item.product.type }}</label><br>
+      <label for="game_id" class="">{{ order_item.product.type }}</label><br> -->
 
       <label for="game_id" class="">Server</label>
       <label for="game_id" class="">Login Type</label>
@@ -86,17 +83,7 @@
     </div>
     {% endif %}
 
-    {% if order_item.product.parent_product.category.name == 'Subscriptions' %}
-      <p> Your subscription will be activated soon. Please keep checking.</p>
-    {% endif %}
-
-    {% if order_item.product.parent_product.category.name == 'Gift cards' %}
-      Your gift card will be mail to you.
-      {{ loginrequiredform.email }}
-    {% endif %}
-
-
-{% endfor %}
+<!-- {% endfor %} -->
 
                 <!-- <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" name="same_billing_address" id="same_billing_address">
@@ -153,7 +140,7 @@
               <h3>Payment option</h3>
 
               <div class="d-block my-3">
-                {% for value,name  in checkoutform.fields.payment_option.choices %}
+                {% for value,name  in form.fields.payment_option.choices %}
                 <div class="custom-control custom-radio">
                   <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
                   <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
