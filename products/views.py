@@ -48,13 +48,13 @@ def add_to_cart(request,slug):
         else:
             messages.info(request, "This item was added to your cart.")
             order.products.add(order_product)
-            return redirect("core:product", slug=slug)
+            return redirect("orders:cart")
     else:
         ordered_date=timezone.now()
         order =Order.objects.create(user=request.user, ordered_date=ordered_date)
         order.products.add(order_product)
         messages.info(request, "This item was added to your cart.")
-        return redirect("core:product", slug=slug)
+        return redirect("orders:cart")
 
 def remove_from_cart(request, slug):
     product=get_object_or_404(ChildProduct,slug=slug)

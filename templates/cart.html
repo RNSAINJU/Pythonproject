@@ -76,7 +76,7 @@ That EASY!.</p>
               </tr>
 
               <tr>
-                  <a class='btn btn-warning float-right' href="/">CONTINUE SHOPPING</a>
+                  <a class='btn btn-warning float-right' href="{% url 'products' %}">CONTINUE SHOPPING</a>
                 </tr>
 
             {% endfor %}
@@ -101,7 +101,7 @@ That EASY!.</p>
             <tr>
                 <td colspan="5">
                   <a class='btn btn-warning float-right ml-2' href="{% url 'orders:checkout' %}">PROCEED TO CHECKOUT </a>
-                  <a class='btn btn-primary float-right' href="/checkout.">CONTINUE SHOPPING</a></td>
+                  <a class='btn btn-primary float-right' href="{% url 'products' %}">CONTINUE SHOPPING</a></td>
             </tr>
             {% endif %}
 

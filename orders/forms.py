@@ -10,7 +10,7 @@ PAYMENT_CHOICES =(
 class CheckoutForm(forms.Form):
     game_details = forms.CharField(
         widget=forms.Textarea(
-            attrs={'rows': 5, 'placeholder': 'Your game details here'}
+            attrs={'rows': 5, 'placeholder': 'Type all required details mentioned above here'}
         ),
         max_length=4000,
         help_text='The max length of the text is 4000.'
@@ -27,6 +27,8 @@ class PaymentForm(forms.Form):
         'placeholder':"Your Esewa transaction code here"
     })
     )
+
+    transaction_image=forms.ImageField()
 
 class CouponForm(forms.Form):
     code=forms.CharField(widget=forms.TextInput(attrs={

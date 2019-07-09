@@ -45,16 +45,16 @@
 
               <h3>Game details</h3>
 
-              <!-- <div class='hideable_shipping_form'> -->
-<!-- {% for order_item in order.products.all %} -->
-  <!-- {{ forloop.counter }} -->
+
+{% for order_item in order.products.all %}
+           <p style="color:white;">For {{ order_item.product.parent_product.title }} order</p>
   {% if order_item.product.parent_product.category.name == 'Gametopups' %}
 
                 <div class="md-form mb-5">
-                  <label for="game_id" class="">**Please type your in game
-                     id and name below**</label>
 
-                  {{ form.game_details }}
+
+                  <p>id:<br>
+                  name:<br></p>
 
                 </div>
 
@@ -62,33 +62,26 @@
 
     {% if order_item.product.parent_product.category.name == 'Gamestopup(Loginrequired)' %}
     <div class="md-form mb-5">
-      <!-- <label for="game_id" class="">{{ order_item.product.parent_product.category.name }}</label>|
-      <label for="game_id" class="">{{ order_item.product.parent_product.title }}</label>|
-      <label for="game_id" class="">{{ order_item.product.type }}</label><br> -->
 
-      <label for="game_id" class="">Server</label>
-      <label for="game_id" class="">Login Type</label>
-            {{ loginrequiredform.type }}
+           <p>
+             Server: PC|PSN|Mobile<br>
+             Login Type:Gmail|Epic|PSN<br>
+             Login Email:<br>
+             Login Password:<br>
+             Character Name:<br>
+             Character Level:<br>
+             V-bucks balance:<br>
 
-      <label for="game_id" class="">Login Email</label>
-            {{ loginrequiredform.email }}
-      <label for="game_id" class="">Login Password</label>
-            {{ loginrequiredform.password }}
-      <label for="game_id" class="">Character Name</label>
-            {{ loginrequiredform.character_name }}
-      <label for="game_id" class="">V-bucks balance</label>
-            {{ loginrequiredform.remaining_vbucks }}
+         </p>
 
 
-    </div>
-    {% endif %}
+      </div>
 
-<!-- {% endfor %} -->
+      {% endif %}
 
-                <!-- <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" name="same_billing_address" id="same_billing_address">
-                  <label class="custom-control-label" for="same_billing_address">Billing address is the same as my shipping address</label>
-                </div> -->
+
+{% endfor %}
+  {{ form.game_details }}
 
                 <div class="custom-control custom-checkbox">
                 {{ form.save_info }}
@@ -96,46 +89,6 @@
                 </div>
 
                 <hr>
-              <!-- </div>
-
-              <!-- {% if default_shipping_address %}
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="use_default_shipping" id="use_default_shipping">
-                <label class="custom-control-label" for="use_default_shipping">Use default shipping address: {{ default_shipping_address.street_address|truncatechars:10 }}</label>
-              </div>
-              {% endif %} -->
-
-
-
-              <!-- <h3>Billing address</h3>
-
-              <div class='hideable_billing_form'>
-                <div class="md-form mb-5">
-                  <input type='text' placeholder='1234 Main St' id='billing_address' name='billing_address' class='form-control' />
-                  <label for="billing_address" class="">Address</label>
-                </div>
-
-                <div class="md-form mb-5">
-                  <input type='text' placeholder='Apartment or suite' id='billing_address2' name='billing_address2' class='form-control' />
-                  <label for="billing_address2" class="">Address 2 (optional)</label>
-                </div>
-
-
-
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" name="set_default_billing" id="set_default_billing">
-                  <label class="custom-control-label" for="set_default_billing">Save as default billing address</label>
-                </div>
-
-              </div> -->
-
-              <!-- {% if default_billing_address %}
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="use_default_billing" id="use_default_billing">
-                <label class="custom-control-label" for="use_default_billing">Use default billing address: {{ default_billing_address.street_address|truncatechars:10 }}</label>
-              </div>
-              {% endif %} -->
-              <!-- <hr> -->
 
               <h3>Payment option</h3>
 

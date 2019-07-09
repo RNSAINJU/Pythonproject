@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .forms import CheckoutForm, PaymentForm, CouponForm, TopupForm, TopupLoginForm
-
+from django.core.files.storage import FileSystemStorage
 
 class OrderSummaryView(LoginRequiredMixin, View):
 
@@ -97,16 +97,20 @@ class PaymentView(View):
 
 
     def post(self, *args, **kwargs):
-        form=PaymentForm(self.request.POST or None)
+        form=PaymentForm(self.request.POST, self.request.FILES or None)
         order= Order.objects.get(user=self.request.user,ordered=False)
         # amount=int(order.get_total())
 
         try:
             if form.is_valid():
+                print("The form is valid")
+                print(form.cleaned_data)
                 transaction_id=form.cleaned_data.get('transaction_id')
+                transaction_image =form.cleaned_data['transaction_image']
                 amount=order.get_total()
                 payment=Payment(
                     transaction_id=transaction_id,
+                    transaction_image=transaction_image,
                     user=self.request.user,
                     amount=amount
                 )
