@@ -122,6 +122,7 @@ class PaymentView(View):
                     item.save()
 
                 order.payment=payment
+                order.status='pending'
                 order.ordered=True
                 order.save()
 
@@ -158,3 +159,15 @@ class AddCouponView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "You do not have an active order")
                 return redirect("orders:checkout")
+
+class OrderView(ListView):
+    model=Order
+    context_object_name = 'orders'
+    # paginate_by = 1
+    template_name="orders.html"
+
+
+    def get_queryset(self):
+        order=Order.objects.filter(user=self.request.user,ordered=True)
+        queryset={'order':order}
+        return queryset

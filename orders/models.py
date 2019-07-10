@@ -31,6 +31,7 @@ class OrderProduct(models.Model):
 class Order(models.Model):
     STATUS_CHOICES=(
         ('pending','Pending'),
+        ('processing','Processing'),
         ('completed','Completed'),
         )
 
@@ -44,6 +45,7 @@ class Order(models.Model):
     payment =models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
     coupon=models.ForeignKey('Coupon', on_delete=models.SET_NULL, blank=True, null=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
+    message=models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username

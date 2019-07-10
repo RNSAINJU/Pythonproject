@@ -1,0 +1,90 @@
+{% extends 'mainbasic.html' %}
+
+
+{% block title %}
+    <title>Home|Khwoppa Gift Card</title>
+      {% endblock %}
+
+ {% block nav %}
+<ul class="navbar-nav ml-auto">
+	<li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+	<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	<li class="nav-item"><a href="{% url 'products' %}" class="nav-link">Products</a></li>
+    <li class="nav-item"><a href="{% url 'partners' %}" class="nav-link">Partners</a></li>
+	<li class="nav-item"><a href="{% url 'news' %}" class="nav-link">News</a></li>
+	<li class="nav-item"><a href="{% url 'discussion' %}" class="nav-link">Discussion Forum</a></li>
+
+{% include 'navbar.html' %}
+</ul>
+{% endblock %}
+
+{% block content %}
+
+
+    <section  class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">
+          		<i class="db-left"></i>
+          		Orders
+          		<i class="db-right"></i>
+          	</span>
+            <h2 class="mb-3">Order-Summary</h2>
+            <p>Message directly on facebook page with your order id if you have any enquiries about your order</p>
+
+          </div>
+        </div>
+
+
+        <table style="color:white;" class="table table-hover">
+          <thead>
+            <tr>
+
+              <th scope="col">Order-Id</th>
+              <th scope="col">Product</th>
+              <th scope="col">Total</th>
+              <!-- <th scope="col">Quantity</th> -->
+              <th scope="col">Order Status</th>
+              <th scope="col">Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders.order %}
+
+            <tr>
+  {{ order.ordered_date }}
+              <td>{{ order.id }}</td>
+              {% for order_item in order.products.all %}
+                <td>{{ order_item.product.parent_product.title }} | {{ order_item.product.type }}</td>
+              {% endfor %}
+              <td>{{ order.payment.amount }}</td>
+              <td>{{ order.status }}</td>
+
+              <td>{{ order.message }}</td>
+
+          </tr>
+
+          {% empty %}
+          <tr>
+            <td class="colspan="5""> No active orders</td>
+            </tr>
+
+            <tr>
+                <a class='btn btn-warning float-right' href="{% url 'products' %}">CONTINUE SHOPPING</a>
+              </tr>
+
+            {% endfor %}
+
+
+
+          </tbody>
+        </table>
+
+
+  </div>
+    </section>
+
+
+
+{% endblock %}
