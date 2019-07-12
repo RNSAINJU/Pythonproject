@@ -13,6 +13,7 @@ app_name ='products'
 
 urlpatterns = [
     url(r'^products/$',ProductView.as_view(),name='products'),
+    # url(r'^products/options/(?P<pk>\d+)/$',OptionView.as_view(),name='products'),
     path('product/<slug>/',ProductDetailView.as_view(),name='product'),
     path(r'^add-to-cart/<slug>/',add_to_cart,name='add-to-cart'),
     path(r'^remove-from-cart/<slug>/',remove_from_cart,name='remove-from-cart'),

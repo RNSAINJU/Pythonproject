@@ -27,6 +27,17 @@ def load_prices(request):
 class ProductDetailView(DetailView):
     model= ChildProduct
     template_name= "product.html"
+# 
+# class ProductOptions(ListView):
+#     model=ChildProduct
+#     context_object_name='items'
+#     template_name='alloptions.html'
+#
+#     # def get_context_data(self, **kwargs):
+#     #     kwargs['childproduct']
+#     def get_queryset(self):
+#         self.product=get_object_or_404(ChildProduct, parent_product__pk=self.kwargs.get('parent_product_pk'))
+#         queryset=self.
 
 @login_required
 def add_to_cart(request,slug):

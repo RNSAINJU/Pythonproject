@@ -31,7 +31,7 @@
           		<i class="db-right"></i>
           	</span>
             <h2 class="mb-3">Order-Summary</h2>
-            <p>Message directly on facebook page with your order id if you have any enquiries about your order</p>
+            <p>After successfull order message us on <a href="https://m.me/khwoppagiftcard">facebook</a>  with your order id.</p>
 
           </div>
         </div>
@@ -40,21 +40,22 @@
         <table style="color:white;" class="table table-hover">
           <thead>
             <tr>
-
               <th scope="col">Order-Id</th>
               <th scope="col">Product</th>
               <th scope="col">Total</th>
-              <!-- <th scope="col">Quantity</th> -->
               <th scope="col">Order Status</th>
               <th scope="col">Message</th>
             </tr>
           </thead>
           <tbody>
             {% for order in orders.order %}
+            <tr>
+                <td colspan="5"><span style="font-size:10px;">{{ order.ordered_date }}</span></td>
+            </tr>
 
             <tr>
-  {{ order.ordered_date }}
-              <td>{{ order.id }}</td>
+              <th scope="row">{{ order.id }} </th>
+
               {% for order_item in order.products.all %}
                 <td>{{ order_item.product.parent_product.title }} | {{ order_item.product.type }}</td>
               {% endfor %}
@@ -62,8 +63,10 @@
               <td>{{ order.status }}</td>
 
               <td>{{ order.message }}</td>
+              </tr>
 
-          </tr>
+
+
 
           {% empty %}
           <tr>

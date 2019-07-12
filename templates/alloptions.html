@@ -1,0 +1,50 @@
+{% extends 'mainbasic.html' %}
+
+
+{% block title %}
+    <title>Home|Khwoppa Gift Card</title>
+      {% endblock %}
+
+ {% block nav %}
+	            <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+						<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	          <li class="nav-item active"><a href="{% url 'products' %}" class="nav-link">Products</a></li>
+					<li class="nav-item"><a href="{% url 'partners' %}" class="nav-link">Partners</a></li>
+					<li class="nav-item"><a href="{% url 'news' %}" class="nav-link">News</a></li>
+	          <li class="nav-item"><a href="{% url 'discussion' %}" class="nav-link">Discussion Forum</a></li>
+	        </ul>
+{% endblock %}
+
+{% block content %}
+
+
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">
+          		<i class="db-left"></i>
+          		Pricing For Topup
+          		<i class="db-right"></i>
+          	</span>
+            <h2 class="mb-3">Pricing For Games Topup</h2>
+            <p>Easily topup UC, vbucks, diamonds, apex coins for your game from us easily with payment through esewa, imepay or khalti.</p>
+          </div>
+        </div>
+    		<div class="row">
+
+          {% for object in items.products %}
+
+
+    			<div class="col-md-4">
+    				<div class="pricing-wrap ftco-animate img active" style="background-image: url({{ object.parent_product.image.url }});">
+    				{% include 'home/getproduct.html' %}
+    				</div>
+    			</div>
+{% endfor %}
+    		</div>
+    	</div>
+    </section>
+
+{% endblock %}

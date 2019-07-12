@@ -16,7 +16,7 @@ That EASY!.</p>
     		<div class="row">
           {% for object in featured_list %}
     			<div class="col-md-4">
-            {% if obj.enabledetail %}
+            {% if object.enabledetail %}
     				<div class="pricing-wrap ftco-animate active img" style="background-image: url({{ object.parent_product.image.url }});">
 
             {% else %}

@@ -127,7 +127,7 @@ class PaymentView(View):
                 order.save()
 
                 messages.success(self.request,"Your order was successfull")
-                return redirect('home')
+                return redirect('orders:orders')
             messages.warning(self.request, "Failed checkout")
             return redirect('orders:payment')
         except ObjectDoesNotExist:
