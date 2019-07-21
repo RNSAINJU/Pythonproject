@@ -37,69 +37,102 @@
           </div>
         </div>
 
+
+
         <div class="table-responsive mb-0 pb-0">
+            {% for order in orders.order %}
           <table class="table">
+
+
             <thead class="thead-dark">
               <tr>
-                {% for order in orders.order %}
 
-                  <th>Payment No #{{ order.payment.id }}</th>
+                  <th style="color:#4886bb;">Payment No #{{ order.payment.id }}</th>
                   <th> Created on {{ order.ordered_date }} </th>
-                  <th> Total {{ order.payment.amount }}</th>
+                  <th style="color:red;"> Total {{ order.payment.amount }}</th>
               </tr>
             </thead>
 
             <tbody style="background-color:#212529;">
               <tr>
-                <td> {{ order.payment.type }}</td>
-                <td>{{ order.payment.status }} </td>
+                <td  style="color:white; font-weight:bold;"> {{ order.payment.type }}
+                </td>
+                <td>
+                  {% if order.payment.status == 'paid' %}
+                  <span class="btn btn-success"style="border-radius: 10px;">
+                    {{ order.payment.status }}
+                    </span>
+                  {% endif %}
+
+                  {% if order.payment.status == 'Verifying payment' %}
+                  <span class="btn btn-warning"style="border-radius: 10px;">
+                    {{ order.payment.status }}
+                    </span>
+                  {% endif %}
+
+
+                  </td>
                 <td></td>
               </tr>
             </tbody>
 
+
             <thead class="thead-light">
               <tr>
-                <th>{{ order.id }}</th>
-                <th>
-                  {% for order_item in order.products.all %}
+                <th  style="color:#6cafe8;" >{{ order.id }}</th>
 
+                <th>
+                  	<!-- <div class="img" style="background-image: url({{ order.products.product.parent_product.image.url }});"> -->
+
+                  {% for order_item in order.products.all %}
                   {{ order_item.product.parent_product.title }} - {{ order_item.product.type }}
                 </th>
-                <th> {{ order.status }}
-                  {% endfor %}</th>
+
+                {% if order.status == 'pending'%}
+                <th> {{ order.status }}</th>
+
+                {% elif order.status == 'processing'%}
+                <th style="color:orange;"> {{ order.status }}</th>
+
+                {% else %}
+                <th style="color:green;"> {{ order.status }}</th>
+
+                {% endif %}
                 </tr>
                 </thead>
+
+                {% endfor %}
 
                 <tbody style="background-color:#212529;">
                 <tr>
 
                   <td> Message: </td>
-                  <td>{{ order.message }}</td>
+                  <td style="color:white">
+                    {% if order.message %}
+                      {{ order.message }}
+                    {% endif %}
+                  </td>
                   <td></td>
                 </tr>
             </tbody>
+
           </table>
 
 <!-- {{ order.payment.amount }} -->
 
-</div>
-</div>
+
 
 
 
 
           {% empty %}
-          <tr>
-            <td class="colspan="5""> No active orders</td>
-            </tr>
+          <p class="text-center">  No active orders</p>
+          <a class='btn btn-warning float-right' href="{% url 'products' %}">CONTINUE SHOPPING</a>
 
-            <tr>
-                <a class='btn btn-warning float-right' href="{% url 'products' %}">CONTINUE SHOPPING</a>
-              </tr>
 
             {% endfor %}
 
-
+</div>
     </section>
 
 

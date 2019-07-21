@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Order, OrderProduct, Payment, Coupon, BillingAddress
+from .models import Order, OrderProduct, Payment, Coupon, BillingAddress, OrderDetail
 from django.views.generic import ListView, DetailView, TemplateView, View
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -53,12 +53,12 @@ class CheckOutView(View):
                 game_details= form.cleaned_data.get('game_details')
                 # save_info= form.cleaned_data.get('save_info')
                 payment_option= form.cleaned_data.get('payment_option')
-                billing_address= BillingAddress(
+                order_details= OrderDetail(
                     user=self.request.user,
                     details=game_details,
                 )
-                billing_address.save()
-                order.billing_address=billing_address
+                order_details.save()
+                order.order_details=order_details
                 order.save()
 
                 if payment_option == 'E':
@@ -84,7 +84,7 @@ class PaymentView(View):
     def get(self, *args, **kwargs):
         form=PaymentForm()
         order= Order.objects.get(user=self.request.user,ordered=False)
-        if order.billing_address:
+        if order.order_details:
             context={
                 'form':form,
                 'order':order,
@@ -99,6 +99,7 @@ class PaymentView(View):
     def post(self, *args, **kwargs):
         form=PaymentForm(self.request.POST, self.request.FILES or None)
         order= Order.objects.get(user=self.request.user,ordered=False)
+        codes=Payment.objects.all()
         # amount=int(order.get_total())
 
         try:
@@ -107,12 +108,16 @@ class PaymentView(View):
                 print(form.cleaned_data)
                 transaction_id=form.cleaned_data.get('transaction_id')
                 transaction_image =form.cleaned_data['transaction_image']
+                type=form.cleaned_data.get('type')
                 amount=order.get_total()
+                # transaction_codes=
                 payment=Payment(
                     transaction_id=transaction_id,
                     transaction_image=transaction_image,
                     user=self.request.user,
-                    amount=amount
+                    type=type,
+                    amount=amount,
+                    status='Verifying payment'
                 )
                 payment.save()
 
@@ -122,7 +127,6 @@ class PaymentView(View):
                     item.save()
 
                 order.payment=payment
-                order.status='pending'
                 order.ordered=True
                 order.save()
 
@@ -140,7 +144,7 @@ def get_coupon(request,code):
         coupon=Coupon.objects.get(code=code)
         return coupon
     except ObjectDoesNotExist:
-            messages.info(request, "This coupn does not exist")
+            messages.info(request, "This coupon does not exist")
             return redirect("orders:checkout")
 
 

@@ -29,6 +29,11 @@ class PaymentForm(forms.Form):
     )
 
     transaction_image=forms.ImageField()
+    type=forms.CharField(
+    widget=forms.TextInput(attrs={
+        'type':"hidden",
+    })
+    )
 
 class CouponForm(forms.Form):
     code=forms.CharField(widget=forms.TextInput(attrs={
