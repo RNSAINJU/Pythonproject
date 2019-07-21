@@ -30,9 +30,9 @@ class OrderProduct(models.Model):
 
 class Order(models.Model):
     STATUS_CHOICES=(
-        ('pending','Pending'),
-        ('processing','Processing'),
-        ('completed','Completed'),
+        ('Pending','pending'),
+        ('Processing','processing'),
+        ('Completed','completed'),
         )
 
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -81,10 +81,23 @@ def upload_image_path(instance, filename):
 
 
 class Payment(models.Model):
+    PAYMENT_CHOICES=(
+        ('Esewa','esewa'),
+        ('Imepay','imepay'),
+        ('Khalti','khalti'),
+        )
+
+    STATUS_CHOICES=(
+        ('Not paid','not paid'),
+        ('Verifying payment','verifing payment'),
+        ('Paid','paid'),
+        )
     transaction_id= models.CharField(max_length=50)
     transaction_image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    type=models.CharField(max_length=50,choices=PAYMENT_CHOICES)
     amount =models.FloatField()
+    status=models.CharField(max_length=50,choices=STATUS_CHOICES)
     timestamp=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

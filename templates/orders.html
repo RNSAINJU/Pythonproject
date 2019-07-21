@@ -5,6 +5,7 @@
     <title>Home|Khwoppa Gift Card</title>
       {% endblock %}
 
+
  {% block nav %}
 <ul class="navbar-nav ml-auto">
 	<li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
@@ -36,34 +37,53 @@
           </div>
         </div>
 
+        <div class="table-responsive mb-0 pb-0">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                {% for order in orders.order %}
 
-        <table style="color:white;" class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Order-Id</th>
-              <th scope="col">Product</th>
-              <th scope="col">Total</th>
-              <th scope="col">Order Status</th>
-              <th scope="col">Message</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for order in orders.order %}
-            <tr>
-                <td colspan="5"><span style="font-size:10px;">{{ order.ordered_date }}</span></td>
-            </tr>
-
-            <tr>
-              <th scope="row">{{ order.id }} </th>
-
-              {% for order_item in order.products.all %}
-                <td>{{ order_item.product.parent_product.title }} | {{ order_item.product.type }}</td>
-              {% endfor %}
-              <td>{{ order.payment.amount }}</td>
-              <td>{{ order.status }}</td>
-
-              <td>{{ order.message }}</td>
+                  <th>Payment No #{{ order.payment.id }}</th>
+                  <th> Created on {{ order.ordered_date }} </th>
+                  <th> Total {{ order.payment.amount }}</th>
               </tr>
+            </thead>
+
+            <tbody style="background-color:#212529;">
+              <tr>
+                <td> {{ order.payment.type }}</td>
+                <td>{{ order.payment.status }} </td>
+                <td></td>
+              </tr>
+            </tbody>
+
+            <thead class="thead-light">
+              <tr>
+                <th>{{ order.id }}</th>
+                <th>
+                  {% for order_item in order.products.all %}
+
+                  {{ order_item.product.parent_product.title }} - {{ order_item.product.type }}
+                </th>
+                <th> {{ order.status }}
+                  {% endfor %}</th>
+                </tr>
+                </thead>
+
+                <tbody style="background-color:#212529;">
+                <tr>
+
+                  <td> Message: </td>
+                  <td>{{ order.message }}</td>
+                  <td></td>
+                </tr>
+            </tbody>
+          </table>
+
+<!-- {{ order.payment.amount }} -->
+
+</div>
+</div>
 
 
 
@@ -80,12 +100,6 @@
             {% endfor %}
 
 
-
-          </tbody>
-        </table>
-
-
-  </div>
     </section>
 
 
