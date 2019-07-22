@@ -27,7 +27,7 @@
 
     <h3><a href="{{ object.get_absolute_url }}">{{ object.type }}</a></h3>
 <p>{{ object.parent_product.description }}</p>
-    <a href="" >More options</a>
+    <a href="{% url 'products:products_with_pk' pk=object.parent_product.pk %}" >More options</a>
   </div>
 
 </div>

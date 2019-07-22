@@ -6,6 +6,7 @@ from orders.models import OrderProduct,Order
 from django.shortcuts import reverse, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 class ProductView(ListView):
     model=ChildProduct
@@ -24,10 +25,29 @@ def load_prices(request):
     price=ChildProduct.objects.filter(childproduct_id=childproduct_id).order_by('type')
     return render(request,'hr/prices_list.html',{'price':price})
 
+
+def product_type(request, pk):
+    queryset=ChildProduct.objects.filter(parent_product_id=pk)
+    queryset2=Product.objects.get(id=pk)
+    context={
+        'products':queryset,
+        'product':queryset2
+    }
+    return render(request,"options.html",context)
+
+def product_category(request, pk):
+    queryset=ChildProduct.objects.filter(parent_product_category_id=pk)
+    # queryset2=Product.objects.get(id=pk)
+    context={
+        'products':queryset,
+    }
+    return render(request,"options.html",context)
+
+
 class ProductDetailView(DetailView):
     model= ChildProduct
     template_name= "product.html"
-# 
+#
 # class ProductOptions(ListView):
 #     model=ChildProduct
 #     context_object_name='items'

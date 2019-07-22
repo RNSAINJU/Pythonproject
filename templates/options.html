@@ -27,16 +27,16 @@
           <div class="col-md-10 heading-section text-center ftco-animate">
           	<span class="subheading">
           		<i class="db-left"></i>
-          		Available Games For Topup
+          		{{ product.title }} Topup
           		<i class="db-right"></i>
           	</span>
-            <h2 class="mb-3">Pricing For Games Topup</h2>
-            <p>Easily topup UC, vbucks, diamonds, apex coins for your game from us easily with payment through esewa, imepay or khalti.</p>
+            <h2 class="mb-3">Pricing For  Topup</h2>
+            <p>Easily topup {{ product.title }} from us easily with payment through esewa, imepay or khalti.</p>
           </div>
         </div>
     		<div class="row">
 
-          {% for object in child.products %}
+          {% for object in products %}
 
 
     			<div class="col-md-4">
