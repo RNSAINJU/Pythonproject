@@ -31,8 +31,7 @@ ALLOWED_HOSTS = ['68.183.91.249','khwoppagiftcard.store','www.khwoppagiftcard.st
 # Application definition
 
 INSTALLED_APPS = [
-    'jet',
-    'jet.dashboard',
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,6 +77,72 @@ TEMPLATES = [
         },
     },
 ]
+
+# Django Suit configuration example
+SUIT_CONFIG = {
+    # header
+    'ADMIN_NAME': 'Khwoppa Gift Card',
+    # 'HEADER_DATE_FORMAT': 'l, j. F Y',
+    # 'HEADER_TIME_FORMAT': 'H:i',
+
+    # forms
+    # 'SHOW_REQUIRED_ASTERISK': True,  # Default True
+    # 'CONFIRM_UNSAVED_CHANGES': True, # Default True
+
+    # menu
+    'SEARCH_URL': '/admin/orders/order',
+
+    # Parameter also accepts url name
+    # 'SEARCH_URL': 'admin:auth_user_changelist',
+
+    # Set to empty string if you want to hide search from menu
+    # 'SEARCH_URL': ''
+
+
+    'MENU_ICONS': {
+       'sites': 'icon-leaf',
+       'auth': 'icon-lock',
+    },
+    # 'MENU_OPEN_FIRST_CHILD': True, # Default True
+
+    'MENU_EXCLUDE': ('orders.orderproduct','orderproduct'),
+
+     'MENU': (
+
+        # Keep original label and models
+        # 'sites',
+
+        # Rename app and set icon
+        # {'app': 'auth', 'label': 'Authorization', 'icon':'icon-lock'},
+        #
+        # # Reorder app models
+        # {'app': 'auth', 'models': ('user', 'group')},
+        #
+        # # Custom app, with models
+        # {'label': 'Settings', 'icon':'icon-cog', 'models': ('auth.user', 'auth.group')},
+        #
+        # # Cross-linked models with custom name; Hide default icon
+        # {'label': 'Custom', 'icon':None, 'models': (
+        #     'auth.group',
+        #     {'model': 'auth.user', 'label': 'Staff'}
+        # )},
+        #
+        # # Custom app, no models (child links)
+        # {'label': 'Users', 'url': 'auth.user', 'icon':'icon-user'},
+        #
+        # # Separator
+        # '-',
+        #
+        # # Custom app and model with permissions
+        # {'label': 'Secure', 'permissions': 'auth.add_user', 'models': [
+        #     {'label': 'custom-child', 'permissions': ('auth.add_user', 'auth.add_group')}
+        # ]},
+    )
+
+    # misc
+    # 'LIST_PER_PAGE': 15
+}
+
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 

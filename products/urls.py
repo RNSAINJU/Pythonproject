@@ -15,12 +15,12 @@ app_name ='products'
 
 urlpatterns = [
     url(r'^products/$',ProductView.as_view(),name='products'),
-    path(r'^product/(?P<pk>\d+)/$',product_type,name='products_with_pk'),
-    path(r'^product/(?P<pk>\d+)/$',product_category,name='products_with_category'),
+    path('product/<int:pk>/',product_type,name='products_with_pk'),
+    path('product/<int:pk>/',product_category,name='products_with_category'),
     # url(r'^products/options/(?P<pk>\d+)/$',OptionView.as_view(),name='products'),
     path('product/<slug>/',ProductDetailView.as_view(),name='product'),
-    path(r'^add-to-cart/<slug>/',add_to_cart,name='add-to-cart'),
-    path(r'^remove-from-cart/<slug>/',remove_from_cart,name='remove-from-cart'),
+    path('add-to-cart/<slug>/',add_to_cart,name='add-to-cart'),
+    path('remove-from-cart/<slug>/',remove_from_cart,name='remove-from-cart'),
     path('remove-item-from-cart/<slug>/', remove_single_item_from_cart,
          name='remove-single-item-from-cart'),
 

@@ -1,0 +1,9 @@
+.bg-2{
+    background-image: url("../img/bg-1.jpg");
+    data-stellar-background-ratio="0.5"
+}
+
+.bg-2{
+    background-image: url("../img/bg-2.jpg");
+    data-stellar-background-ratio="0.5"
+}
