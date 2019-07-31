@@ -7,6 +7,8 @@ from .forms import InvestmentForm, ExpenseForm
 from django.utils.text import slugify
 from django.http import HttpResponseRedirect, HttpResponse
 import json
+from django.contrib.auth.decorators import login_required, permission_required
+
 
 # class BalanceView(PermissionRequiredMixin,TemplateView):
 #     permission_required = 'superuserstatus'
