@@ -37,6 +37,8 @@ import json
 #             form=InvestmentForm()
 #         return render(request, self.template_name,{'form':form})
 
+@login_required
+@permission_required('superuserstatus', raise_exception=True)
 def balance_detail(request):
     balance= Balance.objects.all()
     investment=Investment.objects.all()
@@ -61,6 +63,8 @@ def balance_detail(request):
 
     return redirect('Transactions:investments')
 
+@login_required
+@permission_required('superuserstatus', raise_exception=True)
 def sales_detail(request):
     balance= Balance.objects.all()
     order=Order.objects.filter(status="Completed")
@@ -84,6 +88,8 @@ def sales_detail(request):
 
     return redirect('Transactions:balance')
 
+@login_required
+@permission_required('superuserstatus', raise_exception=True)
 def expenses_detail(request):
     balance= Balance.objects.all()
     expenses=Expense.objects.all()
