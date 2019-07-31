@@ -1,0 +1,28 @@
+{% extends './baseadmin.html' %}
+{% load static %}
+{% block content %}
+
+{% block content %}
+<div class="main-content-container container-fluid px-4">
+  <!-- Page Header -->
+  <div class="page-header row no-gutters py-4">
+    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+      <span class="text-uppercase page-subtitle">Dashboard</span>
+      <h3 class="page-title">Balance & Expenses</h3>
+    </div>
+  </div>
+  <!-- End Page Header -->
+
+  <div class="container">
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form }}
+
+      <button type="submit" class="btn">Add invetment</button>
+      </form>
+  </div>
+<!-- Small Stats Blocks -->
+<div class="row">
+  </div>
+  </div>
+{% endblock %}

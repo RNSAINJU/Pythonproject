@@ -23,8 +23,8 @@
         </div>
 
 {% block breadcrumb %}
-<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'discussion' %}">Games.</a></span>
-  <span><a href="{% url 'board_topics' board.pk %}">{{ board.name }}.</a></span>
+<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'boards:discussion' %}">Games.</a></span>
+  <span><a href="{% url 'boards:board_topics' board.pk %}">{{ board.name }}.</a></span>
   <span>New topic</span>
 {% endblock %}
 

@@ -55,7 +55,7 @@ class SuccessfulSignUpTests(TestCase):
             'password2': 'abcdef123456'
         }
         self.response = self.client.post(url, data)
-        self.home_url = reverse('home')
+        self.home_url = reverse('home:home')
 
     def test_redirection(self):
         '''

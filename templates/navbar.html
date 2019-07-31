@@ -9,7 +9,7 @@
 </a>
 
 <div class="mt-0 dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="{% url 'my_account' %}">My account</a>
+<a class="dropdown-item" href="{% url 'accounts:my_account' %}">My account</a>
 <a class="dropdown-item" href="{% url 'orders:orders' %}">My orders</a>
 <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
 <div class="dropdown-divider"></div>
@@ -28,5 +28,5 @@
 
 {% else %}
 <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login </a></li>
-<li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
+<li class="nav-item"><a href="{% url 'accounts:signup' %}" class="nav-link">Sign Up</a></li>
 {% endif %}

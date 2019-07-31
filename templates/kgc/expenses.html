@@ -1,0 +1,160 @@
+{% extends 'kgc/baseadmin.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} KhwoppaGiftCardAdmin|Expenses {% endblock %}
+
+{% block content %}
+<div class="main-content-container container-fluid px-4">
+  <!-- Page Header -->
+  <div class="page-header row no-gutters py-4">
+    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+      <span class="text-uppercase page-subtitle">Dashboard</span>
+      <h3 class="page-title">Expenses</h3>
+    </div>
+  </div>
+  <!-- End Page Header -->
+<!-- Small Stats Blocks -->
+<div class="row">
+
+  {% for item in balance %}
+  <div class="col-lg col-md-6 col-sm-6 mb-4">
+    <div class="stats-small stats-small--1 card card-small">
+      <div class="card-body p-0 d-flex">
+        <div class="d-flex flex-column m-auto">
+          <div class="stats-small__data text-center">
+            <span class="stats-small__label text-uppercase">{{ item.name }}</span>
+
+            {% if item.balance_left > 0 %}
+              <h6 class="stats-small__value count my-3 text-success">{{ item.balance_left }}</h6>
+            {% elif item.balance_left == 0%}
+              <h6 class="stats-small__value count my-3 .text-warning">{{ item.balance_left }}</h6>
+            {% else %}
+              <h6 class="stats-small__value count my-3 .text-danger">{{ item.balance_left }}</h6>
+            {% endif %}
+
+          </div>
+          <div class="stats-small__data">
+            <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
+          </div>
+        </div>
+        <canvas height="120" class="blog-overview-stats-small-1"></canvas>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+<!-- End Small Stats Blocks -->
+
+
+
+
+    <!-- Default Light Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card card-small mb-4">
+          <div class="card-header border-bottom">
+            <!-- <h6 class="m-0"><a href="{% url 'home:home' %}">Investment</a></h6> -->
+
+
+            <!-- Button to Open the Modal -->
+            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">
+            Add expenses
+            </button>
+
+          </div>
+        <div class="card-body p-0 pb-3 text-center">
+          <table class="table mb-0">
+            <thead class="bg-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="border-0">Name</th>
+                <th scope="col" class="border-0">Type</th>
+                <th scope="col" class="border-0">Amount</th>
+                <!-- <th scope="col" class="border-0">Rate</th>
+                <th scope="col" class="border-0">Total</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in expenses %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ item.transaction_name }}</td>
+                <td>{{ item.type }}</td>
+                <td>$ {{ item.amount }}</td>
+                <!-- <td>Rs {{ item.rate }}</td>
+                <td>Rs {{ item.total }}</td> -->
+                <td>
+                  <a onclick="deleteExpense(this)" data-id="{{ item.id }}">
+                    <i class="material-icons red-text right">close</i>
+                    </a>
+                </td>
+              {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add expenses</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+
+          <form method="POST" class="card-body">
+            {% csrf_token %}
+            <div class="form-group">
+            <label for="title">Title</label>
+            {{ form.transaction_name }}
+            </div>
+
+            <div class="form-group">
+            <label for="title">Type</label>
+            <select name="type" class="form-control">
+              {% for item in balance %}
+                <option>{{ item.name }}</option>
+              {% endfor %}
+              </select>
+              </div>
+
+            <div class="form-group">
+            <label for="amount">Amount($)</label>
+            {{ form.amount }}
+            </div>
+
+
+            <button type="submit" class="btn btn-success float-right">Add</button>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

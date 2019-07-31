@@ -5,11 +5,10 @@ from django.contrib import admin
 ''' importing views module from accounts '''
 from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
-from boards import views
 from django.conf import settings
 from django.conf.urls.static import static
-from products import views as product_views
-from home import views as home_views
+from home import views as views
+
 
 
 urlpatterns = [
@@ -18,22 +17,11 @@ urlpatterns = [
     path('',include('home.urls',namespace='home')),
     path('',include('orders.urls',namespace='orders')),
     path('',include('products.urls',namespace='core')),
+    path('',include('Transactions.urls',namespace='transactions')),
 
-    url(r'^products/$',product_views.ProductView.as_view(),name='products'),
 
-    url(r'^fileupload/$', views.simple_upload, name='fileupload'),
-
-    url(r'^$', home_views.HomeView.as_view(), name='home'),
-    url(r'^partners/$', home_views.PartnerView.as_view(), name='partners'),
-    url(r'^about/$', home_views.AboutView.as_view(), name='about'),
-    # url(r'^about/(?P<pk>\d+)/new/$', home_views.new_enquiry, name='new_enquiry'),
-
-    url(r'^news/$', home_views.news_list_view, name='news'),
-    url(r'^discussion$', views.BoardListView.as_view(), name='discussion'),
-    url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
-    url(r'^settings/account/$',accounts_views.UserUpdateView.as_view(),name='my_account'),
     url(r'^reset/$',
         auth_views.PasswordResetView.as_view(
             template_name='password_reset.html',
@@ -50,27 +38,17 @@ urlpatterns = [
     url(r'^reset/complete/$',
         auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
         name='password_reset_complete'),
-
     url(r'^settings/password/$', auth_views.PasswordChangeView.as_view(template_name='password_change.html'),
         name='password_change'),
     url(r'^settings/password/done/$', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
         name='password_change_done'),
 
-    url(r'^boards/(?P<pk>\d+)/$', views.TopicListView.as_view(), name='board_topics'),
-    url(r'^boards/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
-    url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', views.PostListView.as_view(), name='topic_posts'),
-    url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$', views.reply_topic, name='reply_topic'),
-    # url(r'^jet/', jet.urls, 'jet'),  # Django JET URLS
-    #     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    # url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
-
+    #admin site url
+    url(r'^kgc/',views.admin_home_view, name='kgc_admin'),
     url(r'^admin/', admin.site.urls),
-    url(r'^new_post/$',views.NewPostView.as_view(), name='new_post'),
-    url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
-        views.PostUpdateView.as_view(), name='edit_post'),
-    url(r'^account_activation_sent/$', accounts_views.account_activation_sent, name='account_activation_sent'),
-    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        accounts_views.activate, name='activate'),
+
+
+
 ]
 
 if settings.DEBUG:

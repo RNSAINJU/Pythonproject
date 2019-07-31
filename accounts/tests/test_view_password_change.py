@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.test import TestCase
 
-''' test above tries to access the password_change view without 
-being logged in. The expected behavior is to redirect the user to 
+''' test above tries to access the password_change view without
+being logged in. The expected behavior is to redirect the user to
 the login page.'''
 class LoginRequiredPasswordChangeTests(TestCase):
     def test_redirection(self):
@@ -14,7 +14,7 @@ class LoginRequiredPasswordChangeTests(TestCase):
 
 '''  It does a basic setup, creating a user and making a POST request to the password
 _change view. In the next set of test cases, we are going to use this class
- instead of the TestCase class and test a successful request and an invalid 
+ instead of the TestCase class and test a successful request and an invalid
  request:'''
 
 class PasswordChangeTestCase(TestCase):
@@ -51,7 +51,7 @@ class SuccessfulPasswordChangeTests(PasswordChangeTestCase):
         Create a new request to an arbitrary page.
         The resulting response should now have an `user` to its context, after a successful sign up.
         '''
-        response = self.client.get(reverse('home'))
+        response = self.client.get(reverse('home:home'))
         user = response.context.get('user')
         self.assertTrue(user.is_authenticated)
 

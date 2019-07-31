@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 from django.shortcuts import reverse, redirect
 from django.urls import reverse_lazy
+from django.utils.text import slugify
 
 def get_filename_ext(filepath):
     base_name=os.path.basename(filepath)
@@ -31,18 +32,19 @@ class Product(models.Model):
     ('active','Active'),
     ('in-active','In-active'),
     )
-    # TYPE_CHOICES=(
-    # ('parent','Parent'),
-    # ('child','Child'),
-    # )
-    # type=models.CharField(blank=True,max_length=50,choices=TYPE_CHOICES)
+
+    PAYMENT_CHOICES=(
+        ('Paypal','paypal'),
+        ('Payoneer','payoneer'),
+        )
+
     title=models.CharField(max_length=50, unique=True,blank=True)
     short_description=models.CharField(max_length=60, unique=True)
     description=models.TextField()
     category =models.ForeignKey('Main_Category', on_delete=models.SET_NULL, blank=True, null=True)
     image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
-
+    purchase_method=models.CharField(max_length=50,choices=PAYMENT_CHOICES)
 
     objects= ProductManager()
 
@@ -57,15 +59,21 @@ class ChildProduct(models.Model):
     )
     parent_product=models.ForeignKey(Product, related_name='childproduct', on_delete=models.CASCADE)
     type=models.CharField(max_length=50,null=True)
+    cost_price=models.FloatField()
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
     homefeatured=models.BooleanField(default=False)
     productsfeatured=models.BooleanField(default=False)
     enabledetail=models.BooleanField(default=False)
-    slug=models.SlugField()
+    slug=models.SlugField(max_length=100,unique=True,blank=True)
 
     objects= ProductManager()
+
+    def save(self, *args, **kwargs):
+        self.slug=slugify(self.type)
+        self.cost_price=self.cost_price+(2.90/100*self.cost_price)+0.30
+        super(ChildProduct,self).save(*args,**kwargs)
 
     def __str__(self):
         return self.type

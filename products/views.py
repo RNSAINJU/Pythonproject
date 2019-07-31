@@ -68,6 +68,7 @@ def add_to_cart(request,slug):
     ordered=False
     )
     order_qs=Order.objects.filter(user=request.user, ordered=False)
+
     if order_qs.exists():
         order= order_qs[0]
         #check if the order item is in order
@@ -82,7 +83,8 @@ def add_to_cart(request,slug):
             return redirect("orders:cart")
     else:
         ordered_date=timezone.now()
-        order =Order.objects.create(user=request.user, ordered_date=ordered_date)
+        cost_price=product.cost_price
+        order =Order.objects.create(user=request.user, ordered_date=ordered_date, cost_price=cost_price)
         order.products.add(order_product)
         messages.info(request, "This item was added to your cart.")
         return redirect("orders:cart")

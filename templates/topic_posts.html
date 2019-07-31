@@ -27,15 +27,15 @@
         </div>
 
 {% block breadcrumb %}
-<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'discussion' %}">Games.</a></span>
-  <span> <a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}.</a> </span>
+<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'boards:discussion' %}">Games.</a></span>
+  <span> <a href="{% url 'boards:board_topics' topic.board.pk %}">{{ topic.board.name }}.</a> </span>
   <span>{{ topic.subject }}</span>
 {% endblock %}
 
 
 
   <div class="mb-4">
-    <a href="{% url 'reply_topic' topic.board.pk topic.pk %}" class="btn btn-primary" role="button">Reply</a>
+    <a href="{% url 'boards:reply_topic' topic.board.pk topic.pk %}" class="btn btn-primary" role="button">Reply</a>
   </div>
 
   {% for post in posts%}
@@ -62,7 +62,7 @@
             {{ post.get_message_as_markdown }}
             {% if post.created_by == user %}
               <div class="mt-3">
-                <a href="{% url 'edit_post' post.topic.board.pk post.topic.pk post.pk %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                <a href="{% url 'boards:edit_post' post.topic.board.pk post.topic.pk post.pk %}" class="btn btn-primary btn-sm" role="button">Edit</a>
               </div>
             {% endif %}
           </div>

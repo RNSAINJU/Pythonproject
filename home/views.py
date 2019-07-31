@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 import datetime
 from home.forms import ContactForm
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required, permission_required
 
 class HomeView(TemplateView):
     template_name='index.html'
@@ -31,7 +32,7 @@ class HomeView(TemplateView):
             post=form.save(commit=False)
             post.date=timezone.now()
             post.save()
-            return redirect('home')
+            return redirect('home:home')
         else:
             form=ContactForm()
         return render(request, self.template_name, {'form':form})
@@ -74,3 +75,12 @@ def news_list_view(request):
             'news_list':queryset
     }
     return render(request,"news.html",context)
+
+@login_required
+@permission_required('superuserstatus', raise_exception=True)
+def admin_home_view(request):
+    queryset=News.objects.all()
+    context={
+            'news_list':queryset
+    }
+    return render(request,"kgc/index.html",context)

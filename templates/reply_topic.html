@@ -35,9 +35,9 @@
         </div>
 
 {% block breadcrumb %}
-<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'discussion' %}">Games.</a></span>
-  <span><a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}.</a></span>
-  <span><a href="{% url 'topic_posts' topic.board.pk topic.pk %}">{{ topic.subject }}.</a></span>
+<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'boards:discussion' %}">Games.</a></span>
+  <span><a href="{% url 'boards:board_topics' topic.board.pk %}">{{ topic.board.name }}.</a></span>
+  <span><a href="{% url 'boards:topic_posts' topic.board.pk topic.pk %}">{{ topic.subject }}.</a></span>
   <span>Post a reply</span>
 {% endblock %}
 

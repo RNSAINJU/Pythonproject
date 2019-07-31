@@ -49,6 +49,7 @@ class CheckOutView(View):
         form=CheckoutForm(self.request.POST or None)
         try:
             order= Order.objects.get(user=self.request.user,ordered=False)
+
             if form.is_valid():
                 game_details= form.cleaned_data.get('game_details')
                 # save_info= form.cleaned_data.get('save_info')
@@ -58,6 +59,7 @@ class CheckOutView(View):
                     details=game_details,
                 )
                 order_details.save()
+
                 order.order_details=order_details
                 order.save()
 

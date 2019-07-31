@@ -1,0 +1,159 @@
+{% extends 'kgc/baseadmin.html' %}
+{% block title %} KhwoppaGiftCardAdmin|Expenses {% endblock %}
+
+{% block content %}
+<div class="main-content-container container-fluid px-4">
+  <!-- Page Header -->
+  <div class="page-header row no-gutters py-4">
+    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+      <span class="text-uppercase page-subtitle">Dashboard</span>
+      <h3 class="page-title">Sales</h3>
+    </div>
+  </div>
+  <!-- End Page Header -->
+<!-- Small Stats Blocks -->
+<div class="row">
+
+  <div class="col-lg col-md-6 col-sm-6 mb-4">
+    <div class="stats-small stats-small--1 card card-small">
+      <div class="card-body p-0 d-flex">
+        <div class="d-flex flex-column m-auto">
+          <div class="stats-small__data text-center">
+            <span class="stats-small__label text-uppercase">Total sales</span>
+
+            {% if item.balance_left > 0 %}
+              <h6 class="stats-small__value count my-3 text-success">{{ item.balance_left }}</h6>
+            {% elif item.balance_left == 0%}
+              <h6 class="stats-small__value count my-3 .text-warning">{{ item.balance_left }}</h6>
+            {% else %}
+              <h6 class="stats-small__value count my-3 .text-danger">{{ item.balance_left }}</h6>
+            {% endif %}
+
+          </div>
+          <div class="stats-small__data">
+            <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
+          </div>
+        </div>
+        <canvas height="120" class="blog-overview-stats-small-1"></canvas>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="col-lg col-md-6 col-sm-6 mb-4">
+    <div class="stats-small stats-small--1 card card-small">
+      <div class="card-body p-0 d-flex">
+        <div class="d-flex flex-column m-auto">
+          <div class="stats-small__data text-center">
+            <span class="stats-small__label text-uppercase">Pages</span>
+            <h6 class="stats-small__value count my-3">182</h6>
+          </div>
+          <div class="stats-small__data">
+            <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
+          </div>
+        </div>
+        <canvas height="120" class="blog-overview-stats-small-2"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg col-md-4 col-sm-6 mb-4">
+    <div class="stats-small stats-small--1 card card-small">
+      <div class="card-body p-0 d-flex">
+        <div class="d-flex flex-column m-auto">
+          <div class="stats-small__data text-center">
+            <span class="stats-small__label text-uppercase">Comments</span>
+            <h6 class="stats-small__value count my-3">8,147</h6>
+          </div>
+          <div class="stats-small__data">
+            <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
+          </div>
+        </div>
+        <canvas height="120" class="blog-overview-stats-small-3"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg col-md-4 col-sm-6 mb-4">
+    <div class="stats-small stats-small--1 card card-small">
+      <div class="card-body p-0 d-flex">
+        <div class="d-flex flex-column m-auto">
+          <div class="stats-small__data text-center">
+            <span class="stats-small__label text-uppercase">Users</span>
+            <h6 class="stats-small__value count my-3">2,413</h6>
+          </div>
+          <div class="stats-small__data">
+            <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
+          </div>
+        </div>
+        <canvas height="120" class="blog-overview-stats-small-4"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg col-md-4 col-sm-12 mb-4">
+    <div class="stats-small stats-small--1 card card-small">
+      <div class="card-body p-0 d-flex">
+        <div class="d-flex flex-column m-auto">
+          <div class="stats-small__data text-center">
+            <span class="stats-small__label text-uppercase">Subscribers</span>
+            <h6 class="stats-small__value count my-3">17,281</h6>
+          </div>
+          <div class="stats-small__data">
+            <span class="stats-small__percentage stats-small__percentage--decrease">2.4%</span>
+          </div>
+        </div>
+        <canvas height="120" class="blog-overview-stats-small-5"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Small Stats Blocks -->
+
+
+
+
+<!-- End Small Stats Blocks -->
+
+    <!-- Default Light Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card card-small mb-4">
+          <div class="card-header border-bottom">
+
+          </div>
+        <div class="card-body p-0 pb-3 text-center">
+          <table class="table mb-0">
+            <thead class="bg-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="border-0">Customer</th>
+                <th scope="col" class="border-0">Amount</th>
+                <th scope="col" class="border-0">Ordered date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in order %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ item.user }}</td>
+                <td>{{ item.payment.amount }}</td>
+                <td>{{ item.ordered_date }}</td>
+                <td>
+                  <a onclick="deleteExpense(this)" data-id="{{ item.id }}">
+                    <i class="material-icons red-text right">close</i>
+                    </a>
+                </td>
+              {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -35,7 +35,7 @@ def signup(request):
             # })
             # send_mail(subject, message,'help.khwoppagiftcard.store',[user.email])
             login(request, user)
-            return redirect('home')
+            return redirect('home:home')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
@@ -57,7 +57,7 @@ def activate(request, uidb64, token):
         user.profile.email_confirmed = True
         user.save()
         login(request, user)
-        return redirect('home')
+        return redirect('home:home')
     else:
         return render(request, 'registration/invalid.html')
 
@@ -66,7 +66,7 @@ class UserUpdateView(UpdateView):
     model = User
     fields = ('first_name', 'last_name', 'email',)
     template_name = 'my_account.html'
-    success_url = reverse_lazy('my_account')
+    success_url = reverse_lazy('accounts:my_account')
 
     def get_object(self):
         return self.request.user

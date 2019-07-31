@@ -36,6 +36,7 @@ class Order(models.Model):
         )
 
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    cost_price=models.FloatField()
     products=models.ManyToManyField(OrderProduct)
     start_Date=models.DateTimeField(auto_now_add=True)
     ordered_date=models.DateTimeField()
@@ -48,6 +49,15 @@ class Order(models.Model):
     coupon=models.ForeignKey('Coupon', on_delete=models.SET_NULL, blank=True, null=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='pending')
     message=models.TextField(blank=True, null=True)
+
+    def total_sales_amount(self):
+        # Fetchs dollar added
+        investment_list=Investment.objects.filter(type=self)
+        total_sales_amount=0
+        for item in investment_list:
+            total_invest_amount += item.amount
+
+        return (self.amount + total_invest_amount + total_sales_amount) -total_expense_amount - total_dollar_amount- total_invest_expense
 
     def __str__(self):
         return self.user.username

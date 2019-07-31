@@ -34,9 +34,9 @@
         </div>
 
         {% block breadcrumb %}
-        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'discussion' %}">Games.</a></span>
-          <span><a href="{% url 'board_topics' post.topic.board.pk %}">{{ post.topic.board.name }}.</a></span>
-          <span><a href="{% url 'topic_posts' post.topic.board.pk post.topic.pk %}">{{ post.topic.subject }}.</a></span>
+        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'boards:discussion' %}">Games.</a></span>
+          <span><a href="{% url 'boards:board_topics' post.topic.board.pk %}">{{ post.topic.board.name }}.</a></span>
+          <span><a href="{% url 'boards:topic_posts' post.topic.board.pk post.topic.pk %}">{{ post.topic.subject }}.</a></span>
           <span>Edit post</span>
         {% endblock %}
 
@@ -45,7 +45,7 @@
     {% csrf_token %}
     {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-success">Save changes</button>
-    <a href="{% url 'topic_posts' post.topic.board.pk post.topic.pk %}" class="btn btn-outline-secondary" role="button">Cancel</a>
+    <a href="{% url 'boards:topic_posts' post.topic.board.pk post.topic.pk %}" class="btn btn-outline-secondary" role="button">Cancel</a>
 </form>
 </div>
 </section>

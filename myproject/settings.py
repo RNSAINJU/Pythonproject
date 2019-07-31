@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'products',
     'home',
     'orders',
+    'sales',
+    'Transactions',
     'crispy_forms',
 ]
 
@@ -217,9 +219,9 @@ MEDIA_ROOT= os.path.join(BASE_DIR,'media')
 
 LOGIN_URL = 'login'
 
-LOGIN_REDIRECT_URL= 'home'
+LOGIN_REDIRECT_URL= 'home:home'
 
-LOGOUT_REDIRECT_URL= 'home'
+LOGOUT_REDIRECT_URL= 'home:home'
 
 
 SENDGRID_API_KEY='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'

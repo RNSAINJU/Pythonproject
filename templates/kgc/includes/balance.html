@@ -1,0 +1,42 @@
+
+<div class="main-content-container container-fluid px-4">
+  <!-- Page Header -->
+  <div class="page-header row no-gutters py-4">
+    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+      <span class="text-uppercase page-subtitle">Dashboard</span>
+      <h3 class="page-title"> Investment </h3>
+    </div>
+  </div>
+  <!-- End Page Header -->
+<!-- Small Stats Blocks -->
+<div class="row">
+
+  {% for item in balance %}
+  <div class="col-lg col-md-6 col-sm-6 mb-4">
+    <div class="stats-small stats-small--1 card card-small">
+      <div class="card-body p-0 d-flex">
+        <div class="d-flex flex-column m-auto">
+          <div class="stats-small__data text-center">
+            <span class="stats-small__label text-uppercase">{{ item.name }}</span>
+
+            {% if item.balance_left > 0 %}
+              <h6 class="stats-small__value count my-3 text-success">{{ item.balance_left }}</h6>
+            {% elif item.balance_left == 0%}
+              <h6 class="stats-small__value count my-3 .text-warning">{{ item.balance_left }}</h6>
+            {% else %}
+              <h6 class="stats-small__value count my-3 .text-danger">{{ item.balance_left }}</h6>
+            {% endif %}
+
+          </div>
+          <div class="stats-small__data">
+            <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
+          </div>
+        </div>
+        <canvas height="120" class="blog-overview-stats-small-1"></canvas>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+<!-- End Small Stats Blocks -->
