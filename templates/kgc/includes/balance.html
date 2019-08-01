@@ -1,15 +1,4 @@
 
-<div class="main-content-container container-fluid px-4">
-  <!-- Page Header -->
-  <div class="page-header row no-gutters py-4">
-    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-      <span class="text-uppercase page-subtitle">Dashboard</span>
-      <h3 class="page-title"> Investment </h3>
-    </div>
-  </div>
-  <!-- End Page Header -->
-<!-- Small Stats Blocks -->
-<div class="row">
 
   {% for item in balance %}
   <div class="col-lg col-md-6 col-sm-6 mb-4">
@@ -20,11 +9,11 @@
             <span class="stats-small__label text-uppercase">{{ item.name }}</span>
 
             {% if item.balance_left > 0 %}
-              <h6 class="stats-small__value count my-3 text-success">{{ item.balance_left }}</h6>
+              <h6 class="stats-small__value count my-3 text-success">{{ item.balance_left|floatformat:2 }}</h6>
             {% elif item.balance_left == 0%}
-              <h6 class="stats-small__value count my-3 .text-warning">{{ item.balance_left }}</h6>
+              <h6 class="stats-small__value count my-3 .text-warning">{{ item.balance_left|floatformat:2 }}</h6>
             {% else %}
-              <h6 class="stats-small__value count my-3 .text-danger">{{ item.balance_left }}</h6>
+              <h6 class="stats-small__value count my-3 .text-danger">{{ item.balance_left|floatformat:2 }}</h6>
             {% endif %}
 
           </div>

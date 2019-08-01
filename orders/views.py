@@ -46,17 +46,21 @@ class CheckOutView(View):
 
 
     def post(self, *args, **kwargs):
-        form=CheckoutForm(self.request.POST or None)
+        form=CheckoutForm(self.request.POST, self.request.FILES or None)
         try:
             order= Order.objects.get(user=self.request.user,ordered=False)
 
             if form.is_valid():
+                print("The form is valid")
+                print(form.cleaned_data)
                 game_details= form.cleaned_data.get('game_details')
                 # save_info= form.cleaned_data.get('save_info')
+                image =form.cleaned_data['transaction_image']
                 payment_option= form.cleaned_data.get('payment_option')
                 order_details= OrderDetail(
                     user=self.request.user,
                     details=game_details,
+                    game_image=image,
                 )
                 order_details.save()
 

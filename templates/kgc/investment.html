@@ -5,6 +5,18 @@
 
 {% block content %}
 
+
+<div class="main-content-container container-fluid px-4">
+  <!-- Page Header -->
+  <div class="page-header row no-gutters py-4">
+    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+      <span class="text-uppercase page-subtitle">Dashboard</span>
+      <h3 class="page-title"> Investment </h3>
+    </div>
+  </div>
+  <!-- End Page Header -->
+<!-- Small Stats Blocks -->
+<div class="row">
 {% include 'kgc/includes/balance.html' %}
 
 
@@ -40,23 +52,23 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ item.name }}</td>
                 <td>{{ item.type }}</td>
-                <td>$ {{ item.amount }}</td>
-                <td>Rs {{ item.rate }}</td>
-                <td>Rs {{ item.total }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.rate }}</td>
+                <td>{{ item.total }}</td>
                 <td>
                   <a onclick="deleteExpense(this)" data-id="{{ item.id }}">
                     <i class="material-icons red-text right">close</i>
                     </a>
                 </td>
-              {% endfor %}
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-
+</div>
 
   <!-- The Modal -->
   <div class="modal" id="myModal">
@@ -89,8 +101,13 @@
               </div>
 
             <div class="form-group">
-            <label for="amount">Amount($)</label>
+            <label for="amount">Amount</label>
             {{ form.amount }}
+            </div>
+
+            <div class="form-group">
+            <label for="amount">Rate</label>
+            {{ form.rate }}
             </div>
 
             <div class="form-group">

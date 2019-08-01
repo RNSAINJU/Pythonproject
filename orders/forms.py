@@ -3,8 +3,6 @@ from django import forms
 
 PAYMENT_CHOICES =(
     ('E','Esewa'),
-    ('I','Imepay'),
-    ('K','Khalti')
 )
 
 class CheckoutForm(forms.Form):
@@ -16,6 +14,7 @@ class CheckoutForm(forms.Form):
         help_text='The max length of the text is 4000.'
     )
 
+    transaction_image=forms.ImageField()
     # save_info=forms.BooleanField(required=False)
     payment_option=forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)

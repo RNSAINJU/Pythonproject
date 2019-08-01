@@ -2,6 +2,8 @@
 {% block title %} KhwoppaGiftCardAdmin|Expenses {% endblock %}
 
 {% block content %}
+
+
 <div class="main-content-container container-fluid px-4">
   <!-- Page Header -->
   <div class="page-header row no-gutters py-4">
@@ -11,66 +13,13 @@
     </div>
   </div>
 
+  <div class="row">
+    {% include 'kgc/includes/balance.html' %}
+  <!-- End Small Stats Blocks -->
   <!-- End Page Header -->
 <!-- Small Stats Blocks -->
 <div class="row">
-<!--
-  <div class="col-lg col-md-6 col-sm-6 mb-4">
-    <div class="stats-small stats-small--1 card card-small">
-      <div class="card-body p-0 d-flex">
-        <div class="d-flex flex-column m-auto">
-          <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Total sales</span>
 
-            {% for item in order %}
-            {% if item.total_sales_amount > 0 %}
-              <h6 class="stats-small__value count my-3 text-success">{{ item.total_sales_amount }}</h6>
-            {% elif item.total_sales_amount == 0%}
-              <h6 class="stats-small__value count my-3 .text-warning">{{ item.total_sales_amount }}</h6>
-            {% else %}
-              <h6 class="stats-small__value count my-3 .text-danger">{{ item.total_sales_amount }}</h6>
-            {% endif %}
-
-    </div>
-          </div>
-          <div class="stats-small__data">
-            <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
-          </div>
-        </div>
-        <canvas height="120" class="blog-overview-stats-small-1"></canvas>
-      </div>
-    </div>
-
-</div>
-
-
-  <div class="col-lg col-md-6 col-sm-6 mb-4">
-    <div class="stats-small stats-small--1 card card-small">
-      <div class="card-body p-0 d-flex">
-        <div class="d-flex flex-column m-auto">
-          <div class="d-flex flex-column m-auto">
-            <div class="stats-small__data text-center">
-              <span class="stats-small__label text-uppercase">Total Profit</span>
-
-
-              {% if item.total_profit > 0 %}
-                <h6 class="stats-small__value count my-3 text-success">{{ item.total_profit }}</h6>
-              {% elif item.total_profit == 0%}
-                <h6 class="stats-small__value count my-3 .text-warning">{{ item.total_profit }}</h6>
-              {% else %}
-                <h6 class="stats-small__value count my-3 .text-danger">{{ item.total_profit }}</h6>
-              {% endif %}
-
-              {% endfor %}
-            </div>
-          <div class="stats-small__data">
-            <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
-          </div>
-        </div>
-        <canvas height="120" class="blog-overview-stats-small-2"></canvas>
-      </div>
-    </div>
-  </div> -->
 
   <div class="col-lg col-md-6 col-sm-6 mb-4">
     <div class="stats-small stats-small--1 card card-small">
@@ -78,9 +27,9 @@
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
             <span class="stats-small__label text-uppercase">Sales</span>
-            {% for item in order %}
+            {% for item in order|slice:":1" %}
             <h6 class="stats-small__value count my-3">{{ item.total_sales_amount }}</h6>
-            {% endfor %}
+
           </div>
           <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
@@ -97,9 +46,9 @@
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
             <span class="stats-small__label text-uppercase">Profit</span>
-            {% for item in order %}
+
             <h6 class="stats-small__value count my-3">{{ item.total_profit }}</h6>
-            {% endfor %}
+
           </div>
           <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
@@ -115,8 +64,8 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Comments</span>
-            <h6 class="stats-small__value count my-3">8,147</h6>
+            <span class="stats-small__label text-uppercase">Paypal spent</span>
+            <h6 class="stats-small__value count my-3">{{ item.total_paypal_sales_amount }}</h6>
           </div>
           <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
@@ -132,8 +81,8 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Users</span>
-            <h6 class="stats-small__value count my-3">2,413</h6>
+            <span class="stats-small__label text-uppercase">No of sales</span>
+            <h6 class="stats-small__value count my-3"> {{ item.total_sales }}</h6>
           </div>
           <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
@@ -143,24 +92,12 @@
       </div>
     </div>
   </div>
-  <div class="col-lg col-md-4 col-sm-12 mb-4">
-    <div class="stats-small stats-small--1 card card-small">
-      <div class="card-body p-0 d-flex">
-        <div class="d-flex flex-column m-auto">
-          <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Subscribers</span>
-            <h6 class="stats-small__value count my-3">17,281</h6>
-          </div>
-          <div class="stats-small__data">
-            <span class="stats-small__percentage stats-small__percentage--decrease">2.4%</span>
-          </div>
-        </div>
-        <canvas height="120" class="blog-overview-stats-small-5"></canvas>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
-<!-- End Small Stats Blocks -->
+
+
+
+
 
 
     <!-- Default Light Table -->
@@ -177,6 +114,7 @@
                 <th scope="col">#</th>
                 <th scope="col" class="border-0">Customer</th>
                 <th scope="col" class="border-0">Amount</th>
+                <th scope="col" class="border-0">Paypal spent</th>
                 <th scope="col" class="border-0">Ordered date</th>
               </tr>
             </thead>
@@ -186,6 +124,7 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ item.user }}</td>
                 <td>{{ item.payment.amount }}</td>
+                <td>{{ item.cost_price }}</td>
                 <td>{{ item.ordered_date }}</td>
                 <td>
                   <a onclick="deleteExpense(this)" data-id="{{ item.id }}">

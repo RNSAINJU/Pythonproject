@@ -59,14 +59,20 @@ class Order(models.Model):
 
         return total_sales_amount
 
-    # def total_sales_amount(self):
-    #     # Fetchs dollar added
-    #     sales_list=Order.objects.filter(status="Completed")
-    #     total_sales_amount=Order.objects.filter(status="Completed")
-    #     for item in sales_list:
-    #         total_sales_amount += item.payment.amount
-    #
-    #     return total_sales_amount
+    def total_paypal_sales_amount(self):
+        # Fetchs dollar added
+        sales_list=Order.objects.filter(status="Completed")
+        total_sales_amount=0
+        for item in sales_list:
+            total_sales_amount += item.cost_price
+
+        return total_sales_amount
+
+
+    def total_sales(self):
+        # Fetchs dollar added
+        sales_list=Order.objects.filter(status="Completed").count()
+        return sales_list
 
     def total_profit(self):
         # Fetchs dollar added
@@ -103,11 +109,11 @@ def get_filename_ext(filepath):
     name,ext=os.path.splitext(base_name)
     return name,ext
 
-def upload_image_path(instance, filename):
+def upload_image_path1(instance, filename):
     new_filename=random.randint(1,3910209312)
     name, ext= get_filename_ext(filename)
     final_filename='{new_filename}{ext}'.format(new_filename=new_filename,ext=ext)
-    return "payments/{new_filename}/{final_filename}".format(
+    return "gamedetails/{new_filename}/{final_filename}".format(
             new_filename=new_filename,
             final_filename=final_filename
     )
@@ -115,6 +121,7 @@ def upload_image_path(instance, filename):
 class OrderDetail(models.Model):
     user =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete =models.CASCADE)
     details = models.TextField()
+    game_image=models.ImageField(upload_to=upload_image_path1, null=True, blank=False)
 
     def __str__(self):
         return self.details

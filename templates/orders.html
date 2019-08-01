@@ -32,7 +32,7 @@
           		<i class="db-right"></i>
           	</span>
             <h2 class="mb-3">Order-Summary</h2>
-            <p>After successfull order message us on <a href="https://m.me/khwoppagiftcard">facebook</a>  with your order id.</p>
+            <p>If you have any enquiry about you order message us on <a href="https://m.me/khwoppagiftcard">facebook</a>  with your order id.</p>
 
           </div>
         </div>
@@ -58,18 +58,23 @@
                 <td  style="color:white; font-weight:bold;"> {{ order.payment.type }}
                 </td>
                 <td>
-                  {% if order.payment.status == 'paid' %}
+                  {% if order.payment.status == 'Paid' %}
                   <span class="btn btn-success"style="border-radius: 10px;">
                     {{ order.payment.status }}
                     </span>
-                  {% endif %}
 
-                  {% if order.payment.status == 'Verifying payment' %}
+
+                  {% elif order.payment.status == 'Verifying payment' %}
                   <span class="btn btn-warning"style="border-radius: 10px;">
                     {{ order.payment.status }}
                     </span>
-                  {% endif %}
 
+
+                  {% else %}
+                  <span class="btn btn-danger"style="border-radius: 10px;">
+                    {{ order.payment.status }}
+                    </span>
+                  {% endif %}
 
                   </td>
                 <td></td>
@@ -79,7 +84,7 @@
 
             <thead class="thead-light">
               <tr>
-                <th  style="color:#6cafe8;" >{{ order.id }}</th>
+                <th  style="color:#6cafe8;" > Order id #{{ order.id }}</th>
 
                 <th>
                   	<!-- <div class="img" style="background-image: url({{ order.products.product.parent_product.image.url }});"> -->

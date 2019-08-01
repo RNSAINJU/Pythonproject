@@ -16,7 +16,15 @@ class InvestmentForm(forms.ModelForm):
     })
     )
 
+    rate=forms.IntegerField(
+    required=False,
+    widget=forms.TextInput(attrs={
+        'class':"form-control"
+    })
+    )
+
     total=forms.IntegerField(
+    required=False,
     widget=forms.TextInput(attrs={
         'class':"form-control"
     })
@@ -24,7 +32,7 @@ class InvestmentForm(forms.ModelForm):
 
     class Meta:
         model=Investment
-        fields=['name','type','amount','total']
+        fields=['name','type','amount','rate','total']
 
 class ExpenseForm(forms.ModelForm):
     transaction_name=forms.CharField(

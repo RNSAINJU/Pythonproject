@@ -82,11 +82,6 @@ def sales_detail(request):
             post.save()
             return redirect('Transactions:balance')
 
-    elif request.method == 'DELETE':
-        id=json.loads(request.body)['id']
-        investment=get_object_or_404(Investment, id=id)
-        investment.delete()
-        return redirect('Transactions:balance')
 
     return redirect('Transactions:balance')
 

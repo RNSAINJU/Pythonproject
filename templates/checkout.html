@@ -40,7 +40,7 @@
           <div class="card">
 
 
-            <form method="POST" class="card-body">
+            <form method="POST" class="card-body" enctype="multipart/form-data">
               {% csrf_token %}
 
               <h3>Game details</h3>
@@ -50,20 +50,16 @@
            <p style="color:white;">For {{ order_item.product.parent_product.title }} order</p>
   {% if order_item.product.parent_product.category.name == 'Gametopups' %}
 
-                <div class="md-form mb-5">
 
+            <p class="text-white">id:</p>
 
-                  <p>id:<br>
-                  name:<br></p>
-
-                </div>
 
                 {% endif %}
 
     {% if order_item.product.parent_product.category.name == 'Gamestopup(Loginrequired)' %}
     <div class="md-form mb-5">
 
-           <p>
+           <p class="text-white">
              Server: PC|PSN|Mobile<br>
              Login Type:Gmail|Epic|PSN<br>
              Login Email:<br>
@@ -82,11 +78,12 @@
 
 {% endfor %}
   {{ form.game_details }}
+  {{ form.transaction_image }}
 
-                <div class="custom-control custom-checkbox">
+                <!-- <div class="custom-control custom-checkbox">
                 {{ form.save_info }}
                   <label for="save-info">Save this information for next time</label>
-                </div>
+                </div> -->
 
                 <hr>
 

@@ -69,17 +69,23 @@ class Expense(models.Model):
 class Investment(models.Model):
     name=models.CharField(max_length=50)
     type=models.CharField(max_length=50)
-    rate=models.FloatField()
+    rate=models.FloatField(null=True, blank=True, default=0.0)
     type2=models.CharField(max_length=7,default="Esewa")
-    # models.ForeignKey(Balance,on_delete=models.CASCADE, related_name='investment')
-    amount=models.FloatField()
-    total=models.FloatField()
+    amount=models.FloatField(null=True, blank=True, default=0.0)
+    total=models.FloatField(null=True, blank=True, default=0.0)
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.rate=self.total/self.amount
+        if self.total is None:
+            self.total=0.0
+            if self.rate is None:
+                self.rate=0.0
+            else:
+                self.total=self.rate*self.amount
+
+
         super(Investment,self).save(*args,**kwargs)
 
     # def add_investment(self):
