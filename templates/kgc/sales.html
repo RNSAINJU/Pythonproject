@@ -28,7 +28,7 @@
           <div class="stats-small__data text-center">
             <span class="stats-small__label text-uppercase">Sales</span>
             {% for item in order|slice:":1" %}
-            <h6 class="stats-small__value count my-3">{{ item.total_sales_amount }}</h6>
+            <h6 class="stats-small__value count my-3">{{ item.total_sales_amount|floatformat:2 }}</h6>
 
           </div>
           <div class="stats-small__data">
@@ -47,7 +47,7 @@
           <div class="stats-small__data text-center">
             <span class="stats-small__label text-uppercase">Profit</span>
 
-            <h6 class="stats-small__value count my-3">{{ item.total_profit }}</h6>
+            <h6 class="stats-small__value count my-3">{{ item.total_profit|floatformat:2 }}</h6>
 
           </div>
           <div class="stats-small__data">
@@ -65,7 +65,7 @@
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
             <span class="stats-small__label text-uppercase">Paypal spent</span>
-            <h6 class="stats-small__value count my-3">{{ item.total_paypal_sales_amount }}</h6>
+            <h6 class="stats-small__value count my-3">{{ item.total_paypal_sales_amount|floatformat:2 }}</h6>
           </div>
           <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
