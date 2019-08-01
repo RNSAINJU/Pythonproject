@@ -52,12 +52,33 @@ class Order(models.Model):
 
     def total_sales_amount(self):
         # Fetchs dollar added
-        investment_list=Investment.objects.filter(type=self)
+        sales_list=Order.objects.filter(status="Completed")
         total_sales_amount=0
-        for item in investment_list:
-            total_invest_amount += item.amount
+        for item in sales_list:
+            total_sales_amount += item.payment.amount
 
-        return (self.amount + total_invest_amount + total_sales_amount) -total_expense_amount - total_dollar_amount- total_invest_expense
+        return total_sales_amount
+
+    # def total_sales_amount(self):
+    #     # Fetchs dollar added
+    #     sales_list=Order.objects.filter(status="Completed")
+    #     total_sales_amount=Order.objects.filter(status="Completed")
+    #     for item in sales_list:
+    #         total_sales_amount += item.payment.amount
+    #
+    #     return total_sales_amount
+
+    def total_profit(self):
+        # Fetchs dollar added
+        list=Order.objects.filter(status="Completed")
+        total_sales_amount=0
+        total_cost_price=0
+        for item in list:
+            total_sales_amount += item.payment.amount
+        for item in list:
+            total_cost_price += item.cost_price
+
+        return total_sales_amount- (total_cost_price*121)
 
     def __str__(self):
         return self.user.username
