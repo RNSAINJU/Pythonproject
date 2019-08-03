@@ -13,10 +13,10 @@ class HomeView(TemplateView):
 
     def get(self, request):
         form=ContactForm()
-        featuredproducts=ChildProduct.objects.filter(homefeatured=True)
+        featuredproducts=ChildProduct.objects.filter(homefeatured=True).order_by('id')
         partners=Partner.objects.all()
         reviews=Reviews.objects.all()
-        news=News.objects.order_by('date')
+        news=News.objects.order_by('date').reverse()
 
         args={
         'form':form,'featured_list':featuredproducts,
@@ -70,7 +70,7 @@ class AboutView(TemplateView):
 
 
 def news_list_view(request):
-    queryset=News.objects.all()
+    queryset=News.objects.order_by('date').reverse()
     context={
             'news_list':queryset
     }

@@ -27,7 +27,7 @@ def load_prices(request):
 
 
 def product_type(request, pk):
-    queryset=ChildProduct.objects.filter(parent_product_id=pk)
+    queryset=ChildProduct.objects.filter(parent_product_id=pk).order_by('price')
     queryset2=Product.objects.get(id=pk)
     context={
         'products':queryset,
