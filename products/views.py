@@ -7,7 +7,9 @@ from django.shortcuts import reverse, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required, permission_required
 
+# Fetch only featured products to users
 class ProductView(ListView):
     model=ChildProduct
     context_object_name = 'child'
@@ -20,12 +22,13 @@ class ProductView(ListView):
         queryset={'products':product}
         return queryset
 
+
 def load_prices(request):
     childproduct_id=request.GET.get('childproduct')
     price=ChildProduct.objects.filter(childproduct_id=childproduct_id).order_by('type')
     return render(request,'hr/prices_list.html',{'price':price})
 
-
+# fetchs respective child products
 def product_type(request, pk):
     queryset=ChildProduct.objects.filter(parent_product_id=pk).order_by('price')
     queryset2=Product.objects.get(id=pk)
@@ -43,7 +46,7 @@ def product_category(request, pk):
     }
     return render(request,"options.html",context)
 
-
+# detailed view of child product
 class ProductDetailView(DetailView):
     model= ChildProduct
     template_name= "product.html"
@@ -144,6 +147,31 @@ def remove_single_item_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order.")
         return redirect("core:product", slug=slug)
+
+@login_required
+@permission_required('superuserstatus', raise_exception=True)
+def admin_product_detail(request):
+    product=Product.objects.all()
+
+    if request.method == 'GET':
+        # form=InvestmentForm()
+        queryset={'product':product}
+        return render(request,'kgc/products.html',queryset)
+
+    # elif request.method =='POST':
+    #     form=InvestmentForm(request.POST)
+    #     if form.is_valid():
+    #         post=form.save(commit=False)
+    #         post.save()
+    #         return redirect('Transactions:investments')
+
+    elif request.method == 'DELETE':
+        id=json.loads(request.body)['id']
+        product=get_object_or_404(Product, id=id)
+        product.delete()
+        return redirect('Transactions:investments')
+
+    return redirect('Transactions:investments')
 
 # class ProductListView(ListView):
 #     model= ChildProduct

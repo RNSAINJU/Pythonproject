@@ -3,6 +3,27 @@
 
 {% block title %} KhwoppaGiftCardAdmin|Expenses {% endblock %}
 
+{% block css %}
+<style>
+.adminproductimg{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 120px;
+  height:100px;
+  background-size:100% 100%;
+  background-repeat: no-repeat;
+  /* background-origin: content-box; */
+}
+
+.adminproductimg:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+</style>
+
+{% endblock %}
+
 {% block content %}
 
 
@@ -11,7 +32,7 @@
   <div class="page-header row no-gutters py-4">
     <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
       <span class="text-uppercase page-subtitle">Dashboard</span>
-      <h3 class="page-title"> Investment </h3>
+      <h3 class="page-title"> Pending Orders </h3>
     </div>
   </div>
   <!-- End Page Header -->
@@ -39,29 +60,42 @@
             <thead class="bg-light">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col" class="border-0">Name</th>
-                <th scope="col" class="border-0">Type</th>
-                <th scope="col" class="border-0">Amount</th>
-                <th scope="col" class="border-0">Rate</th>
+                <th scope="col" class="border-0">Customer</th>
+                <th scope="col" class="border-0">Product</th>
+                <th scope="col" class="border-0">Quantity</th>
                 <th scope="col" class="border-0">Total</th>
+                <th scope="col" class="border-0">Ordered date</th>
+                <th scope="col" class="border-0">Order details</th>
+                <th scope="col" class="border-0">Game screenshot</th>
+                <th scope="col" class="border-0">Message</th>
               </tr>
             </thead>
             <tbody>
-              {% for item in investment %}
+              {% for item in order %}
               <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ item.name }}</td>
-                <td>{{ item.type }}</td>
-                <td>{{ item.amount }}</td>
-                <td>{{ item.rate }}</td>
-                <td>{{ item.total }}</td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.user.username }}</td>
+                {% for order_item in item.products.all %}
+                <td>{{ order_item.product.parent_product.title }}|{{ order_item.product.type }}</td>
+
+                <td>{{ order_item.quantity }}</td>
+                {% endfor %}
+
+                <td>{{ item.payment.amount }}</td>
+                <td>{{ item.ordered_date }}</td>
+                <td>{{ item.order_details.details }}</td>
+                <td>
+                <div class ="adminproductimg" style="background-image: url({{ item.order_details.game_image }});">
+                </div>
+              </td>
+                <td>{{ item.message }}</td>
                 <td>
                   <a onclick="deleteExpense(this)" data-id="{{ item.id }}">
                     <i class="material-icons red-text right">close</i>
                     </a>
                 </td>
               </tr>
-              
+
               {% endfor %}
             </tbody>
           </table>

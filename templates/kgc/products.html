@@ -1,7 +1,29 @@
 {% extends 'kgc/baseadmin.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %} KhwoppaGiftCardAdmin|Expenses {% endblock %}
+
+{% block css %}
+<style>
+.adminproductimg{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 120px;
+  height:100px;
+  background-size:100% 100%;
+  background-repeat: no-repeat;
+  /* background-origin: content-box; */
+}
+
+.adminproductimg:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+</style>
+
+{% endblock %}
 
 {% block content %}
 
@@ -11,65 +33,58 @@
   <div class="page-header row no-gutters py-4">
     <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
       <span class="text-uppercase page-subtitle">Dashboard</span>
-      <h3 class="page-title"> Investment </h3>
+      <h3 class="page-title"> Products </h3>
     </div>
   </div>
-  <!-- End Page Header -->
-<!-- Small Stats Blocks -->
-<div class="row">
-{% include 'kgc/includes/balance.html' %}
 
-
-    <!-- Default Light Table -->
-    <div class="row">
-      <div class="col">
-        <div class="card card-small mb-4">
-          <div class="card-header border-bottom">
-            <!-- <h6 class="m-0"><a href="{% url 'home:home' %}">Investment</a></h6> -->
-
-
-            <!-- Button to Open the Modal -->
-            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">
-            Add investment
-            </button>
-
-          </div>
-        <div class="card-body p-0 pb-3 text-center">
-          <table class="table mb-0">
-            <thead class="bg-light">
+  <!-- Default Dark Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card card-small overflow-hidden mb-4">
+        <div class="card-header bg-dark">
+          <h6 class="m-0 text-white">Inactive Users</h6>
+        </div>
+        <div class="card-body p-0 pb-3 bg-dark text-center">
+          <table class="table table-dark mb-0">
+            <thead class="thead-dark">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col" class="border-0">Name</th>
-                <th scope="col" class="border-0">Type</th>
-                <th scope="col" class="border-0">Amount</th>
-                <th scope="col" class="border-0">Rate</th>
-                <th scope="col" class="border-0">Total</th>
+                <th scope="col" class="border-bottom-0">#</th>
+                <th scope="col" class="border-bottom-0">Title</th>
+                <th scope="col" class="border-bottom-0">Short description</th>
+                <th scope="col" class="border-bottom-0">Description</th>
+                <th scope="col" class="border-bottom-0">Category</th>
+                <th scope="col" class="border-bottom-0">Image</th>
+                <th scope="col" class="border-bottom-0">Status</th>
+                <th scope="col" class="border-bottom-0">Method</th>
               </tr>
             </thead>
             <tbody>
-              {% for item in investment %}
+              {% for item in product %}
               <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ item.name }}</td>
-                <td>{{ item.type }}</td>
-                <td>{{ item.amount }}</td>
-                <td>{{ item.rate }}</td>
-                <td>{{ item.total }}</td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.short_description }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.category }}</td>
                 <td>
-                  <a onclick="deleteExpense(this)" data-id="{{ item.id }}">
-                    <i class="material-icons red-text right">close</i>
-                    </a>
-                </td>
-              </tr>
-              
+                <div class ="adminproductimg" style="background-image: url({{ item.image.url }});">
+                </div>
+              </td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.purchase_method }}</td>
+
+
               {% endfor %}
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-</div>
+  <!-- End Default Dark Table -->
+
+  </div>
 
   <!-- The Modal -->
   <div class="modal" id="myModal">
@@ -129,13 +144,8 @@
   </div>
 
 
+  {% endblock %}
 
+  {% block script %}
 
-
-
-
-{% endblock %}
-
-{% block script %}
-
-{% endblock %}
+  {% endblock %}

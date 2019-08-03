@@ -8,7 +8,8 @@ add_to_cart,
 remove_from_cart,
 remove_single_item_from_cart,
 product_type,
-product_category
+product_category,
+admin_product_detail
 )
 
 app_name ='products'
@@ -23,5 +24,7 @@ urlpatterns = [
     path('remove-from-cart/<slug>/',remove_from_cart,name='remove-from-cart'),
     path('remove-item-from-cart/<slug>/', remove_single_item_from_cart,
          name='remove-single-item-from-cart'),
+
+    path('kgc/products', admin_product_detail,name='kgcproducts'),
 
 ]

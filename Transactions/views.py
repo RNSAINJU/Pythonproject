@@ -38,6 +38,31 @@ from django.contrib.auth.decorators import login_required, permission_required
 #         else:
 #             form=InvestmentForm()
 #         return render(request, self.template_name,{'form':form})
+@login_required
+@permission_required('superuserstatus', raise_exception=True)
+def pending_orders_detail(request):
+    balance= Balance.objects.all()
+    order=Order.objects.filter(ordered=True, status="Pending").order_by('ordered_date')
+
+    if request.method == 'GET':
+        # form=ExpenseForm()
+        queryset={'balance':balance,'order':order}
+        return render(request,'kgc/orders-pending.html',queryset)
+
+    # elif request.method =='POST':
+    #     # form=ExpenseForm(request.POST)
+    #     if form.is_valid():
+    #         post=form.save(commit=False)
+    #         post.save()
+    #         return redirect('Transactions:expenses')
+
+    elif request.method == 'DELETE':
+        id=json.loads(request.body)['id']
+        investment=get_object_or_404(Expense, id=id)
+        investment.delete()
+        return redirect('Transactions:expenses')
+
+    return redirect('Transactions:expenses')
 
 @login_required
 @permission_required('superuserstatus', raise_exception=True)
