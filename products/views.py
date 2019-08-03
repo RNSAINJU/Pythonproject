@@ -16,7 +16,7 @@ class ProductView(ListView):
 
 
     def get_queryset(self):
-        product=ChildProduct.objects.filter(productsfeatured=True)
+        product=ChildProduct.objects.filter(productsfeatured=True),order_by('id')
         queryset={'products':product}
         return queryset
 
