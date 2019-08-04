@@ -14,7 +14,7 @@
 					<li class="nav-item"><a href="{% url 'home:news' %}" class="nav-link">News</a></li>
 	          <li class="nav-item"><a href="{% url 'boards:discussion' %}" class="nav-link">Discussion Forum</a></li>
 	        </ul>
-          
+
 {% endblock %}
 
 {% block content %}
@@ -34,10 +34,12 @@
 {% include 'home/counter.html' %}
 
     <section class="ftco-about d-md-flex">
-    	<div class="one-half img" style="background-image: url(../static/images/about.jpg);">
-    		<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
-      		<span class="icon-play"></a>
-      	</a>
+    	<div style="margin-bottom:30px;"class="one-half img" style="background-image: url(../static/images/about.jpg);">
+    		<!-- <a href="https://player.vimeo.com/video/351851503" class="icon popup-youtube d-flex justify-content-center align-items-center"> -->
+        <div  >
+          <iframe  class="d-flex justify-content-center align-items-center" width="445" height="315" src="https://www.youtube.com/embed/bv6y41YSCyA?autoplay=1" frameborder="0" allow="autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
     	</div>
     	<div class="one-half ftco-animate">
         <div class="heading-section ftco-animate ">

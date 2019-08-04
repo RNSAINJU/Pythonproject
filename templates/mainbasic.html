@@ -26,6 +26,8 @@
 	  <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    <meta name="google-site-verification" content="fldJMgN7PNGF_PvQ35nPqtjITiHtY3kCxjh8lcFrMZw" />
+
     {% block css %}
     {% endblock %}
   </head>
@@ -198,7 +200,14 @@ That EASY!</p>
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script> -->
  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
+ <script>
+   $(document).ready(function() {
+   $('#headerVideoLink').magnificPopup({
+     type:'inline',
+     midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+   });
+ });
+   </script>
 
    {% block javascript %}
 
