@@ -31,10 +31,9 @@ class CheckOutView(View):
             # for order_item in order.products.all:
             #     if order_item.product.parent_product.category == 'Gametopups':
             #     elif order_item.product.parent_product.category  == 'Gamestopup(Loginrequired)':
-            loginrequiredform=TopupLoginForm()
+            # loginrequiredform=TopupLoginForm()
             form=CheckoutForm()
             context={
-                'loginrequiredform':loginrequiredform,
                 'form':form,
                 'couponform':CouponForm(),
                 'order':order,
@@ -179,7 +178,7 @@ class OrderView(ListView):
 
 
     def get_queryset(self):
-        order=Order.objects.filter(user=self.request.user,ordered=True)
+        order=Order.objects.filter(user=self.request.user,ordered=True).order_by('ordered_date').reverse()
         queryset={'order':order}
         return queryset
 
