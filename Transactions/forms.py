@@ -1,7 +1,8 @@
 from django import forms
-from .models import Investment, Expense
+from .models import Balance,Investment, Expense
 
 class InvestmentForm(forms.ModelForm):
+
     name=forms.CharField(
     widget=forms.TextInput(attrs={
         'class':"form-control",
@@ -9,6 +10,9 @@ class InvestmentForm(forms.ModelForm):
     })
     )
 
+    type=forms.ModelChoiceField(
+    queryset=Balance.objects.only('name')
+    )
 
     amount=forms.IntegerField(
     widget=forms.TextInput(attrs={
@@ -32,7 +36,8 @@ class InvestmentForm(forms.ModelForm):
 
     class Meta:
         model=Investment
-        fields=['name','type','amount','rate','total']
+        fields=['name','amount','rate','total','type']
+
 
 class ExpenseForm(forms.ModelForm):
     transaction_name=forms.CharField(

@@ -19,4 +19,6 @@ urlpatterns = [
     url(r'^new_post/$',NewPostView.as_view(), name='new_post'),
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
         PostUpdateView.as_view(), name='edit_post'),
+        
+    path('kgc/boards', BoardView.as_view(),name='boards'),
 ]

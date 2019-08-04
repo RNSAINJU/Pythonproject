@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import Order, OrderProduct, Payment, Coupon, BillingAddress, OrderDetail
+from Transactions.models import Balance
 from django.views.generic import ListView, DetailView, TemplateView, View
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib import messages
-from .forms import CheckoutForm, PaymentForm, CouponForm, TopupForm, TopupLoginForm
+from .forms import CheckoutForm, PaymentForm, CouponForm
 from django.core.files.storage import FileSystemStorage
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -181,3 +182,34 @@ class OrderView(ListView):
         order=Order.objects.filter(user=self.request.user,ordered=True)
         queryset={'order':order}
         return queryset
+
+class OrdersPendingView(PermissionRequiredMixin,TemplateView):
+    permission_required = 'superuserstatus'
+    # paginate_by = 1
+    template_name="kgc/orders-pending.html"
+
+
+    def get(self,request):
+        model_name,view=self.__class__.__name__.split('V')
+        balance= Balance.objects.all()
+        order=Order.objects.filter(ordered=True, status="Pending").order_by('ordered_date')
+        queryset={'balance':balance,'order':order,'model_name':model_name}
+        return render(request,'kgc/orders-pending.html',queryset)
+
+
+    def delete(self,request):
+        id=json.loads(request.body)['id']
+        order=get_object_or_404(Order, id=id)
+        order.delete()
+        return redirect('Transactions:investments')
+
+class SalesView(PermissionRequiredMixin,TemplateView):
+    permission_required='superuserstatus'
+    template_name="kgc/sales.html"
+
+    def get(self,request):
+        balance=Balance.objects.all()
+        order=Order.objects.filter(status="Completed")
+        model_name,view=self.__class__.__name__.split('V')
+        queryset={'balance':balance,'order':order,'model_name':model_name}
+        return render(request,self.template_name,queryset)

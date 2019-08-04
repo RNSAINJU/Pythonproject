@@ -6,6 +6,7 @@ import datetime
 from home.forms import ContactForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 class HomeView(TemplateView):
     template_name='index.html'
@@ -76,11 +77,90 @@ def news_list_view(request):
     }
     return render(request,"news.html",context)
 
-@login_required
-@permission_required('superuserstatus', raise_exception=True)
-def admin_home_view(request):
-    queryset=News.objects.all()
-    context={
-            'news_list':queryset
-    }
-    return render(request,"kgc/index.html",context)
+
+
+class EnquiryView(PermissionRequiredMixin, TemplateView):
+    permission_required='superuserstatus'
+    template_name='kgc/enquiries.html'
+
+    def get(self,request):
+        model_name,view=self.__class__.__name__.split('V')
+        enquiry=Enquiries.objects.all()
+        queryset={'enquiry':enquiry,'model_name':model_name}
+        return render(request,self.template_name,queryset)
+
+
+    def delete(self,request):
+        id=json.loads(request.body)['id']
+        enquiry=get_object_or_404(Enquiries, id=id)
+        enquiry.delete()
+        return redirect('home:enquiries')
+
+class NewsView(PermissionRequiredMixin, TemplateView):
+    permission_required='superuserstatus'
+    template_name='kgc/news.html'
+
+    def get(self,request):
+        news=News.objects.all()
+        model_name,view=self.__class__.__name__.split('V')
+        queryset={'news':news,'model_name':model_name}
+        return render(request,self.template_name,queryset)
+
+    # def post(self,request):
+    #     form=InvestmentForm(request.POST)
+    #     if form.is_valid():
+    #         post=form.save(commit=False)
+    #         post.save()
+    #         return redirect('boards:boards')
+
+    def delete(self,request):
+        id=json.loads(request.body)['id']
+        news=get_object_or_404(News, id=id)
+        news.delete()
+        return redirect('home:admin-news')
+
+class PartnersView(PermissionRequiredMixin, TemplateView):
+    permission_required='superuserstatus'
+    template_name='kgc/partners.html'
+
+    def get(self,request):
+        partners=Partner.objects.all()
+        model_name,view=self.__class__.__name__.split('V')
+        queryset={'partners':partners,'model_name':model_name}
+        return render(request,self.template_name,queryset)
+
+    # def post(self,request):
+    #     form=InvestmentForm(request.POST)
+    #     if form.is_valid():
+    #         post=form.save(commit=False)
+    #         post.save()
+    #         return redirect('boards:boards')
+
+    def delete(self,request):
+        id=json.loads(request.body)['id']
+        partner=get_object_or_404(Partner, id=id)
+        partner.delete()
+        return redirect('home:admin-partners')
+
+class ReviewsView(PermissionRequiredMixin, TemplateView):
+    permission_required='superuserstatus'
+    template_name='kgc/reviews.html'
+
+    def get(self,request):
+        reviews=Reviews.objects.all()
+        model_name,view=self.__class__.__name__.split('V')
+        queryset={'reviews':reviews,'model_name':model_name}
+        return render(request,self.template_name,queryset)
+
+    # def post(self,request):
+    #     form=InvestmentForm(request.POST)
+    #     if form.is_valid():
+    #         post=form.save(commit=False)
+    #         post.save()
+    #         return redirect('boards:boards')
+
+    def delete(self,request):
+        id=json.loads(request.body)['id']
+        review=get_object_or_404(Reviews, id=id)
+        review.delete()
+        return redirect('home:admin-reviews')

@@ -1,15 +1,18 @@
 {% extends 'kgc/baseadmin.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %} KhwoppaGiftCardAdmin|Investment {% endblock %}
+{% block title %} KhwoppaGiftCardAdmin|Expenses {% endblock %}
+
+{% block css %}
+<style>
+
+
+</style>
+
+{% endblock %}
 
 {% block content %}
 
-
-  <!-- End Page Header -->
-<!-- Small Stats Blocks -->
-<div class="row">
-{% include 'kgc/includes/balance.html' %}
 
 
     <!-- Default Light Table -->
@@ -32,21 +35,21 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col" class="border-0">Name</th>
-                <th scope="col" class="border-0">Type</th>
-                <th scope="col" class="border-0">Amount</th>
-                <th scope="col" class="border-0">Rate</th>
-                <th scope="col" class="border-0">Total</th>
+                <th scope="col" class="border-0">Email</th>
+                <th scope="col" class="border-0">Phone no</th>
+                <th scope="col" class="border-0">Message</th>
+                <th scope="col" class="border-0">Date</th>
               </tr>
             </thead>
             <tbody>
-              {% for item in investment %}
+              {% for item in enquiry %}
               <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ item.name }}</td>
-                <td>{{ item.type }}</td>
-                <td>{{ item.amount }}</td>
-                <td>{{ item.rate }}</td>
-                <td>{{ item.total }}</td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.firstname }} {{ item.lastname }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phoneno }}</td>
+                <td>{{ item.message }}</td>
+                <td>{{ item.date }}</td>
                 <td>
                   <a onclick="deleteExpense(this)" data-id="{{ item.id }}">
                     <i class="material-icons red-text right">close</i>
@@ -61,9 +64,10 @@
       </div>
     </div>
   </div>
-</div>
 
-{% include 'kgc/includes/add_model.html' %}
+
+
+
 
 
 

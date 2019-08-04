@@ -4,39 +4,13 @@
 {% block title %} KhwoppaGiftCardAdmin|Expenses {% endblock %}
 
 {% block css %}
-<style>
-.adminproductimg{
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  width: 120px;
-  height:100px;
-  background-size:100% 100%;
-  background-repeat: no-repeat;
-  /* background-origin: content-box; */
-}
 
-.adminproductimg:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-}
-
-</style>
 
 {% endblock %}
 
 {% block content %}
 
 
-<div class="main-content-container container-fluid px-4">
-  <!-- Page Header -->
-  <div class="page-header row no-gutters py-4">
-    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-      <span class="text-uppercase page-subtitle">Dashboard</span>
-      <h3 class="page-title"> Pending Orders </h3>
-    </div>
-  </div>
-  <!-- End Page Header -->
-<!-- Small Stats Blocks -->
 <div class="row">
 {% include 'kgc/includes/balance.html' %}
 
@@ -50,9 +24,9 @@
 
 
             <!-- Button to Open the Modal -->
-            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">
-            Add investment
-            </button>
+            <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">
+            Add {{ model_name }}
+            </button> -->
 
           </div>
         <div class="card-body p-0 pb-3 text-center">
@@ -85,7 +59,7 @@
                 <td>{{ item.ordered_date }}</td>
                 <td>{{ item.order_details.details }}</td>
                 <td>
-                <div class ="adminproductimg" style="background-image: url({{ item.order_details.game_image }});">
+                <div class ="adminproductimg" style="background-image: url({{ item.order_details.game_image.url }});">
                 </div>
               </td>
                 <td>{{ item.message }}</td>
@@ -105,62 +79,8 @@
   </div>
 </div>
 
-  <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Add investment</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
 
-        <!-- Modal body -->
-        <div class="modal-body">
-
-          <form method="POST" class="card-body">
-            {% csrf_token %}
-            <div class="form-group">
-            <label for="title">Title</label>
-            {{ form.name }}
-            </div>
-
-            <div class="form-group">
-            <label for="title">Type</label>
-            <select name="type" class="form-control">
-              {% for item in balance %}
-                <option>{{ item.name }}</option>
-              {% endfor %}
-              </select>
-              </div>
-
-            <div class="form-group">
-            <label for="amount">Amount</label>
-            {{ form.amount }}
-            </div>
-
-            <div class="form-group">
-            <label for="amount">Rate</label>
-            {{ form.rate }}
-            </div>
-
-            <div class="form-group">
-            <label for="total">Total (Rs)</label>
-            {{ form.total }}
-            </div>
-
-            <button type="submit" class="btn btn-success float-right">Add</button>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
 
 
 

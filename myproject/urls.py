@@ -44,7 +44,6 @@ urlpatterns = [
         name='password_change_done'),
 
     #admin site url
-    url(r'^kgc/',views.admin_home_view, name='kgc_admin'),
     url(r'^admin/', admin.site.urls),
 
 

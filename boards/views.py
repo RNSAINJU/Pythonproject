@@ -6,7 +6,7 @@ from django.views.generic import ListView
 from .forms import NewTopicForm, PostForm
 from .models import Board, Post, Topic
 from django.db.models import Count
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, TemplateView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
@@ -15,8 +15,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
 from django.core.mail import send_mail
-
-
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 def about(request):
@@ -166,3 +165,26 @@ def simple_upload(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'simple_upload.html')
+
+class BoardView(PermissionRequiredMixin, TemplateView):
+    permission_required='superuserstatus'
+    template_name='kgc/boards.html'
+
+    def get(self,request):
+        board=Board.objects.all()
+        model_name,view=self.__class__.__name__.split('V')
+        queryset={'board':board,'model_name':model_name}
+        return render(request,self.template_name,queryset)
+
+    def post(self,request):
+        form=InvestmentForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.save()
+            return redirect('boards:boards')
+
+    def delete(self,request):
+        id=json.loads(request.body)['id']
+        board=get_object_or_404(Board, id=id)
+        board.delete()
+        return redirect('boards:boards')

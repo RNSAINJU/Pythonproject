@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView, View, CreateView
 from .models import Balance, Expense, Investment
 from orders.models import Order
+from boards.models import Board
+from home.models import Enquiries
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .forms import InvestmentForm, ExpenseForm
 from django.utils.text import slugify
@@ -10,131 +12,103 @@ import json
 from django.contrib.auth.decorators import login_required, permission_required
 
 
-# class BalanceView(PermissionRequiredMixin,TemplateView):
-#     permission_required = 'superuserstatus'
-#     # paginate_by = 1
-#     template_name="kgc/balance.html"
-#
-#
-#     def get(self,request):
-#         form=InvestmentForm()
-#         balance=Balance.objects.all()
-#         investment=Investment.objects.all()
-#         queryset={'form':form,'balance':balance,'investment':investment}
-#         return render(request,self.template_name,queryset)
-#
-#     def post(self,request):
-#         form=InvestmentForm(request.POST)
-#         if form.is_valid():
-#             post=form.save(commit=False)
-#             post.save()
-#             return redirect('Transactions:balance')
-#         elif request.method == 'DELETE':
-#             id=json.loads(request.body)['id']
-#             print(id)
-#             expense=get_object_or_404(Expense, id=id)
-#             expense.delete()
-#             return HttpResponse('')
-#         else:
-#             form=InvestmentForm()
-#         return render(request, self.template_name,{'form':form})
-@login_required
-@permission_required('superuserstatus', raise_exception=True)
-def pending_orders_detail(request):
-    balance= Balance.objects.all()
-    order=Order.objects.filter(ordered=True, status="Pending").order_by('ordered_date')
+class InvestmentView(PermissionRequiredMixin,TemplateView):
+    permission_required = 'superuserstatus'
+    # paginate_by = 1
+    template_name="kgc/investment.html"
 
-    if request.method == 'GET':
-        # form=ExpenseForm()
-        queryset={'balance':balance,'order':order}
-        return render(request,'kgc/orders-pending.html',queryset)
 
-    # elif request.method =='POST':
-    #     # form=ExpenseForm(request.POST)
-    #     if form.is_valid():
-    #         post=form.save(commit=False)
-    #         post.save()
-    #         return redirect('Transactions:expenses')
-
-    elif request.method == 'DELETE':
-        id=json.loads(request.body)['id']
-        investment=get_object_or_404(Expense, id=id)
-        investment.delete()
-        return redirect('Transactions:expenses')
-
-    return redirect('Transactions:expenses')
-
-@login_required
-@permission_required('superuserstatus', raise_exception=True)
-def balance_detail(request):
-    balance= Balance.objects.all()
-    investment=Investment.objects.all()
-
-    if request.method == 'GET':
+    def get(self,request):
         form=InvestmentForm()
-        queryset={'balance':balance,'investment':investment,'form':form}
-        return render(request,'kgc/investment.html',queryset)
+        model_name,view=self.__class__.__name__.split('V')
+        balance=Balance.objects.all()
+        investment=Investment.objects.all()
+        queryset={'form':form,'balance':balance,'investment':investment,'model_name':model_name}
+        return render(request,self.template_name,queryset)
 
-    elif request.method =='POST':
+    def post(self,request):
         form=InvestmentForm(request.POST)
         if form.is_valid():
             post=form.save(commit=False)
             post.save()
             return redirect('Transactions:investments')
 
-    elif request.method == 'DELETE':
+    def delete(self,request):
         id=json.loads(request.body)['id']
         investment=get_object_or_404(Investment, id=id)
         investment.delete()
         return redirect('Transactions:investments')
 
-    return redirect('Transactions:investments')
-
-@login_required
-@permission_required('superuserstatus', raise_exception=True)
-def sales_detail(request):
-    balance= Balance.objects.all()
-    order=Order.objects.filter(status="Completed")
-
-    if request.method == 'GET':
-        queryset={'balance':balance,'order':order}
-        return render(request,'kgc/sales.html',queryset)
-
-    elif request.method =='POST':
-        form=InvestmentForm(request.POST)
-        if form.is_valid():
-            post=form.save(commit=False)
-            post.save()
-            return redirect('Transactions:balance')
+class ExpensesView(PermissionRequiredMixin,TemplateView):
+    permission_required = 'superuserstatus'
+    # paginate_by = 1
+    template_name="kgc/expenses.html"
 
 
-    return redirect('Transactions:balance')
-
-@login_required
-@permission_required('superuserstatus', raise_exception=True)
-def expenses_detail(request):
-    balance= Balance.objects.all()
-    expenses=Expense.objects.all()
-
-    if request.method == 'GET':
+    def get(self,request):
         form=ExpenseForm()
-        queryset={'balance':balance,'expenses':expenses,'form':form}
-        return render(request,'kgc/expenses.html',queryset)
+        balance= Balance.objects.all()
+        expenses=Expense.objects.all()
+        model_name,view=self.__class__.__name__.split('V')
+        queryset={'balance':balance,'expenses':expenses,'form':form,'model_name':model_name}
+        return render(request,self.template_name,queryset)
 
-    elif request.method =='POST':
+    def post(self,request):
         form=ExpenseForm(request.POST)
         if form.is_valid():
             post=form.save(commit=False)
             post.save()
             return redirect('Transactions:expenses')
 
-    elif request.method == 'DELETE':
+    def delete(self,request):
         id=json.loads(request.body)['id']
-        investment=get_object_or_404(Expense, id=id)
-        investment.delete()
+        expense=get_object_or_404(Expense, id=id)
+        expense.delete()
         return redirect('Transactions:expenses')
 
-    return redirect('Transactions:expenses')
+
+class DashboardView(PermissionRequiredMixin,TemplateView):
+    permission_required = 'superuserstatus'
+    # paginate_by = 1
+    template_name="kgc/index.html"
+
+
+    def get(self,request):
+        form=ExpenseForm()
+        balance= Balance.objects.all()
+        expenses=Expense.objects.all()
+        model_name,view=self.__class__.__name__.split('V')
+        queryset={'balance':balance,'expenses':expenses,'form':form,'model_name':model_name}
+        return render(request,self.template_name,queryset)
+
+
+# @login_required
+# @permission_required('superuserstatus', raise_exception=True)
+# def balance_detail(request):
+#     balance= Balance.objects.all()
+#     investment=Investment.objects.all()
+#
+#     if request.method == 'GET':
+#         form=InvestmentForm()
+#         queryset={'balance':balance,'investment':investment,'form':form}
+#         return render(request,'kgc/investment.html',queryset)
+#
+#     elif request.method =='POST':
+#         form=InvestmentForm(request.POST)
+#         if form.is_valid():
+#             post=form.save(commit=False)
+#             post.save()
+#             return redirect('Transactions:investments')
+#
+#     elif request.method == 'DELETE':
+#         id=json.loads(request.body)['id']
+#         investment=get_object_or_404(Investment, id=id)
+#         investment.delete()
+#         return redirect('Transactions:investments')
+#
+#     return redirect('Transactions:investments')
+
+
 # class InvestmentCreateView(CreateView):
 #     model=Balance
 #     template_name='kgc/add-investment.html'

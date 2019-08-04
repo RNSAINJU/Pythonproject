@@ -6,7 +6,9 @@ from .views import (
     CheckOutView,
     PaymentView,
     AddCouponView,
-    OrderView
+    OrderView,
+    OrdersPendingView,
+    SalesView
     # order_success
 )
 
@@ -18,5 +20,8 @@ urlpatterns = [
     path('add-coupon/',AddCouponView.as_view(),name='add-coupon'),
     # path('success/',order_success,name='success'),
     path('payment/<payment_option>/',PaymentView.as_view(),name='payment'),
-        path('orders/',OrderView.as_view(),name='orders')
+        path('orders/',OrderView.as_view(),name='orders'),
+
+    path('kgc/pending-orders', OrdersPendingView.as_view(),name='pending-orders'),
+    path('kgc/sales', SalesView.as_view(),name='sales'),
 ]

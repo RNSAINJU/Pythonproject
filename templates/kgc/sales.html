@@ -4,14 +4,7 @@
 {% block content %}
 
 
-<div class="main-content-container container-fluid px-4">
-  <!-- Page Header -->
-  <div class="page-header row no-gutters py-4">
-    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-      <span class="text-uppercase page-subtitle">Dashboard</span>
-      <h3 class="page-title">Sales</h3>
-    </div>
-  </div>
+
 
   <div class="row">
     {% include 'kgc/includes/balance.html' %}
@@ -126,11 +119,6 @@
                 <td>{{ item.payment.amount }}</td>
                 <td>{{ item.cost_price }}</td>
                 <td>{{ item.ordered_date }}</td>
-                <td>
-                  <a onclick="deleteExpense(this)" data-id="{{ item.id }}">
-                    <i class="material-icons red-text right">close</i>
-                    </a>
-                </td>
               {% endfor %}
               </tr>
             </tbody>

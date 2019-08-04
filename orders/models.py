@@ -152,6 +152,7 @@ class Payment(models.Model):
         ('Verifying payment','verifing payment'),
         ('Paid','paid'),
         )
+
     transaction_id= models.CharField(max_length=50)
     transaction_image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
@@ -169,7 +170,3 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
-# class OrderDetails(models.Model):
-#     game_id
-#     game_name
-#     image=
