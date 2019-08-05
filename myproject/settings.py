@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rqr_cjv4igscyu8&&(0%e(=sy=f2)p=f_wn&@0xsp7m$@!kp=d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['68.183.91.249','khwoppagiftcard.store','www.khwoppagiftcard.store','localhost','127.0.0.1']
 
