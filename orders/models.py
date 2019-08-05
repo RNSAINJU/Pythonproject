@@ -3,7 +3,7 @@ from django.conf import settings
 from products.models import ChildProduct
 import random
 import os
-from django.core.exceptions import ValidationError
+
 
 class OrderProduct(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
@@ -120,17 +120,10 @@ def upload_image_path1(instance, filename):
     )
 
 
-def validate_image(image):
-    file_size = game_image.file.size
-
-    limit_mb = 5
-    if file_size > limit_mb * 1024 * 1024:
-       raise ValidationError("Max size of file is %s MB" % limit_mb)
-
 class OrderDetail(models.Model):
     user =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete =models.CASCADE)
     details = models.TextField()
-    game_image=models.ImageField(upload_to=upload_image_path1, validators=[validate_image])
+    game_image=models.ImageField(upload_to=upload_image_path1, blank=True, null=True)
 
     def __str__(self):
         return self.details
@@ -163,7 +156,7 @@ class Payment(models.Model):
         )
 
     transaction_id= models.CharField(max_length=50)
-    transaction_image=models.ImageField(upload_to=upload_image_path,validators=[validate_image])
+    transaction_image=models.ImageField(upload_to=upload_image_path, blank=True, null=True)
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     type=models.CharField(max_length=50,choices=PAYMENT_CHOICES)
     amount =models.FloatField()
