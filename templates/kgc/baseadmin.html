@@ -169,26 +169,18 @@
 
                 <ul class="dropdown-menu" aria-labelledby="dropdown1">
                   <li class="dropdown-item">
-                    <a  class="nav-link" href="{% url 'orders:admin-orders' status='Pending'%}">
+                    <a  class="nav-link" href="{% url 'orders:pending-orders' %}">
                       <i class="material-icons">table_chart</i>
                     <span>Pending</span>
                   </a>
                   </li>
 
                   <li class="dropdown-item">
-                    <a  class="nav-link" href="{% url 'orders:admin-orders' status='Processing'%}">
+                    <a  class="nav-link" href="{% url 'Transactions:expenses'%}">
                       <i class="material-icons">table_chart</i>
                     <span>Processing</span>
                   </a>
                   </li>
-
-                  <li class="dropdown-item">
-                    <a  class="nav-link" href="{% url 'orders:admin-orders' status='Completed'%}">
-                      <i class="material-icons">table_chart</i>
-                    <span>Completed</span>
-                  </a>
-                  </li>
-
 
                 </ul>
 

@@ -182,19 +182,18 @@ class OrderView(ListView):
         queryset={'order':order}
         return queryset
 
-# Admin views
 class OrdersPendingView(PermissionRequiredMixin,TemplateView):
     permission_required = 'superuserstatus'
     # paginate_by = 1
-    template_name="kgc/orders.html"
+    template_name="kgc/orders-pending.html"
 
 
-    def get(self,request,status):
+    def get(self,request):
         model_name,view=self.__class__.__name__.split('V')
         balance= Balance.objects.all()
-        order=Order.objects.filter(ordered=True, status=status).order_by('ordered_date')
+        order=Order.objects.filter(ordered=True, status="Pending").order_by('ordered_date')
         queryset={'balance':balance,'order':order,'model_name':model_name}
-        return render(request,self.template_name,queryset)
+        return render(request,'kgc/orders-pending.html',queryset)
 
 
     def delete(self,request):

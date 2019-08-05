@@ -22,6 +22,6 @@ urlpatterns = [
     path('payment/<payment_option>/',PaymentView.as_view(),name='payment'),
         path('orders/',OrderView.as_view(),name='orders'),
 
-    path('kgc/orders/<status>', OrdersPendingView.as_view(),name='admin-orders'),
+    path('kgc/pending-orders', OrdersPendingView.as_view(),name='pending-orders'),
     path('kgc/sales', SalesView.as_view(),name='sales'),
 ]
