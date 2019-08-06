@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Order, OrderProduct, Payment, Coupon, BillingAddress, OrderDetail
 from Transactions.models import Balance
 from django.views.generic import ListView, DetailView, TemplateView, View
@@ -8,6 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib import messages
 from .forms import CheckoutForm, PaymentForm, CouponForm
 from django.core.files.storage import FileSystemStorage
+import json
+from django.http import HttpResponseRedirect, HttpResponse
 
 class OrderSummaryView(LoginRequiredMixin, View):
 
@@ -196,11 +198,12 @@ class OrdersView(PermissionRequiredMixin,TemplateView):
         return render(request,self.template_name,queryset)
 
 
-    def delete(self,request):
+    def delete(self,request,status):
         id=json.loads(request.body)['id']
-        order=get_object_or_404(Order, id=id)
+        # order_details=get_object_or_404(OrderDetail,)
+        order=get_object_or_404(Order, id=id,status=status)
         order.delete()
-        return redirect('Transactions:investments')
+        return HttpResponse('')
 
 class SalesView(PermissionRequiredMixin,TemplateView):
     permission_required='superuserstatus'

@@ -19,6 +19,6 @@ class ChildProductAdmin(admin.ModelAdmin):
     list_editable=('cost_price','price','discount_price','status','homefeatured','productsfeatured','enabledetail')
     list_filter=('parent_product','status')
 
-# admin.site.register(Main_Category)
+admin.site.register(Main_Category)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(ChildProduct,ChildProductAdmin)

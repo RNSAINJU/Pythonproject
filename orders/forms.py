@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import Order
 
 PAYMENT_CHOICES =(
     ('E','Esewa'),
@@ -7,6 +7,7 @@ PAYMENT_CHOICES =(
 
 class CheckoutForm(forms.Form):
     game_details = forms.CharField(
+        required=False,
         widget=forms.Textarea(
             attrs={'rows': 5, 'placeholder': 'Type all required details mentioned above here'}
         ),
@@ -14,7 +15,7 @@ class CheckoutForm(forms.Form):
         help_text='The max length of the text is 4000.'
     )
 
-    transaction_image=forms.ImageField()
+    transaction_image=forms.ImageField(required=False)
     # save_info=forms.BooleanField(required=False)
     payment_option=forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
@@ -41,6 +42,7 @@ class CouponForm(forms.Form):
         'aria-label':"Recipent's username",
         'aria_describedby':"basic-addon2"
     }))
+
 
 # class TopupForm(forms.Form):
 #     game_id=forms.CharField(widget=forms.TextInput(attrs={

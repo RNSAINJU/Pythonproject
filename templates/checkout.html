@@ -5,6 +5,9 @@
     <title>Home|Khwoppa Gift Card</title>
       {% endblock %}
 
+{% block css %}
+{% endblock %}
+
       {% block nav %}
      <ul class="navbar-nav ml-auto">
      	<li class="nav-item active"><a href="{% url 'home:home' %}" class="nav-link">Home</a></li>
@@ -52,12 +55,21 @@
 
 
             <p class="text-white">id:</p>
+            <div style="border:2px solid red;" class="form-group">
+            <textarea id="game_details" rows="4"  class="form-control"  placeholder="Type all required details mentioned above here"
+             name="game_details" maxlength="1000" required>
+             </textarea>
+            </div>
 
 
-                {% endif %}
+            <p class="text-white">
+              Game screenshot:
+              <input id="transaction_image" type="file" accept="image/*" name="transaction_image" required>
+            </p>
 
-    {% if order_item.product.parent_product.category.name == 'Gamestopup(Loginrequired)' %}
-    <div class="md-form mb-5">
+
+    {% elif order_item.product.parent_product.category.name == 'Gamestopup(Loginrequired)' %}
+    <!-- <div class="md-form mb-5"> -->
 
            <p class="text-white">
              Server: PC|PSN|Mobile<br>
@@ -67,19 +79,32 @@
              Character Name:<br>
              Character Level:<br>
              V-bucks balance:<br>
-
          </p>
 
 
+      <!-- </div> -->
+      <div style="border:2px solid white;" class="form-group">
+      <textarea id="game_details" rows="4"  class="form-control"  placeholder="Type all required details mentioned above here"
+       name="game_details" maxlength="1000" required></textarea>
       </div>
 
-      {% endif %}
 
+      <p class="text-white">
+        Game screenshot :
+        <input id="transaction_image" type="file" accept="image/*" name="transaction_image" required>
+      </p>
+
+
+
+      {% else %}
+      <div class="md-form mb-5">
+
+        <p class="text-white">After successfull order your code will be shown on my orders page. Keep on checking</p>
+        </div>
+
+        {% endif %}
 
 {% endfor %}
-  {{ form.game_details }}
-
-    <p class="text-white">Game screenshot: {{ form.transaction_image }}</p>
 
 
                 <!-- <div class="custom-control custom-checkbox">
