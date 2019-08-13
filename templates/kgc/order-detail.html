@@ -1,0 +1,102 @@
+{% extends 'kgc/baseadmin.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} KhwoppaGiftCardAdmin|Expenses {% endblock %}
+
+{% block css %}
+
+
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- Default Light Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card card-small mb-4">
+          <div class="card-header border-bottom">
+            <span class="float-right font-weight-bold text-success">{{ order.status }}</span>
+            <h4 class="m-0 font-weight-bold">#{{ order.id}} ({{ order.user.username }})</h4>
+            </div>
+
+              <div class="container-fluid">
+                <div class="row">
+                <div class="col-sm-12 col-lg-12 col-md-12 pb-2 pt-2" style="border-bottom:1px solid #e1e5eb">
+                  <h6 class=" float-right">
+                  {{ order.ordered_date }}
+                  </h6>
+
+                {% for order_item in order.products.all %}
+                <h4>{{ order_item.product.parent_product.title }} | {{ order_item.product.type }} ({{ order_item.quantity }})
+                </h4>
+                {% endfor %}
+              </div>
+
+
+
+              <div class="col-md-6 col-lg-6" style="border-right:1px solid #e1e5eb">
+              <h4>Order details</h4>
+              <p>{{ order.order_details.details }}</p>
+              {% if order.order_details.game_image %}
+            <div class ="adminproductimg" style="background-image: url({{ order.order_details.game_image.url }});">
+            </div>
+
+              {% endif %}
+              </div>
+
+              <div class="col-md-6 col-lg-6">
+              <h4>Payment</h4>
+              <p>Transaction id: {{ order.payment.transaction_id }}</p>
+              <p>Total:{{ order.payment.amount }}</p>
+              <p>Payment method:{{ order.payment.type }}</p>
+              <p>Status:{{ order.payment.status }}</p>
+
+              {% if order.payment.transaction_image %}
+            <div class ="adminproductimg" style="background-image: url({{ order.payment.transaction_image.url }});">
+            </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-12 border-top  pb-2">
+            <div class="col-md-3 center mt-5">
+
+              <form  method="POST" class="card-body">
+                {% csrf_token %}
+
+                  {{ form.as_p }}
+              <button type="submit" class="btn btn-success float-right">Update</button>
+
+              </form>
+
+              <!-- <button onclick="deleteExpense(this)" data-id="{{ item.id }}"
+                class="btn btn-danger float-right">Delete order
+                </button> -->
+
+
+              </div>
+              </div>
+
+
+
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

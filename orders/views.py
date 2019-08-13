@@ -6,10 +6,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib import messages
-from .forms import CheckoutForm, PaymentForm, CouponForm
+from .forms import Orderdetailform,OrderForm,CheckoutForm, PaymentForm, CouponForm, Payment2Form
 from django.core.files.storage import FileSystemStorage
 import json
 from django.http import HttpResponseRedirect, HttpResponse
+from django.views.generic import CreateView, UpdateView, TemplateView
+from products.models import Product, ChildProduct
+from django.utils import timezone
 
 class OrderSummaryView(LoginRequiredMixin, View):
 
@@ -184,6 +187,9 @@ class OrderView(ListView):
         queryset={'order':order}
         return queryset
 
+
+
+
 class OrdersView(PermissionRequiredMixin,TemplateView):
     permission_required = 'superuserstatus'
     # paginate_by = 1
@@ -191,19 +197,143 @@ class OrdersView(PermissionRequiredMixin,TemplateView):
 
 
     def get(self,request,status):
+        form=OrderForm()
+        detailform=CheckoutForm()
+        paymentform=PaymentForm()
         model_name,view=self.__class__.__name__.split('V')
+        product=ChildProduct.objects.all()
         balance= Balance.objects.all()
         order=Order.objects.filter(ordered=True, status=status).order_by('ordered_date')
-        queryset={'balance':balance,'order':order,'model_name':model_name}
+        queryset={'paymentform':paymentform,'detailform':detailform,'product':product,'form':form,'balance':balance,'order':order,'model_name':model_name}
         return render(request,self.template_name,queryset)
 
+    def post(self, request,status):
+        form=OrderForm(self.request.POST)
+        detailform=CheckoutForm(self.request.POST, self.request.FILES or None)
+        paymentform=Payment2Form(self.request.POST, self.request.FILES or None)
+
+
+        if form.is_valid()  & detailform.is_valid() & paymentform.is_valid():
+            print("The form is valid")
+            print(form.cleaned_data)
+            # Order product
+            post=form.save(commit=False)
+            post.user=self.request.user
+            post.ordered=False
+            post.quantity=1
+            post.save()
+
+            # Order Details
+            print(detailform.cleaned_data)
+            game_details= detailform.cleaned_data.get('game_details')
+            # save_info= form.cleaned_data.get('save_info')
+            image =detailform.cleaned_data['transaction_image']
+            payment_option= detailform.cleaned_data.get('payment_option')
+            order_details= OrderDetail(
+                user=self.request.user,
+                details=game_details,
+                game_image=image,
+            )
+            order_details.save()
+
+            #0rder
+            ordered_date=timezone.now()
+            # cost_price=product.cost_price
+            order =Order.objects.create(user=request.user, ordered_date=ordered_date, cost_price=0)
+            order.products.add(post)
+            order.order_details=order_details
+            order.save()
+
+            # Order payment
+            # order= Order.objects.get(user=self.request.user,ordered=False)
+            post2=paymentform.save(commit=False)
+            post2.user=self.request.user
+
+            if payment_option == 'E':
+                    payment_option='Esewa'
+            elif payment_option == 'I':
+                    payment_option='Imepay'
+            elif payment_option == 'K':
+                payment_option='Khalti'
+            else:
+                messages.warning(self.request, "Invalid payment option selected")
+
+            if post.product.discount_price:
+                final_price=post.product.discount_price
+            else:
+                final_price=post.product.price
+
+            post2.type=payment_option
+            post2.amount=final_price
+            post2.status='Paid'
+            post2.save()
+            order.ordered=True
+            order.cost_price=post.product.cost_price
+            order.payment=post2
+            order.save()
+
+            return redirect('orders:orders-admin',status='Pending')
 
     def delete(self,request,status):
         id=json.loads(request.body)['id']
-        # order_details=get_object_or_404(OrderDetail,)
+
+        payment=Payment.objects.get(order__id=id)
+        orderdetails=OrderDetail.objects.get(order__id=id)
+        orderedproduct=OrderProduct.objects.get(order__id=id)
+
+        orderdetails.game_image.delete(save=True)
+        payment.transaction_image.delete(save=True)
+
+        orderedproduct.delete()
+        payment.delete()
+        orderdetails.delete()
+
         order=get_object_or_404(Order, id=id,status=status)
         order.delete()
+
         return HttpResponse('')
+
+class OrderDetailView(PermissionRequiredMixin,TemplateView):
+    permission_required = 'superuserstatus'
+    # paginate_by = 1
+    template_name="kgc/order-detail.html"
+
+    def get(self,request,pk):
+        form=Orderdetailform()
+        model_name,view=self.__class__.__name__.split('V')
+        balance= Balance.objects.all()
+        order=Order.objects.get(id=pk)
+        queryset={'form':form,'balance':balance,'order':order,'model_name':model_name}
+        return render(request,self.template_name,queryset)
+
+    def post(self, request,pk):
+        form=Orderdetailform(self.request.POST)
+
+        if form.is_valid():
+            order=get_object_or_404(Order, id=pk)
+            message= form.cleaned_data.get('message')
+            status=form.cleaned_data.get('status')
+            order.message=message
+            order.status=status
+            order.save()
+            return redirect('orders:orders-admin',status='Pending')
+
+
+    def delete(self,request,id):
+        id=id
+        order=get_object_or_404(Order, id=id)
+        order.delete()
+        return HttpResponse('')
+
+# @method_decorator(login_required, name='dispatch')
+# class OrderDetailView(UpdateView):
+#     model = Order
+#     fields = ('cost_price', 'order_details', 'message',)
+#     template_name = 'order-detail.html'
+#     success_url = reverse_lazy('orders:order-detail')
+#
+#     def get_object(self,pk):
+#         return Order.objects.get(id=pk)
 
 class SalesView(PermissionRequiredMixin,TemplateView):
     permission_required='superuserstatus'

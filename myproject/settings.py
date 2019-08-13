@@ -107,7 +107,7 @@ SUIT_CONFIG = {
     },
     # 'MENU_OPEN_FIRST_CHILD': True, # Default True
 
-    'MENU_EXCLUDE': ('orders.orderproduct','orderproduct'),
+    # 'MENU_EXCLUDE': ('orders.orderproduct','orderproduct'),
 
      'MENU': (
 

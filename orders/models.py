@@ -45,8 +45,8 @@ class Order(models.Model):
     billing_address =models.ForeignKey(
         'BillingAddress', on_delete=models.SET_NULL, blank=True, null=True)
     order_details =models.ForeignKey(
-    'OrderDetail', on_delete=models.SET_NULL, blank=True, null=True)
-    payment =models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    'OrderDetail', on_delete=models.CASCADE, blank=True, null=True)
+    payment =models.ForeignKey('Payment', on_delete=models.CASCADE, blank=True, null=True)
     coupon=models.ForeignKey('Coupon', on_delete=models.SET_NULL, blank=True, null=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='Pending')
     message=models.TextField(blank=True, null=True)

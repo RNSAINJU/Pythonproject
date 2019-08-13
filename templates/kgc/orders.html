@@ -23,10 +23,10 @@
             <!-- <h6 class="m-0"><a href="{% url 'home:home' %}">Investment</a></h6> -->
 
 
-            <!-- Button to Open the Modal -->
-            <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">
+
+          <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">
             Add {{ model_name }}
-            </button> -->
+            </button>
 
           </div>
         <div class="table-responsive card-body p-0 pb-3 text-center">
@@ -47,8 +47,8 @@
             <tbody>
               {% for item in order %}
               <tr>
-                <td>{{ item.id }}</td>
-                <td>{{ item.user.username }}</td>
+                <td><a href="{% url 'orders:orders-detail' pk=item.pk %}" >{{ item.id }}</a></td>
+                <td><a href="{% url 'orders:orders-detail' pk=item.pk %}" >{{ item.user.username }}</a></td>
                 {% for order_item in item.products.all %}
                 <td>{{ order_item.product.parent_product.title }}|{{ order_item.product.type }}</td>
 
@@ -86,6 +86,41 @@
 
 
 
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add {{ model_name }}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <form method="POST" class="card-body" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {{ form.as_p }}
+
+          {{ detailform.as_p }}
+
+          {{ paymentform.as_p }}
+
+
+          <button type="submit" class="btn btn-success float-right">Add</button>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 

@@ -16,8 +16,9 @@ class PaymentAdmin(admin.ModelAdmin):
     list_display=['transaction_id', 'user', 'type', 'amount','status','timestamp']
     list_filter=('user','timestamp','status')
 
-admin.site.register(OrderProduct)
+
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Payment, PaymentAdmin)
-admin.site.register(Coupon)
+# admin.site.register(Coupon)
 admin.site.register(OrderDetail)
+admin.site.register(OrderProduct)

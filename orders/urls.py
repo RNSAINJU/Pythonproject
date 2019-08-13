@@ -8,8 +8,8 @@ from .views import (
     AddCouponView,
     OrderView,
     OrdersView,
-    SalesView
-    # order_success
+    SalesView,
+    OrderDetailView
 )
 
 app_name ='orders'
@@ -22,6 +22,7 @@ urlpatterns = [
     path('payment/<payment_option>/',PaymentView.as_view(),name='payment'),
         path('orders/',OrderView.as_view(),name='orders'),
 
-    path('kgc/orders/<status>', OrdersView.as_view(),name='orders-admin'),
+    path('kgc/orders/<status>/', OrdersView.as_view(),name='orders-admin'),
+    path('kgc/order/<int:pk>/', OrderDetailView.as_view(),name='orders-detail'),
     path('kgc/sales', SalesView.as_view(),name='sales'),
 ]

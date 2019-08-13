@@ -28,6 +28,8 @@
 
     .adminproductimg:hover {
       box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+      width: 520px;
+      height:400px;
     }
 
     </style>
@@ -169,18 +171,26 @@
 
                 <ul class="dropdown-menu" aria-labelledby="dropdown1">
                   <li class="dropdown-item">
-                    <a  class="nav-link" href="{% url 'orders:orders-admin' status='Pending' %}">
+                    <a  class="nav-link" href="{% url 'orders:orders-admin' status='Pending'%}">
                       <i class="material-icons">table_chart</i>
                     <span>Pending</span>
                   </a>
                   </li>
 
                   <li class="dropdown-item">
-                    <a  class="nav-link" href="{% url 'orders:orders-admin' status='Processing'%}">
+                    <a  class="nav-link" href="{% url 'orders:orders-admin' status='Processing' %}">
                       <i class="material-icons">table_chart</i>
                     <span>Processing</span>
                   </a>
                   </li>
+
+                  <li class="dropdown-item">
+                    <a  class="nav-link" href="{% url 'orders:orders-admin' status='Completed' %}">
+                      <i class="material-icons">table_chart</i>
+                    <span>Completed</span>
+                  </a>
+                  </li>
+
 
                 </ul>
 
