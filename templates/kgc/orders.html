@@ -41,6 +41,8 @@
                 <th scope="col" class="border-0">Ordered date</th>
                 <th scope="col" class="border-0">Order details</th>
                 <th scope="col" class="border-0">Game screenshot</th>
+                <th scope="col" class="border-0">Transaction id</th>
+                <th scope="col" class="border-0">Transaction image</th>
                 <th scope="col" class="border-0">Message</th>
               </tr>
             </thead>
@@ -65,6 +67,17 @@
 
                   {% endif %}
               </td>
+
+              <td>{{ item.payment.transaction_id }}</td>
+              <td>
+                {% if item.payment.transaction_image %}
+              <div class ="adminproductimg" style="background-image: url({{ item.payment.transaction_image.url }});">
+              </div>
+
+                {% endif %}
+            </td>
+
+
 
 
                 <td>{{ item.message }}</td>
