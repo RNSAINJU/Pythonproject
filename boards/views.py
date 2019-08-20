@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render,reverse
+from django.shortcuts import  redirect, render,reverse, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView
 
-from .forms import NewTopicForm, PostForm
+from .forms import NewBoardForm,NewTopicForm, PostForm
 from .models import Board, Post, Topic
 from django.db.models import Count
 from django.views.generic import CreateView, UpdateView, TemplateView
@@ -17,6 +17,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
+import json
 
 def about(request):
     return render(request, 'about.html')
@@ -166,18 +167,35 @@ def simple_upload(request):
         })
     return render(request, 'simple_upload.html')
 
+
+def board_edit(request, pk):
+    post = get_object_or_404(Board, pk=pk)
+    if request.method == "POST":
+        form = NewBoardForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('boards:boards', pk=post.pk)
+    else:
+        form = NewBoardForm(instance=post)
+    return render(request, 'kgc/board_edit.html', {'form': form})
+
 class BoardView(PermissionRequiredMixin, TemplateView):
     permission_required='superuserstatus'
     template_name='kgc/boards.html'
 
     def get(self,request):
-        board=Board.objects.all()
+        board=Board.objects.all().order_by('id')
         model_name,view=self.__class__.__name__.split('V')
-        queryset={'board':board,'model_name':model_name}
+        form=NewBoardForm()
+
+        queryset={'form':form,'board':board,'model_name':model_name}
         return render(request,self.template_name,queryset)
 
     def post(self,request):
-        form=InvestmentForm(request.POST)
+        form=NewBoardForm(request.POST)
         if form.is_valid():
             post=form.save(commit=False)
             post.save()
@@ -187,4 +205,4 @@ class BoardView(PermissionRequiredMixin, TemplateView):
         id=json.loads(request.body)['id']
         board=get_object_or_404(Board, id=id)
         board.delete()
-        return redirect('boards:boards')
+        return HttpResponse('')

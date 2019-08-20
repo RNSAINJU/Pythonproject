@@ -1,6 +1,84 @@
 from django import forms
-from home.models import Enquiries
+from home.models import Enquiries,News, Partner
 
+class NewsForm(forms.ModelForm):
+    title=forms.CharField(
+    max_length=50,
+    widget=forms.TextInput(
+    attrs={'class':"form-control"}
+    )
+    )
+
+    description=forms.CharField(
+    max_length=2000,
+    widget=forms.Textarea(
+    attrs={'rows':2,'cols':30,'class':"form-control"}
+    )
+    )
+
+    image=forms.ImageField()
+
+    class Meta:
+        model=News
+        fields=['title','description','image']
+
+    def __init__(self, *args, **kwargs):
+        super(NewsForm, self).__init__(*args, **kwargs)
+        self.fields['image'].widget.attrs['class'] = 'form-control'
+
+class PartnersForm(forms.ModelForm):
+    profession=forms.CharField(
+    max_length=50,
+    widget=forms.TextInput(
+    attrs={'class':"form-control"}
+    )
+    )
+
+    title=forms.CharField(
+    max_length=50,
+    widget=forms.TextInput(
+    attrs={'class':"form-control"}
+    )
+    )
+
+    description=forms.CharField(
+    max_length=2000,
+    widget=forms.Textarea(
+    attrs={'rows':2,'cols':30,'class':"form-control"}
+    )
+    )
+
+    image=forms.ImageField()
+
+    ytlink=forms.CharField(
+    max_length=100,
+    widget=forms.TextInput(
+    attrs={'class':"form-control"}
+    )
+    )
+
+    fblink=forms.CharField(
+    max_length=100,
+    widget=forms.TextInput(
+    attrs={'class':"form-control"}
+    )
+    )
+
+    instalink=forms.CharField(
+    max_length=100,
+    widget=forms.TextInput(
+    attrs={'class':"form-control"}
+    )
+    )
+
+
+    class Meta:
+        model=Partner
+        fields=['profession','title','description','image','ytlink','fblink','instalink']
+
+    def __init__(self, *args, **kwargs):
+        super(PartnersForm, self).__init__(*args, **kwargs)
+        self.fields['image'].widget.attrs['class'] = 'form-control'
 
 class ContactForm(forms.ModelForm):
     firstname = forms.CharField(

@@ -10,6 +10,7 @@ app_name ='boards'
 urlpatterns = [
     url(r'^fileupload/$',simple_upload, name='fileupload'),
     url(r'^discussion$', BoardListView.as_view(), name='discussion'),
+      path('board/<int:pk>/edit/', board_edit, name='board_edit'),
     url(r'^boards/(?P<pk>\d+)/$', TopicListView.as_view(), name='board_topics'),
     url(r'^boards/(?P<pk>\d+)/new/$', new_topic, name='new_topic'),
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', PostListView.as_view(), name='topic_posts'),
@@ -19,6 +20,6 @@ urlpatterns = [
     url(r'^new_post/$',NewPostView.as_view(), name='new_post'),
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
         PostUpdateView.as_view(), name='edit_post'),
-        
+
     path('kgc/boards', BoardView.as_view(),name='boards'),
 ]

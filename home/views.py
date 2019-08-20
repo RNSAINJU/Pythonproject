@@ -3,10 +3,11 @@ from home.models import Partner, Reviews, News, Enquiries
 from products.models import Product, ChildProduct
 from django.views.generic import ListView, DetailView, TemplateView
 import datetime
-from home.forms import ContactForm
+from home.forms import NewsForm, PartnersForm,ContactForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
+import json
 
 class HomeView(TemplateView):
     template_name='index.html'
@@ -101,21 +102,24 @@ class NewsView(PermissionRequiredMixin, TemplateView):
     template_name='kgc/news.html'
 
     def get(self,request):
-        news=News.objects.all()
+        news=News.objects.all().order_by('id')
         model_name,view=self.__class__.__name__.split('V')
-        queryset={'news':news,'model_name':model_name}
+        form=NewsForm()
+        queryset={'form':form,'news':news,'model_name':model_name}
         return render(request,self.template_name,queryset)
 
-    # def post(self,request):
-    #     form=InvestmentForm(request.POST)
-    #     if form.is_valid():
-    #         post=form.save(commit=False)
-    #         post.save()
-    #         return redirect('boards:boards')
+    def post(self,request):
+        form=NewsForm(self.request.POST, self.request.FILES or None)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.date=timezone.now()
+            post.save()
+            return redirect('home:admin-news')
 
     def delete(self,request):
         id=json.loads(request.body)['id']
         news=get_object_or_404(News, id=id)
+        news.image.delete(save=True)
         news.delete()
         return redirect('home:admin-news')
 
@@ -124,21 +128,24 @@ class PartnersView(PermissionRequiredMixin, TemplateView):
     template_name='kgc/partners.html'
 
     def get(self,request):
-        partners=Partner.objects.all()
+        form=PartnersForm()
+        partners=Partner.objects.all().order_by('id')
         model_name,view=self.__class__.__name__.split('V')
-        queryset={'partners':partners,'model_name':model_name}
+        queryset={'form':form,'partners':partners,'model_name':model_name}
         return render(request,self.template_name,queryset)
 
-    # def post(self,request):
-    #     form=InvestmentForm(request.POST)
-    #     if form.is_valid():
-    #         post=form.save(commit=False)
-    #         post.save()
-    #         return redirect('boards:boards')
+    def post(self,request):
+        form=PartnersForm(self.request.POST,self.request.FILES or None)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.save()
+            return redirect('home:admin-partners')
+
 
     def delete(self,request):
         id=json.loads(request.body)['id']
         partner=get_object_or_404(Partner, id=id)
+        partner.image.delete(save=True)
         partner.delete()
         return redirect('home:admin-partners')
 
@@ -147,7 +154,7 @@ class ReviewsView(PermissionRequiredMixin, TemplateView):
     template_name='kgc/reviews.html'
 
     def get(self,request):
-        reviews=Reviews.objects.all()
+        reviews=Reviews.objects.all().order_by('id')
         model_name,view=self.__class__.__name__.split('V')
         queryset={'reviews':reviews,'model_name':model_name}
         return render(request,self.template_name,queryset)

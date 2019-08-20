@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404,render
 from django.views.generic import ListView, DetailView
 from django.utils import timezone
+from .forms import ProductForm,ChildProductForm
 from .models import Product,ChildProduct
 from orders.models import OrderProduct,Order
 from django.shortcuts import reverse, redirect
@@ -8,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, permission_required
-
+import json
 # Fetch only featured products to users
 class ProductView(ListView):
     model=ChildProduct
@@ -151,28 +152,57 @@ def remove_single_item_from_cart(request, slug):
 @login_required
 @permission_required('superuserstatus', raise_exception=True)
 def admin_product_detail(request):
-    product=Product.objects.all()
+    product=Product.objects.all().order_by('id')
 
     if request.method == 'GET':
-        # form=InvestmentForm()
-        queryset={'product':product}
+        form=ProductForm()
+        model_name='Products'
+        queryset={'form':form,'product':product,'model_name':model_name}
         return render(request,'kgc/products.html',queryset)
 
-    # elif request.method =='POST':
-    #     form=InvestmentForm(request.POST)
-    #     if form.is_valid():
-    #         post=form.save(commit=False)
-    #         post.save()
-    #         return redirect('Transactions:investments')
+    elif request.method =='POST':
+        form=ProductForm(request.POST, request.FILES or None)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.save()
+            return redirect('products:kgcproducts')
 
     elif request.method == 'DELETE':
         id=json.loads(request.body)['id']
         product=get_object_or_404(Product, id=id)
+        product.image.delete(save=True)
         product.delete()
-        return redirect('Transactions:investments')
+        return redirect('products:kgcproducts')
 
-    return redirect('Transactions:investments')
+    return redirect('products:kgcproducts')
 
+@login_required
+@permission_required('superuserstatus', raise_exception=True)
+def admin_product_detail_view(request,pk):
+    parentProduct=Product.objects.filter(id=pk)
+    childproduct=ChildProduct.objects.filter(parent_product__id=pk)
+
+    if request.method == 'GET':
+        form=ChildProductForm()
+        model_name='Child Products'
+        queryset={'form':form,'product':childproduct,'model_name':model_name}
+        return render(request,'kgc/childproducts.html',queryset)
+
+    elif request.method =='POST':
+        form=ChildProductForm(request.POST, request.FILES or None)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.parent_product.id=pk
+            post.save()
+            return redirect('products:kgcproductsdetails',pk=pk)
+
+    elif request.method == 'DELETE':
+        id=json.loads(request.body)['id']
+        product=get_object_or_404(ChildProduct, id=id)
+        product.delete()
+        return redirect('products:kgcproductsdetails',pk=pk)
+
+    return redirect('products:kgcproducts')
 # class ProductListView(ListView):
 #     model= ChildProduct
 #     context_object_name='childproduct'

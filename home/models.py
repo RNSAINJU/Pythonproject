@@ -12,7 +12,16 @@ def upload_image_path(instance, filename):
     new_filename=random.randint(1,3910209312)
     name, ext= get_filename_ext(filename)
     final_filename='{new_filename}{ext}'.format(new_filename=new_filename,ext=ext)
-    return "products/{new_filename}/{final_filename}".format(
+    return "news/{final_filename}".format(
+            new_filename=new_filename,
+            final_filename=final_filename
+    )
+
+def partners_image_path(instance, filename):
+    new_filename=random.randint(1,3910209312)
+    name, ext= get_filename_ext(filename)
+    final_filename='{new_filename}{ext}'.format(new_filename=new_filename,ext=ext)
+    return "partners/{final_filename}".format(
             new_filename=new_filename,
             final_filename=final_filename
     )
@@ -21,7 +30,7 @@ class Partner(models.Model):
         profession=models.CharField(max_length=50, unique=True)
         title=models.CharField(max_length=50, unique=True)
         description=models.TextField()
-        image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)
+        image=models.ImageField(upload_to=partners_image_path, null=True, blank=False)
         ytlink=models.CharField(max_length=100, unique=True)
         fblink=models.CharField(max_length=100, unique=True)
         instalink=models.CharField(max_length=100, unique=True)

@@ -1,0 +1,16 @@
+
+<form method="POST" class="card-body" enctype="multipart/form-data">
+  {% csrf_token %}
+
+
+{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        <div class="form-group">
+        {{ field.label_tag }} {{ field }}
+        </div>
+    </div>
+{% endfor %}
+
+  <button type="submit" class="btn btn-success float-right">Add</button>
+</form>

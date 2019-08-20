@@ -376,7 +376,7 @@
     var instance=M.FormSelect.init(elem)
     </script> -->
     <script>
-    function deleteExpense(e){
+    function deleteItem(e){
       let id= e.dataset.id
       // e.data('id')
       e.closest('tr').remove()
@@ -394,6 +394,25 @@
       location.reload();
       // window.location.replace("{% url 'Transactions:investments' %}");
     }
+
+    function getId(e){
+      let id= e.dataset.id
+      // e.data('id')
+      fetch('',{
+        method:'GET',
+        headers:{
+          'X-CSRFToken':'{{ csrf_token }}'
+        },
+        body:JSON.stringify({
+          'id':id
+        }),
+        credentials:'same-origin',
+      })
+      // window.location.href = "{% url 'Transactions:investments' %}";
+      location.reload();
+      // window.location.replace("{% url 'Transactions:investments' %}");
+    }
+
     </script>
 
 <!-- Compiled and minified JavaScript -->

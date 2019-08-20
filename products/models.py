@@ -15,7 +15,7 @@ def upload_image_path(instance, filename):
     new_filename=random.randint(1,3910209312)
     name, ext= get_filename_ext(filename)
     final_filename='{new_filename}{ext}'.format(new_filename=new_filename,ext=ext)
-    return "products/{new_filename}/{final_filename}".format(
+    return "products/{final_filename}".format(
             new_filename=new_filename,
             final_filename=final_filename
     )
@@ -23,9 +23,7 @@ def upload_image_path(instance, filename):
 class ProductManager(models.Manager):
     def featured(self):
         return self.get_queryset().filter(featured=True)
-    # def get_by_status(self, status):
-    #     qs=self.queryset().filter(status='active')
-    #     if qs.co
+
 
 class Product(models.Model):
     STATUS_CHOICES=(
@@ -72,7 +70,7 @@ class ChildProduct(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug=slugify(self.type)
-        self.cost_price=self.cost_price+(2.90/100*self.cost_price)+0.30
+        # self.cost_price=self.cost_price+(2.90/100*self.cost_price)+0.30
         super(ChildProduct,self).save(*args,**kwargs)
 
     def __str__(self):
