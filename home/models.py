@@ -2,6 +2,7 @@ from django.db import models
 import random
 import os
 # from .products.models import get_filename_ext, upload_image_path
+from django.utils.text import slugify
 
 def get_filename_ext(filepath):
     base_name=os.path.basename(filepath)
@@ -51,6 +52,11 @@ class News(models.Model):
     description=models.TextField()
     image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)
     date=models.DateField(unique=True)
+    slug=models.SlugField(max_length=100,unique=True,blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug=slugify(self.title)
+        super(News,self).save(*args,**kwargs)
 
     def __str__(self):
         return self.title

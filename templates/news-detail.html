@@ -1,0 +1,49 @@
+{% extends 'mainbasic.html' %}
+
+
+{% block title %}
+    <title>News|Khwoppa Gift Card</title>
+      {% endblock %}
+
+ {% block nav %}
+	            <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="{% url 'home:home' %}" class="nav-link">Home</a></li>
+						<li class="nav-item"><a href="{% url 'home:about' %}" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="{% url 'products:products' %}" class="nav-link">Products</a></li>
+					<li class="nav-item"><a href="{% url 'home:partners' %}" class="nav-link">Partners</a></li>
+					<li class="nav-item active"><a href="{% url 'home:news' %}" class="nav-link">News</a></li>
+	          <li class="nav-item"><a href="{% url 'boards:discussion' %}" class="nav-link">Discussion Forum</a></li>
+	        </ul>
+{% endblock %}
+
+{% block content %}
+
+    <section class="ftco-section">
+      <div class="container">
+
+        <div class="col-lg-8 d-flex ftco-animate ">
+          <div class="blog-entry align-self-stretch">
+
+            <div class="text py-4 d-flex">
+              <div class="meta text-center">
+                <span class="day">{{ obj.date.day }}</span>
+                <span class="mos">{{ obj.date|date:'F' }}</span>
+                <span class="yr">{{ obj.date.year }}</span>
+              </div>
+              <!-- <div class="desc"> -->
+                <h1 class="heading mt-2">{{ obj.title }}</h1>
+
+              <!-- </div> -->
+            </div>
+
+            <div class="block-20" style="background-image: url({{ obj.image.url }});"></div>
+
+            <p class="float-right">{{ obj.description }}</p>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+{% endblock %}

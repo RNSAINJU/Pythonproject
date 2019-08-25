@@ -8,7 +8,9 @@
           		Read Articles
           		<i class="db-right"></i>
           	</span>
-            <h2 class="mb-3">Latest News</h2>
+            <a href="{% url 'home:news' %}">
+              <h2 class="mb-3">Latest News</h2>
+            </a>
             <p>We also organize and sponsor gaming tounaments in Nepal. Latest news for upcoming tournaments and giveaways.</p>
           </div>
         </div>
@@ -18,7 +20,7 @@
 
           <div class="col-lg-4 d-flex ftco-animate">
           	<div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url({{ obj.image.url }});">
+              <a href="{% url 'home:news-detail' slug=obj.slug %}" class="block-20" style="background-image: url({{ obj.image.url }});">
               </a>
               <div class="text py-4 d-flex">
               	<div class="meta text-center">
@@ -27,7 +29,7 @@
               		<span class="yr">{{ obj.date.year }}</span>
               	</div>
               	<div class="desc">
-	                <h3 class="heading mt-2"><a href="#">{{ obj.title }}</a></h3>
+	                <h3 class="heading mt-2"><a href="{% url 'home:news-detail' slug=obj.slug %}">{{ obj.title }}</a></h3>
 	                <p>{{ obj.description }}</p>
 	              </div>
               </div>

@@ -8,7 +8,9 @@
           		Partner
           		<i class="db-right"></i>
           	</span>
-            <h2 class="mb-3">Our Partners</h2>
+            <a href="{% url 'home:partners' %}">
+              <h2 class="mb-3">Our Partners</h2>
+            </a>
             <p> We have come this far with help of these streamers , eSports & Gaming Organisation.</p>
           </div>
         </div>
@@ -20,7 +22,7 @@
               <div class="img" style="background-image: url({{ obj.image.url }});"></div>
               <div class="text py-4 px-5 ftco-animate">
                 <span class="subheading">{{ obj.profession }}</span>
-                <h3><a href="#">{{ obj.title }}</a></h3>
+                <h3>{{ obj.title }}</h3>
                 <p>{{ obj.description }}</p>
                 <ul class="ftco-social-media d-flex mt-4">
                   <li class="ftco-animate"><a href="{{ obj.ytlink }}" class="mr-2 d-flex justify-content-center align-items-center"><span class="icon-youtube"></span></a></li>

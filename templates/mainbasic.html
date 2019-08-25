@@ -106,11 +106,11 @@ That EASY!</p>
               <div class="block-21 mb-4 d-flex">
                 <a class="blog-img mr-4" style="background-image: url({{ obj.image.url }});"></a>
                 <div class="text">
-                  <h3 class="heading"><a href="#">{{ obj.title }}</a></h3>
+                  <h3 class="heading"><a href="{% url 'home:news-detail' slug=obj.slug %}">{{ obj.title }}</a></h3>
                   <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> {{ obj.date|date:'F' }} {{ obj.day }} {{ obj.year }}</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    <div><span class="icon-calendar"></span> {{ obj.date|date:'F' }} {{ obj.day }} {{ obj.year }}</div>
+                    <div><span class="icon-person"></span> Admin</div>
+                    <div><span class="icon-chat"></span> 19</div>
                   </div>
                 </div>
               </div>
@@ -136,7 +136,7 @@ That EASY!</p>
 	              <ul>
 	                <li><span class="icon icon-map-marker"></span><span class="text"> Bhaktapur</span></li>
 <!--	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>-->
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">khwoppagiftcard@gmail.com</span></a></li>
+	                <li><a href="https://www.gmail.com"><span class="icon icon-envelope"></span><span class="text">khwoppagiftcard@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>

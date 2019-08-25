@@ -78,6 +78,12 @@ def news_list_view(request):
     }
     return render(request,"news.html",context)
 
+def detail_news_view(request,slug):
+    queryset=News.objects.get(slug=slug)
+    context={
+        'obj':queryset
+    }
+    return render(request,"news-detail.html",context)
 
 
 class EnquiryView(PermissionRequiredMixin, TemplateView):

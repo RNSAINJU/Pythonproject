@@ -11,7 +11,10 @@ urlpatterns = [
     url(r'^about/$', AboutView.as_view(), name='about'),
     # url(r'^about/(?P<pk>\d+)/new/$', home_views.new_enquiry, name='new_enquiry'),
     url(r'^news/$', news_list_view, name='news'),
+    # url(r'^news/<slug>/',detail_news_view,name='news-detail'),
 
+
+    path('news/<slug>', detail_news_view,name='news-detail'),
     path('kgc/enquiries', EnquiryView.as_view(),name='enquiries'),
     path('kgc/news', NewsView.as_view(),name='admin-news'),
     path('kgc/partners', PartnersView.as_view(),name='admin-partners'),
