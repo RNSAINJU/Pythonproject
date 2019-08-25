@@ -16,6 +16,10 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import send_mail
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.views.generic import TemplateView
+import json
+from django.shortcuts import render, redirect, get_object_or_404
 
 def signup(request):
     if request.method == 'POST':
@@ -70,6 +74,35 @@ class UserUpdateView(UpdateView):
 
     def get_object(self):
         return self.request.user
+
+@method_decorator(login_required, name='dispatch')
+class UserAdminUpdateView(UpdateView):
+    model = User
+    fields = ('first_name', 'last_name', 'email',)
+    template_name = 'kgc/user-profile-lite.html'
+    success_url = reverse_lazy('accounts:admin_account')
+
+    def get_object(self):
+        return self.request.user
+
+class UsersView(PermissionRequiredMixin,TemplateView):
+    permission_required = 'superuserstatus'
+    # paginate_by = 1
+    template_name="kgc/users.html"
+
+
+    def get(self,request):
+        user= User.objects.all()
+        model_name,view=self.__class__.__name__.split('V')
+        queryset={'user':user,'model_name':model_name}
+        return render(request,self.template_name,queryset)
+
+
+    def delete(self,request):
+        id=json.loads(request.body)['id']
+        expense=get_object_or_404(User, id=id)
+        expense.delete()
+        return redirect('accounts:kgc_users')
 
     # username = form.cleaned_data.get('username')
     # raw_password = form.cleaned_data.get('password1')

@@ -1,9 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView, View, CreateView
+
 from .models import Balance, Expense, Investment
+from products.models import Product
+from django.contrib.auth.models import User
 from orders.models import Order
 from boards.models import Board
 from home.models import Enquiries
+
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .forms import InvestmentForm, ExpenseForm
 from django.utils.text import slugify
@@ -75,10 +79,24 @@ class DashboardView(PermissionRequiredMixin,TemplateView):
 
     def get(self,request):
         form=ExpenseForm()
+        product=Product.objects.all().count()
+        users=User.objects.all().count()
+        order=Order.objects.filter(status="Completed")
+        sales=Order.objects.filter(status="Completed").count()
+        users_list=User.objects.all()
         balance= Balance.objects.all()
         expenses=Expense.objects.all()
         model_name,view=self.__class__.__name__.split('V')
-        queryset={'balance':balance,'expenses':expenses,'form':form,'model_name':model_name}
+        queryset={'product':product,
+                  'users':users,
+                  'sales':sales,
+                  'order':order,
+                  'users_list':users_list,
+                  'balance':balance,
+                  'expenses':expenses,
+                  'form':form,
+                  'model_name':model_name
+                  }
         return render(request,self.template_name,queryset)
 
 

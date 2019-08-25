@@ -25,8 +25,9 @@
 	  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
 	  <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
 	  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
     <meta name="google-site-verification" content="fldJMgN7PNGF_PvQ35nPqtjITiHtY3kCxjh8lcFrMZw" />
+    {% block head %}
+    {% endblock %}
 
     {% block css %}
     {% endblock %}
@@ -35,16 +36,7 @@
 
   <body>
 
-<!-- Load Facebook SDK for JavaScript -->
-<!-- <div id="fb-root"></div> -->
 
-
-<!-- Your customer chat code -->
-<!-- <div class="fb-customerchat"
-  attribution=setup_tool
-  page_id="559524434453053"
-  theme_color="#ff0000">
-</div> -->
 {% block body %}
 
   	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -184,7 +176,7 @@ That EASY!</p>
 	<script src="{% static 'js/main.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<!-- <script>
+<script>
   window.fbAsyncInit = function() {
     FB.init({
       xfbml            : true,
@@ -198,7 +190,8 @@ That EASY!</p>
   js = d.createElement(s); js.id = id;
   js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script> -->
+}(document, 'script', 'facebook-jssdk'));</script>
+
  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script>
    $(document).ready(function() {
