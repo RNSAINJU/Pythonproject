@@ -52,6 +52,7 @@ class News(models.Model):
     description=models.TextField()
     image=models.ImageField(upload_to=upload_image_path, null=True, blank=False)
     date=models.DateField(unique=True)
+    subject=models.CharField(max_length=50, unique=False,blank=True)
     slug=models.SlugField(max_length=100,unique=False,blank=True)
 
     def save(self, *args, **kwargs):

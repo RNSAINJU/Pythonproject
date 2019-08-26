@@ -21,26 +21,71 @@
     <section class="ftco-section">
       <div class="container">
 
-        <div class="col-lg-8 d-flex ftco-animate ">
-          <div class="blog-entry align-self-stretch">
+        <div class="col-xs-12 col-lg-7 d-flex ftco-animate">
 
-            <div class="text py-4 d-flex">
-              <div class="meta text-center">
-                <span class="day">{{ obj.date.day }}</span>
-                <span class="mos">{{ obj.date|date:'F' }}</span>
-                <span class="yr">{{ obj.date.year }}</span>
-              </div>
-              <!-- <div class="desc"> -->
-                <h1 class="heading mt-2">{{ obj.title }}</h1>
+                      <div class="text py-4 d-flex">
+                        <!-- <div class="meta text-center">
+                          <span class="day">{{ obj.date.day }}</span>
+                          <span class="mos">{{ obj.date|date:'F' }}</span>
+                          <span class="yr">{{ obj.date.year }}</span>
+                        </div> -->
+                        <div class="desc">
+                          <h1 class="heading mt-2">{{ obj.title }}</h1>
+                        </div>
+                      </div>
+          </div>
 
-              <!-- </div> -->
+
+
+
+          <div class="row ml-0 pl-0">
+            <div class="mainimage col-xs-12 col-lg-9 d-flex ftco-animate">
+              <div class="block-20" style="background-image: url({{ obj.image.url }});"></div>
+        </div>
+
+
+
+        <div class="sidebar col-lg-3" style="background-color:white; ">
+          <div class="heading">
+          <h3 class="text-info text-center border-bottom mt-2 mb-2">{{ obj.subject }}</h3>
+
+          <div class="block-30 " style="background-image: url({{ obj.image.url }}); margin-top:37%;"></div>
+
+          <div class="text-center">
+            <h5 class=" text-info"> By Khwoppa Gift Card</h5>
+            <h6 class=" text-dark"> {{ obj.date }}</h6>
             </div>
 
-            <div class="block-20" style="background-image: url({{ obj.image.url }});"></div>
+          <div class="footer mt-5 border-top">
+            <ul class="ftco-footer-social list-unstyled">
+              <li class="ftco-animate"><a target="_blank" href=""><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="https://www.instagram.com/khwoppagiftcard/"><span class="icon-instagram"></span></a></li>
+            </ul>
+            </div>
 
-            <p class="float-right">{{ obj.description }}</p>
-          </div>
         </div>
+          </div>
+
+          <div class="small-sidebar">
+            <div class="row">
+              <div class="block-30" style="background-image: url({{ obj.image.url }});"></div>
+
+              <div class="text">
+              <h3 class="text-info mt-2 mb-2">{{ obj.subject }}</h3>
+              <h6 class=" text-dark"> {{ obj.date }}</h6>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div class="row ml-2 pt-5 text-white">
+          <div class="blog-entry align-self-stretch">
+            <p class="description float-right">{{ obj.description }}</p>
+          </div>
+          </div>
 
 
       </div>

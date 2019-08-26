@@ -8707,7 +8707,20 @@ textarea.form-control {
   position: relative;
   display: block;
   width: 100%;
-  height: 270px; }
+  height: 470px; }
+
+  .block-30 {
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    display: block;
+    left:25%;
+    width: 60%;
+    height: 150px;
+    border-radius: 50%;
+   }
 
 .blog-entry {
   overflow: hidden; }
