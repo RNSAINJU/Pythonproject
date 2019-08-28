@@ -1,7 +1,8 @@
 from django.db import models
 
-# class Sales(models.Model):
-#     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     date
+class employees(models.Model):
+    firstname=models.CharField(max_length=20)
+    lastname=models.CharField(max_length=10)
 
-# class 
+    def __str__(self):
+        return self.firstname

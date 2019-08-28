@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'sales',
     'Transactions',
     'crispy_forms',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

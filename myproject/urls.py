@@ -8,10 +8,12 @@ from accounts import views as accounts_views
 from django.conf import settings
 from django.conf.urls.static import static
 from home import views as views
-
+from rest_framework.urlpatterns import format_suffix_patterns
+from sales import views
 
 
 urlpatterns = [
+    url(r'^employees/',views.employeeList.as_view()),
     path('',include('accounts.urls',namespace='accounts')),
     path('',include('boards.urls',namespace='boards')),
     path('',include('home.urls',namespace='home')),
