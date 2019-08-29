@@ -13,14 +13,15 @@ from sales import views
 
 
 urlpatterns = [
-    url(r'^employees/',views.employeeList.as_view()),
+    # url(r'^employees/',views.employeeList.as_view()),
+
     path('',include('accounts.urls',namespace='accounts')),
     path('',include('boards.urls',namespace='boards')),
     path('',include('home.urls',namespace='home')),
     path('',include('orders.urls',namespace='orders')),
     path('',include('products.urls',namespace='core')),
     path('',include('Transactions.urls',namespace='transactions')),
-
+    path('api/',include('sales.urls')),
 
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
