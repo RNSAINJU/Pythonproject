@@ -313,8 +313,10 @@ class OrderDetailView(PermissionRequiredMixin,TemplateView):
             order=get_object_or_404(Order, id=pk)
             message= form.cleaned_data.get('message')
             status=form.cleaned_data.get('status')
-            order.message=message
-            order.status=status
+            if message !='':
+                order.message=message
+            if status !='':
+                order.status=status
             order.save()
             return redirect('orders:orders-admin',status='Pending')
 

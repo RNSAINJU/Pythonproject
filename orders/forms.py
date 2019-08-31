@@ -15,6 +15,7 @@ STATUS_CHOICES=(
 
 class Orderdetailform(forms.ModelForm):
     message = forms.CharField(
+        required=False,
         widget=forms.Textarea(
             attrs={'rows': 5, 'placeholder': 'Type all required details mentioned above here'}
         ),
@@ -23,6 +24,7 @@ class Orderdetailform(forms.ModelForm):
     )
 
     status=forms.ChoiceField(
+        required=False,
         widget=forms.RadioSelect, choices=STATUS_CHOICES)
 
     class Meta:

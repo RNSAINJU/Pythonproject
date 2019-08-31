@@ -29,6 +29,3 @@ class ChildProductForm(forms.ModelForm):
         self.fields['price'].widget.attrs['class'] = 'form-control'
         self.fields['discount_price'].widget.attrs['class'] = 'form-control'
         self.fields['status'].widget.attrs['class'] = 'form-control'
-        # self.fields['homefeatured'].widget.attrs['class'] = 'form-control'
-        # self.fields['productsfeatured'].widget.attrs['class'] = 'form-control'
-        # self.fields['enabledetail'].widget.attrs['class'] = 'form-control'
