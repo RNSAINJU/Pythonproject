@@ -8,7 +8,7 @@ from accounts import views as accounts_views
 from django.conf import settings
 from django.conf.urls.static import static
 from home import views as views
-from rest_framework.urlpatterns import format_suffix_patterns
+# from rest_framework.urlpatterns import format_suffix_patterns
 # from sales import views
 
 
