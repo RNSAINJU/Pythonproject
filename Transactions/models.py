@@ -81,9 +81,17 @@ class Investment(models.Model):
         if self.total is None:
             self.total=0.0
             if self.rate is None:
+                self.total=self.amount
                 self.rate=0.0
             else:
                 self.total=self.rate*self.amount
+        elif self.rate is None:
+            self.rate=0.0
+            if self.total is None:
+                self.total=0.0
+                self.total=self.amount
+            else:
+                self.rate=self.total/self.amount
 
 
         super(Investment,self).save(*args,**kwargs)
