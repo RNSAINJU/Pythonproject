@@ -9,7 +9,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from home import views as views
 from rest_framework.urlpatterns import format_suffix_patterns
-from sales import views
+# from sales import views
 
 
 urlpatterns = [
@@ -21,7 +21,7 @@ urlpatterns = [
     path('',include('orders.urls',namespace='orders')),
     path('',include('products.urls',namespace='core')),
     path('',include('Transactions.urls',namespace='transactions')),
-    path('api/',include('sales.urls')),
+    # path('api/',include('sales.urls')),
 
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
