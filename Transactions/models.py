@@ -2,11 +2,13 @@ from django.db import models
 from django.utils.text import slugify
 from orders.models import Order
 
+
 class Balance(models.Model):
     name=models.CharField(max_length=50)
     amount=models.FloatField()
+    rate=models.IntegerField()
+    date=models.DateField(blank=True)
     slug=models.SlugField(max_length=100,unique=False,blank=True)
-
 
 
     def __str__(self):

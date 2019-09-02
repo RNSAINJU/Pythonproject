@@ -15,7 +15,7 @@ class ProductAdmin(admin.ModelAdmin):
     # search_fields= ('user',)
 
 class ChildProductAdmin(admin.ModelAdmin):
-    list_display=['type','cost_price','price','discount_price','status','homefeatured','productsfeatured','enabledetail']
+    list_display=['type','cost_price','total_cost_price','total_cost_price_with_profit','price','discount_price','status','homefeatured','productsfeatured','enabledetail']
     list_editable=('cost_price','price','discount_price','status','homefeatured','productsfeatured','enabledetail')
     list_filter=('parent_product','status')
 

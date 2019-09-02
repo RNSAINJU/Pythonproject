@@ -6,6 +6,7 @@ from django.shortcuts import reverse, redirect
 from django.urls import reverse_lazy
 from django.utils.text import slugify
 
+
 def get_filename_ext(filepath):
     base_name=os.path.basename(filepath)
     name,ext=os.path.splitext(base_name)
@@ -58,6 +59,9 @@ class ChildProduct(models.Model):
     parent_product=models.ForeignKey(Product, related_name='childproduct', on_delete=models.CASCADE)
     type=models.CharField(max_length=50,null=True)
     cost_price=models.FloatField()
+    cost_price_withcharge=models.FloatField()
+    total_cost_price=models.IntegerField()
+    total_cost_price_with_profit=models.IntegerField()
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES)
@@ -70,7 +74,12 @@ class ChildProduct(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug=slugify(self.type)
-        # self.cost_price=self.cost_price+(2.90/100*self.cost_price)+0.30
+        self.cost_price_withcharge=self.cost_price+(2.90/100*self.cost_price)+0.30
+        # rate=Balance.objects.get(name='Paypal')
+        rate=120
+        self.total_cost_price=self.cost_price_withcharge*rate
+        cp_withprofit=(self.cost_price_withcharge+(30/100*self.cost_price_withcharge))
+        self.total_cost_price_with_profit=cp_withprofit*(rate)
         super(ChildProduct,self).save(*args,**kwargs)
 
     def __str__(self):

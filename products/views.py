@@ -180,7 +180,7 @@ def admin_product_detail(request):
 @permission_required('superuserstatus', raise_exception=True)
 def admin_product_detail_view(request,pk):
     parentProduct=Product.objects.filter(id=pk)
-    childproduct=ChildProduct.objects.filter(parent_product__id=pk)
+    childproduct=ChildProduct.objects.filter(parent_product__id=pk).order_by('price')
 
     if request.method == 'GET':
         form=ChildProductForm()

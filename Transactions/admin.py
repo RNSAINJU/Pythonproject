@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import Balance, Expense,Investment
 
 class BalanceAdmin(admin.ModelAdmin):
-    list_display=['name','amount']
+    list_display=['name','amount','rate','date']
     list_display_links=('name','amount')
 
 class ExpenseAdmin(admin.ModelAdmin):
