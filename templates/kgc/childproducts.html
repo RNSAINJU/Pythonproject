@@ -40,6 +40,7 @@
                 <th scope="col" class="border-bottom-0">#</th>
                 <th scope="col" class="border-bottom-0">Title</th>
                 <th scope="col" class="border-bottom-0">Cost price</th>
+                <th scope="col" class="border-bottom-0">Cost price with charge</th>
                 <th scope="col" class="border-bottom-0">Total Cost price</th>
                 <th scope="col" class="border-bottom-0">Total Cost price with 30% profit</th>
                 <th scope="col" class="border-bottom-0">Price</th>
@@ -52,6 +53,7 @@
                 <td><a href="{% url 'products:kgcproductsdetails' pk=item.pk %}">{{ item.id }}</a></td>
                 <td>{{ item.type }}</td>
                 <td>{{ item.cost_price }}</td>
+                <td>{{ item.cost_price_withcharge }}</td>
                 <td>{{ item.total_cost_price }}</td>
                 <td>{{ item.total_cost_price_with_profit }}</td>
                 <td  class="text-success">{{ item.price }}</td>
