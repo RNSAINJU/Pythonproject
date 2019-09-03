@@ -27,7 +27,14 @@ class InvestmentView(PermissionRequiredMixin,TemplateView):
         model_name,view=self.__class__.__name__.split('V')
         balance=Balance.objects.all()
         investment=Investment.objects.all()
-        queryset={'form':form,'balance':balance,'investment':investment,'model_name':model_name}
+        total=0
+        for items in investment:
+            total += items.total
+        queryset={'form':form,
+        'balance':balance,
+        'investment':investment,
+        'model_name':model_name,
+        'total':total}
         return render(request,self.template_name,queryset)
 
     def post(self,request):
@@ -54,7 +61,14 @@ class ExpensesView(PermissionRequiredMixin,TemplateView):
         balance= Balance.objects.all()
         expenses=Expense.objects.all()
         model_name,view=self.__class__.__name__.split('V')
-        queryset={'balance':balance,'expenses':expenses,'form':form,'model_name':model_name}
+        total=0
+        for items in expenses:
+            total += items.amount
+        queryset={'balance':balance,
+        'expenses':expenses,
+        'form':form,
+        'model_name':model_name,
+        'total':total}
         return render(request,self.template_name,queryset)
 
     def post(self,request):

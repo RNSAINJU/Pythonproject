@@ -121,6 +121,18 @@
                 <td>{{ item.ordered_date }}</td>
               {% endfor %}
               </tr>
+
+              <tr>
+              <td>Total</td>
+              <td></td>
+
+              {% for item in order|slice:":1" %}
+              <td>{{ item.total_sales_amount }}</td>
+              <td>{{ item.total_paypal_sales_amount }}</td>
+              <td></td>
+              </tr>
+              {% endfor %}
+
             </tbody>
           </table>
         </div>

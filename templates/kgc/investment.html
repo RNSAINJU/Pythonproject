@@ -46,7 +46,7 @@
                 <td>{{ item.type }}</td>
                 <td>{{ item.amount }}</td>
                 <td>{{ item.rate }}</td>
-                <td>{{ item.total }}</td>
+                <td>Rs. {{ item.total }}</td>
                 <td>
                   <a onclick="deleteItem(this)" data-id="{{ item.id }}">
                     <i class="material-icons red-text right">close</i>
@@ -55,6 +55,16 @@
               </tr>
 
               {% endfor %}
+
+              <tr>
+                <td>Total</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ total }}</td>
+                <td></td>
+                </tr>
             </tbody>
           </table>
         </div>

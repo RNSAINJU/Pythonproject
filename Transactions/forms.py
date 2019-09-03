@@ -14,7 +14,10 @@ class InvestmentForm(forms.ModelForm):
     queryset=Balance.objects.only('name')
     )
 
-    amount=forms.IntegerField(
+
+
+    amount=forms.FloatField(
+    required=False,
     widget=forms.TextInput(attrs={
         'class':"form-control"
     })
@@ -27,7 +30,7 @@ class InvestmentForm(forms.ModelForm):
     })
     )
 
-    total=forms.IntegerField(
+    total=forms.FloatField(
     required=False,
     widget=forms.TextInput(attrs={
         'class':"form-control"
@@ -36,7 +39,7 @@ class InvestmentForm(forms.ModelForm):
 
     class Meta:
         model=Investment
-        fields=['name','amount','rate','total','type']
+        fields=['name','amount','rate','total','type','type2']
 
 
 class ExpenseForm(forms.ModelForm):

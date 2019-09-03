@@ -204,7 +204,17 @@ class OrdersView(PermissionRequiredMixin,TemplateView):
         product=ChildProduct.objects.all()
         balance= Balance.objects.all()
         order=Order.objects.filter(ordered=True, status=status).order_by('ordered_date')
-        queryset={'paymentform':paymentform,'detailform':detailform,'product':product,'form':form,'balance':balance,'order':order,'model_name':model_name}
+        total=0
+        for item in order:
+            total +=item.payment.amount
+        queryset={'paymentform':paymentform,
+                  'detailform':detailform,
+                  'product':product,
+                  'form':form,
+                  'balance':balance,
+                  'order':order,
+                  'model_name':model_name,
+                  'total':total}
         return render(request,self.template_name,queryset)
 
     def post(self, request,status):
