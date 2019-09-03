@@ -11,9 +11,8 @@ class InvestmentForm(forms.ModelForm):
     )
 
     type=forms.ModelChoiceField(
-    queryset=Balance.objects.only('name')
+    queryset=Balance.objects.only('name'),
     )
-
 
 
     amount=forms.FloatField(
@@ -40,6 +39,10 @@ class InvestmentForm(forms.ModelForm):
     class Meta:
         model=Investment
         fields=['name','amount','rate','total','type','type2']
+
+    def __init__(self, *args, **kwargs):
+        super(InvestmentForm, self).__init__(*args, **kwargs)
+        self.fields['type2'].widget.attrs['class'] = 'form-control'
 
 
 class ExpenseForm(forms.ModelForm):
