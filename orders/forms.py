@@ -75,7 +75,6 @@ class OrderForm(forms.ModelForm):
 
 class CheckoutForm(forms.Form):
     game_details = forms.CharField(
-        required=False,
         widget=forms.Textarea(
             attrs={'rows': 5, 'placeholder': 'Type all required details mentioned above here'}
         ),
@@ -83,12 +82,12 @@ class CheckoutForm(forms.Form):
         help_text='The max length of the text is 4000.'
     )
 
-    transaction_image=forms.ImageField(required=False)
+    game_image=forms.ImageField(required=False)
     # save_info=forms.BooleanField(required=False)
     payment_option=forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
 
-class Payment2Form(forms.ModelForm):
+class Payment2Form(forms.Form):
     transaction_id=forms.CharField(
     widget=forms.TextInput(attrs={
         'class':"form-control",
@@ -96,16 +95,15 @@ class Payment2Form(forms.ModelForm):
     })
     )
 
-    transaction_image=forms.ImageField()
+    transaction_image=forms.ImageField(
+    required=False,
+    )
     # type=forms.CharField(
     # widget=forms.TextInput(attrs={
     #     'type':"hidden",
     # })
     # )
 
-    class Meta:
-        model=Payment
-        fields=['transaction_id','transaction_image']
 
 
 class PaymentForm(forms.Form):

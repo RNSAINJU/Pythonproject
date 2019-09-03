@@ -199,7 +199,7 @@ class OrdersView(PermissionRequiredMixin,TemplateView):
     def get(self,request,status):
         form=OrderForm()
         detailform=CheckoutForm()
-        paymentform=PaymentForm()
+        paymentform=Payment2Form()
         model_name,view=self.__class__.__name__.split('V')
         product=ChildProduct.objects.all()
         balance= Balance.objects.all()
@@ -216,6 +216,7 @@ class OrdersView(PermissionRequiredMixin,TemplateView):
         if form.is_valid()  & detailform.is_valid() & paymentform.is_valid():
             print("The form is valid")
             print(form.cleaned_data)
+
             # Order product
             post=form.save(commit=False)
             post.user=self.request.user
@@ -227,7 +228,7 @@ class OrdersView(PermissionRequiredMixin,TemplateView):
             print(detailform.cleaned_data)
             game_details= detailform.cleaned_data.get('game_details')
             # save_info= form.cleaned_data.get('save_info')
-            image =detailform.cleaned_data['transaction_image']
+            image =detailform.cleaned_data['game_image']
             payment_option= detailform.cleaned_data.get('payment_option')
             order_details= OrderDetail(
                 user=self.request.user,
@@ -246,8 +247,13 @@ class OrdersView(PermissionRequiredMixin,TemplateView):
 
             # Order payment
             # order= Order.objects.get(user=self.request.user,ordered=False)
-            post2=paymentform.save(commit=False)
-            post2.user=self.request.user
+            transaction_id=paymentform.cleaned_data.get('transaction_id')
+            transaction_image=paymentform.cleaned_data['transaction_image']
+            # post2=paymentform.save(commit=False)
+            if post.product.discount_price:
+                final_price=post.product.discount_price
+            else:
+                final_price=post.product.price
 
             if payment_option == 'E':
                     payment_option='Esewa'
@@ -258,18 +264,23 @@ class OrdersView(PermissionRequiredMixin,TemplateView):
             else:
                 messages.warning(self.request, "Invalid payment option selected")
 
-            if post.product.discount_price:
-                final_price=post.product.discount_price
-            else:
-                final_price=post.product.price
-
-            post2.type=payment_option
-            post2.amount=final_price
-            post2.status='Paid'
-            post2.save()
+            payment_details=Payment(
+                transaction_id=transaction_id,
+                transaction_image=transaction_image,
+                user=self.request.user,
+                type=payment_option,
+                amount=final_price,
+                status='Paid',
+            )
+            # post2.user=self.request.user
+            # post2.type=payment_option
+            # post2.amount=final_price
+            # post2.status='Paid'
+            payment_details.save()
+            # post2.save()
             order.ordered=True
             order.cost_price=post.product.cost_price
-            order.payment=post2
+            order.payment=payment_details
             order.save()
 
             return redirect('orders:orders-admin',status='Pending')
