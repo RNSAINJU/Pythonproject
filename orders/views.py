@@ -60,7 +60,7 @@ class CheckOutView(View):
                 print(form.cleaned_data)
                 game_details= form.cleaned_data.get('game_details')
                 # save_info= form.cleaned_data.get('save_info')
-                image =form.cleaned_data['transaction_image']
+                image =form.cleaned_data['game_image']
                 payment_option= form.cleaned_data.get('payment_option')
                 order_details= OrderDetail(
                     user=self.request.user,
