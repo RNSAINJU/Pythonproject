@@ -40,7 +40,7 @@
             <tbody>
               {% for item in board %}
               <tr>
-                <td><a  href="{% url 'boards:board_edit' pk=item.pk %}">{{ item.id }}</a></td>
+                <td><a  href="https://www.khwoppagiftcard.store/admin/boards/board/{{ item.id }}/change/">{{ item.id }}</a></td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.description }}</td>
                 <td>

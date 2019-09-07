@@ -209,10 +209,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL ='/media/'
 #
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static_in_env'),
+    ]
+
+STATIC_ROOT= os.path.join(os.path.dirname(BASE_DIR), "static","static_root")
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+# MEDIA_ROOT= os.path.join(os.path.dirname(BASE_DIR), "static","media_root")
 
 
 
@@ -223,13 +229,13 @@ LOGIN_REDIRECT_URL= 'home:home'
 LOGOUT_REDIRECT_URL= 'home:home'
 
 
-SENDGRID_API_KEY='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'
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-MAILER_EMAIL_BACKEND=EMAIL_BACKEND
-EMAIL_HOST='smtp.sendgrid.net'
-EMAIL_HOST_USER='kgcgiftcard'
-EMAIL_HOST_PASSWORD='probook450'
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-DEFAULT_FROM_EMAIL='mail@khwoppagiftcard.store'
-ACCOUNT_EMAIL_SUBJECT_PREFIX='mail.khwoppagiftcard.store'
+# SENDGRID_API_KEY='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'
+# EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+# MAILER_EMAIL_BACKEND=EMAIL_BACKEND
+# EMAIL_HOST='smtp.sendgrid.net'
+# EMAIL_HOST_USER='kgcgiftcard'
+# EMAIL_HOST_PASSWORD='probook450'
+# EMAIL_PORT=587
+# EMAIL_USE_TLS=True
+# DEFAULT_FROM_EMAIL='mail@khwoppagiftcard.store'
+# ACCOUNT_EMAIL_SUBJECT_PREFIX='mail.khwoppagiftcard.store'

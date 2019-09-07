@@ -21,12 +21,18 @@ from django.views.generic import TemplateView
 import json
 from django.shortcuts import render, redirect, get_object_or_404
 
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = True
+            # user = form.save(commit=False)
+            # user.is_active = True
+            # user.save()
+            username=form.cleaned_data.get("username")
+            password=form.cleaned_data.get("password1")
+            email=form.cleaned_data.get("email")
+            user=User.objects.create_user(username,email,password)
             user.save()
 
             # current_site = get_current_site(request)

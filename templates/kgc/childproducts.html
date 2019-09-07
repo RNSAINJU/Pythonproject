@@ -50,7 +50,7 @@
             <tbody>
               {% for item in product %}
               <tr>
-                <td><a href="{% url 'products:kgcproductsdetails' pk=item.pk %}">{{ item.id }}</a></td>
+                <td><a href="https://www.khwoppagiftcard.store/admin/products/childproduct/{{ item.id }}/change/">{{ item.id }}</a></td>
                 <td>{{ item.type }}</td>
                 <td>{{ item.cost_price }}</td>
                 <td>{{ item.cost_price_withcharge }}</td>

@@ -42,7 +42,7 @@
             <tbody>
               {% for item in expenses %}
               <tr>
-                <th scope="row">{{ forloop.counter }}</th>
+              <th scope="row"><a  href="https://www.khwoppagiftcard.store/admin/Transactions/expense/{{ item.id }}/change/">{{ item.id }}</a></th>
                 <td>{{ item.transaction_name }}</td>
                 <td>{{ item.type }}</td>
                 <td>$ {{ item.amount }}</td>
