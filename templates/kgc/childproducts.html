@@ -61,9 +61,9 @@
                 <td class="text-success">{{ item.discount_price }}</td>
                 {% else %}
                 <td  class="text-success">{{ item.price }}</td>
+                <td> None</td>
                 {% endif %}
 
-                <td>{{ item.status }}</td>
                 <td>
                   <a onclick="deleteItem(this)" data-id="{{ item.id }}">
                     <i class="material-icons red-text right">close</i>
